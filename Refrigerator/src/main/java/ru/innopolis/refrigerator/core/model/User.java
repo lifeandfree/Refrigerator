@@ -8,15 +8,12 @@ import javax.xml.bind.annotation.*;
 public class User {
 
 	public User() {
-		this.username = null;
-		this.password = null;
-		this.email = null;
-
 	}
 
-	public User(String username, String password, String email) {
+	public User(String username, String password, byte role, String email) {
 		this.username = username;
 		this.password = password;
+		this.role = role;
 		this.email = email;
 	}
 
@@ -33,6 +30,12 @@ public class User {
 	 */
 	@XmlElement(required = true)
 	private String password;
+
+	/**
+	 *
+	 */
+	@XmlElement(required = true)
+	private byte role;
 
 	/**
 	 * Email пользователя

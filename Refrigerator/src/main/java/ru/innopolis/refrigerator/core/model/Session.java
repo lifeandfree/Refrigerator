@@ -11,12 +11,6 @@ import java.util.Date;
 public class Session {
 
 	public Session() {
-		this.sessionId = null;
-		this.user = null;
-		this.session_user_agent = null;
-		this.session_finish_time = null;
-		this.session_start_time = null;
-		this.remember = false;
 	}
 
 	public Session(String sessionId, User user, String session_user_agent, Date session_finish_time, Date session_start_time, boolean remember) {

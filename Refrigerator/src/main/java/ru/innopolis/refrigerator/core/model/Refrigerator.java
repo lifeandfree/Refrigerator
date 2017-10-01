@@ -11,9 +11,6 @@ import java.util.Set;
 public class Refrigerator {
 
 	public Refrigerator() {
-		this.name = null;
-		this.user = null;
-		this.ingredients = null;
 	}
 
 	public Refrigerator(String name, User user, Set<Ingredient> ingredients) {
