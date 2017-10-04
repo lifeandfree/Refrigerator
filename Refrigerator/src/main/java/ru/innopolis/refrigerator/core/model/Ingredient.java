@@ -52,4 +52,9 @@ public class Ingredient {
 	public void setIngredientCategory(List<IngredientCategory> ingredientCategory) {
 		this.ingredientCategory = ingredientCategory;
 	}
+
+	@Override
+	public String toString() {
+		return "Ingredient{" + "id=" + id + ", name='" + name + '\'' + ", dimension='" + dimension + '\'' + ", ingredientCategory=" + ingredientCategory + '}';
+	}
 }

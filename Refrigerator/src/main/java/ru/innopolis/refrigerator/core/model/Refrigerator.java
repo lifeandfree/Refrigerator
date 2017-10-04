@@ -1,6 +1,8 @@
 package ru.innopolis.refrigerator.core.model;
 
 import javax.xml.bind.annotation.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -13,7 +15,7 @@ public class Refrigerator {
 	public Refrigerator() {
 	}
 
-	public Refrigerator(String name, User user, Set<Ingredient> ingredients) {
+	public Refrigerator(String name, User user, Map<Ingredient, Double> ingredients) {
 		this.name = name;
 		this.user = user;
 		this.ingredients = ingredients;
@@ -25,7 +27,7 @@ public class Refrigerator {
 	@XmlElement(required = true)
 	private User user;
 	@XmlElement(required = true)
-	private Set<Ingredient> ingredients;
+	private Map<Ingredient, Double> ingredients;
 
 	public String getName() {
 		return name;
@@ -43,11 +45,17 @@ public class Refrigerator {
 		this.user = user;
 	}
 
-	public Set<Ingredient> getIngredients() {
+	public Map<Ingredient, Double> getIngredients() {
 		return ingredients;
 	}
 
-	public void setIngredients(Set<Ingredient> ingredients) {
+	public void setIngredients(Map<Ingredient, Double> ingredients) {
 		this.ingredients = ingredients;
 	}
+
+	@Override
+	public String toString() {
+		return "Refrigerator{" + "id=" + id + ", name='" + name + '\'' + ", user=" + user + ", ingredients=" + ingredients + '}';
+	}
+
 }

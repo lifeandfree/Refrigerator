@@ -3,7 +3,7 @@ package ru.innopolis.refrigerator.core.model;
 import javax.xml.bind.annotation.*;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "User", propOrder = {"id", "username", "password", "email"})
+@XmlType(name = "User", propOrder = {"id", "username", "password", "email", "role"})
 @XmlRootElement(name = "User")
 public class User {
 
@@ -17,6 +17,7 @@ public class User {
 		this.email = email;
 	}
 
+	@XmlElement(required = true)
 	private long id;
 
 	/**
@@ -70,5 +71,10 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	@Override
+	public String toString() {
+		return "User{" + "id=" + id + ", username='" + username + '\'' + ", password='" + password + '\'' + ", role=" + role + ", email='" + email + '\'' + '}';
 	}
 }

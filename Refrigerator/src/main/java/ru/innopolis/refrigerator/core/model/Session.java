@@ -87,4 +87,9 @@ public class Session {
 	public void setRemember(boolean remember) {
 		this.remember = remember;
 	}
+
+	@Override
+	public String toString() {
+		return "Session{" + "id=" + id + ", sessionId='" + sessionId + '\'' + ", user=" + user + ", session_user_agent='" + session_user_agent + '\'' + ", session_finish_time=" + session_finish_time + ", session_start_time=" + session_start_time + ", remember=" + remember + '}';
+	}
 }

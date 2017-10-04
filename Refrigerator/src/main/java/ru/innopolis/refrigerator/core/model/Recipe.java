@@ -2,6 +2,7 @@ package ru.innopolis.refrigerator.core.model;
 
 import javax.xml.bind.annotation.*;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -12,7 +13,7 @@ public class Recipe {
 	public Recipe() {
 	}
 
-	public Recipe(String name, List<RecipeCategory> recipeCategorys, byte complexity, int time, Set<Ingredient> ingredients, String instructions, String photo, CookingMethod cookingMethod) {
+	public Recipe(String name, List<RecipeCategory> recipeCategorys, byte complexity, int time, Map<Ingredient, Double> ingredients, String instructions, String photo, CookingMethod cookingMethod) {
 		this.name = name;
 		this.recipeCategorys = recipeCategorys;
 		this.complexity = complexity;
@@ -29,11 +30,11 @@ public class Recipe {
 	@XmlElement(required = true)
 	private List<RecipeCategory> recipeCategorys; //вид блида.
 	@XmlElement(required = true)
-	private byte complexity;
+	private byte complexity; //enum
 	@XmlElement(required = true)
 	private int time;
 	@XmlElement(required = true)
-	private Set<Ingredient> ingredients;// название / количество.
+	private Map<Ingredient, Double> ingredients;// название / количество. map
 	@XmlElement(required = true)
 	private String instructions;
 	@XmlElement(required = true)
@@ -77,11 +78,11 @@ public class Recipe {
 		this.time = time;
 	}
 
-	public Set<Ingredient> getIngredients() {
+	public Map<Ingredient, Double> getIngredients() {
 		return ingredients;
 	}
 
-	public void setIngredients(Set<Ingredient> ingredients) {
+	public void setIngredients(Map<Ingredient, Double> ingredients) {
 		this.ingredients = ingredients;
 	}
 
@@ -107,5 +108,10 @@ public class Recipe {
 
 	public void setCookingMethod(CookingMethod cookingMethod) {
 		this.cookingMethod = cookingMethod;
+	}
+
+	@Override
+	public String toString() {
+		return "Recipe{" + "id=" + id + ", name='" + name + '\'' + ", recipeCategorys=" + recipeCategorys + ", complexity=" + complexity + ", time=" + time + ", ingredients=" + ingredients + ", instructions='" + instructions + '\'' + ", photo='" + photo + '\'' + ", cookingMethod=" + cookingMethod + '}';
 	}
 }
