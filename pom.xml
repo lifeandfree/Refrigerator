@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ru.innopolis.refrigerator</groupId>
+    <artifactId>refrigerator</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>refrigerator</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jdkVersion>1.8</jdkVersion>
+        <log4j.version>2.6.1</log4j.version>
+        <hibernate.version>5.2.1.Final</hibernate.version>
+    </properties>
+
+    <dependencies>
+
+
+    </dependencies>
+
+    <modules>
+        <module>core</module>
+        <module>serialization</module>
+        <module>db</module>
+    </modules>
+
+    <build>
+
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>exploded</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <useCache>true</useCache>
+                    <webappDirectory>${webappDirectory}</webappDirectory>
+                    <archive>
+                        <addMavenDescriptor>false</addMavenDescriptor>
+                        <compress>true</compress>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <source>${jdkVersion}</source>
+                    <target>${jdkVersion}</target>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>

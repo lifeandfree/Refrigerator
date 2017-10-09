@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="Ingredient" type="Ingredient"/>
+
+  <xs:element name="Recipe" type="Recipe"/>
+
+  <xs:element name="Refrigerator" type="Refrigerator"/>
+
+  <xs:element name="Session" type="Session"/>
+
+  <xs:element name="User" type="User"/>
+
+  <xs:complexType name="CookingMethod">
+    <xs:all>
+      <xs:element name="id" type="xs:long"/>
+      <xs:element name="name" type="xs:string"/>
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="Ingredient">
+    <xs:all>
+      <xs:element name="id" type="xs:long"/>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="dimension" type="xs:string"/>
+      <xs:element name="ingredientCategory" type="IngredientCategory" maxOccurs="unbounded"/>
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="IngredientCategory">
+    <xs:all>
+      <xs:element name="id" type="xs:long"/>
+      <xs:element name="name" type="xs:string"/>
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="Recipe">
+    <xs:all>
+      <xs:element name="id" type="xs:long"/>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="recipeCategorys" type="RecipeCategory" maxOccurs="unbounded"/>
+      <xs:element name="complexity" type="xs:byte"/>
+      <xs:element name="time" type="xs:int"/>
+      <xs:element name="ingredients" type="Ingredient" maxOccurs="unbounded"/>
+      <xs:element name="instructions" type="xs:string"/>
+      <xs:element name="photo" type="xs:string"/>
+      <xs:element name="cookingMethod" type="CookingMethod"/>
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="RecipeCategory">
+    <xs:all>
+      <xs:element name="id" type="xs:long"/>
+      <xs:element name="name" type="xs:string"/>
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="User">
+    <xs:sequence>
+      <xs:element name="id" type="xs:long"/>
+      <xs:element name="username" type="xs:string"/>
+      <xs:element name="password" type="xs:string"/>
+      <xs:element name="email" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Refrigerator">
+    <xs:all>
+      <xs:element name="id" type="xs:long"/>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="user" type="User"/>
+      <xs:element name="ingredients" type="Ingredient" maxOccurs="unbounded"/>
+    </xs:all>
+  </xs:complexType>
+
+  <xs:complexType name="Session">
+    <xs:all>
+      <xs:element name="id" type="xs:long"/>
+      <xs:element name="sessionId" type="xs:string"/>
+      <xs:element name="user" type="User"/>
+      <xs:element name="session_user_agent" type="xs:string"/>
+      <xs:element name="session_finish_time" type="xs:dateTime"/>
+      <xs:element name="session_start_time" type="xs:dateTime"/>
+      <xs:element name="remember" type="xs:boolean"/>
+    </xs:all>
+  </xs:complexType>
+</xs:schema>
+

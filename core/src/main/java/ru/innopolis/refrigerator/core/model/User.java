@@ -1,0 +1,96 @@
+package ru.innopolis.refrigerator.core.model;
+
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+import javax.xml.bind.annotation.*;
+import java.io.Serializable;
+
+@Entity
+@Table(name = "\"User\"")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "User", propOrder = {"id", "username", "password", "email", "role"})
+@XmlRootElement(name = "User")
+public class User implements Serializable {
+
+	private static final long serialVersionUID = 8304111827557668640L;
+
+	public User() {
+	}
+
+	public User(String username, String password, byte role, String email) {
+		this.username = username;
+		this.password = password;
+		this.role = role;
+		this.email = email;
+	}
+
+	@Id
+	@GeneratedValue(generator = "increment")
+	@GenericGenerator(name = "increment", strategy = "increment")
+	@Column(name = "id", unique = true, nullable = false)
+	@XmlElement(required = true)
+	private long id;
+
+	/**
+	 * Логин пользователя
+	 */
+	@Column(name = "username", nullable = false, length = 255)
+	@XmlElement(required = true)
+	private String username;
+
+	/**
+	 * Сформированное хэш-значение пароля для хранения в базе
+	 */
+	@Column(name = "password", nullable = false, length = 100)
+	@XmlElement(required = true)
+	private String password;
+
+	/**
+	 *
+	 */
+	@Column(name = "role", nullable = false)
+	@XmlElement(required = true)
+	private byte role;
+
+	/**
+	 * Email пользователя
+	 */
+	@Column(name = "email", nullable = false, length = 255)
+	@XmlElement(required = true)
+	private String email;
+
+
+	public long getId() {
+		return id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	@Override
+	public String toString() {
+		return "User{" + "id=" + id + ", username='" + username + '\'' + ", password='" + password + '\'' + ", role=" + role + ", email='" + email + '\'' + '}';
+	}
+}
