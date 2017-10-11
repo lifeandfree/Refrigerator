@@ -17,14 +17,18 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>1.8</java.version>
-    <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
     <junit.jupiter.version>5.0.0</junit.jupiter.version>
     <junit.platform.version>1.0.0</junit.platform.version>
     <hibernate.version>5.2.1.Final</hibernate.version>
   </properties>
 
-
   <dependencies>
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>${hibernate.version}</version>
+    </dependency>
 
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
@@ -59,22 +63,6 @@
       <scope>test</scope>
     </dependency>
 
-    <dependency>
-      <groupId>org.postgresql</groupId>
-      <artifactId>postgresql</artifactId>
-      <version>9.4-1200-jdbc41</version>
-    </dependency>
-      <!--<dependency>-->
-          <!--<groupId>postgresql</groupId>-->
-          <!--<artifactId>postgresql</artifactId>-->
-          <!--<version>9.1-901-1.jdbc4</version>-->
-      <!--</dependency>-->
-
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-core</artifactId>
-      <version>${hibernate.version}</version>
-    </dependency>
   </dependencies>
 
 </project>

@@ -12,8 +12,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jdkVersion>1.8</jdkVersion>
-        <log4j.version>2.6.1</log4j.version>
-        <hibernate.version>5.2.1.Final</hibernate.version>
+        <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
     </properties>
 
     <dependencies>
@@ -25,11 +24,13 @@
         <module>core</module>
         <module>serialization</module>
         <module>db</module>
+        <module>web-refrigerator</module>
     </modules>
 
     <build>
 
         <finalName>${project.artifactId}</finalName>
+
         <plugins>
 
             <plugin>
