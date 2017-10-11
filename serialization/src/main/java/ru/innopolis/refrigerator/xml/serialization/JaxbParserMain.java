@@ -7,16 +7,13 @@ import ru.innopolis.refrigerator.xml.serialization.refrigerator.Refrigerators;
 
 import javax.xml.bind.JAXBException;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class JaxbParserMain {
 
 	public static void main(String[] args) {
 		IngredientCategory ingredientCategory = new IngredientCategory("овощь");
-		List<IngredientCategory> ingredientCategorys = new ArrayList<IngredientCategory>();
+		Set<IngredientCategory> ingredientCategorys = new HashSet<>();
 		ingredientCategorys.add(ingredientCategory);
 
 		Ingredient ingredient = new Ingredient("Морковь", "гр", ingredientCategorys);
@@ -25,7 +22,7 @@ public class JaxbParserMain {
 		ingredientStringMap.put(ingredient, 100d);
 		ingredientStringMap.put(ingredient2, 1000d);
 
-		User user = new User("user1", "pass1", (byte) 1, "emael1");
+		User user = new User("user1", "pass1", Role.user, "emael1");
 
 		Refrigerator refrigerator = new Refrigerator("ref1", user, ingredientStringMap);
 		List<Refrigerator> refrigeratorsList = new ArrayList<>();
@@ -49,7 +46,7 @@ public class JaxbParserMain {
 			e.printStackTrace();
 		}
 
-		List<RecipeCategory> recipeCategories = new ArrayList<>();
+		Set<RecipeCategory> recipeCategories = new HashSet<>();
 		RecipeCategory recipeCategory = new RecipeCategory("гарниры");
 		recipeCategories.add(recipeCategory);
 

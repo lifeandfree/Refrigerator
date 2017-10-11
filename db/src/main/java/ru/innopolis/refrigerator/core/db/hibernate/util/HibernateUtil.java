@@ -16,7 +16,7 @@ public class HibernateUtil {
 
 	private static final Logger logger = LogManager.getLogger(HibernateUtil.class.getName());
 
-	private static SessionFactory sessionFactory = new Configuration().configure("file:/opt/git/Refrigerator/Refrigerator/src/main/resources/hibernate.cfg.xml")
+	private static SessionFactory sessionFactory = new Configuration().configure("file:/opt/git/Refrigerator2/db/src/main/resources/hibernate.cfg.xml")
 			.buildSessionFactory();
 
 	public static SessionFactory getSessionFactory() {
