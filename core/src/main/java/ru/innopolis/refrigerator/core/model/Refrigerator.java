@@ -7,7 +7,6 @@ import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Refrigerator", propOrder = {
@@ -19,6 +18,7 @@ import java.util.Set;
 public class Refrigerator implements Serializable {
 
 	public Refrigerator() {
+		ingredients = new HashMap<>();
 	}
 
 	public Refrigerator(String name, User user, Map<Ingredient, Double> ingredients) {
@@ -44,8 +44,10 @@ public class Refrigerator implements Serializable {
 	private User user;
 
 	@XmlElement(required = true)
-	@OneToMany @JoinTable(name="Refrigerator_ingredient")
-	@MapKeyColumn(name="ingredients")
+//	@OneToMany
+//	@JoinTable(name = "Refrigerator_ingredient")
+//	@MapKeyColumn(name = "ingredients")
+	@Transient
 	private Map<Ingredient, Double> ingredients;
 
 	public String getName() {
@@ -74,7 +76,27 @@ public class Refrigerator implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Refrigerator{" + "id=" + id + ", name='" + name + '\'' + ", user=" + user + ", ingredients=" + ingredients + '}';
+		return "Refrigerator{" + "name='" + name + '\'' + ", user=" + user + ", ingredients=" + ingredients + '}';
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+
+		Refrigerator that = (Refrigerator) o;
+
+		if (name != null ? !name.equals(that.name) : that.name != null)
+			return false;
+		return user != null ? user.equals(that.user) : that.user == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = name != null ? name.hashCode() : 0;
+		result = 31 * result + (user != null ? user.hashCode() : 0);
+		return result;
+	}
 }

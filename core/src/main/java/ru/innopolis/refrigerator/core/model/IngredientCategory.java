@@ -28,6 +28,7 @@ public class IngredientCategory implements Serializable {
 	@Column(name = "id", unique = true, nullable = false)
 	@XmlElement(required = true)
 	private long id;
+
 	@XmlElement(required = true)
 	@Column(name = "ingredientCategorName", nullable = false, length = 255)
 	private String ingredientCategorName;
@@ -46,6 +47,23 @@ public class IngredientCategory implements Serializable {
 
 	@Override
 	public String toString() {
-		return "IngredientCategory{" + "id=" + id + ", name='" + ingredientCategorName + '\'' + '}';
+		return "IngredientCategory{" + "ingredientCategorName='" + ingredientCategorName + '\'' + '}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+
+		IngredientCategory that = (IngredientCategory) o;
+
+		return ingredientCategorName != null ? ingredientCategorName.equals(that.ingredientCategorName) : that.ingredientCategorName == null;
+	}
+
+	@Override
+	public int hashCode() {
+		return ingredientCategorName != null ? ingredientCategorName.hashCode() : 0;
 	}
 }

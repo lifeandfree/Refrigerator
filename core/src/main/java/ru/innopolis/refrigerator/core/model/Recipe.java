@@ -5,9 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Recipe", propOrder = {})
@@ -17,9 +15,12 @@ import java.util.Map;
 public class Recipe implements Serializable {
 
 	public Recipe() {
+		recipeCategorys = new HashSet<>();
+		ingredients = new HashMap<>();
+
 	}
 
-	public Recipe(String name, List<RecipeCategory> recipeCategorys, Complexity complexity, int time, HashMap<Ingredient, Double> ingredients, String instructions, String photo, CookingMethod cookingMethod) {
+	public Recipe(String name, Set<RecipeCategory> recipeCategorys, Complexity complexity, int time, HashMap<Ingredient, Double> ingredients, String instructions, String photo, CookingMethod cookingMethod) {
 		this.name = name;
 		this.recipeCategorys = recipeCategorys;
 		this.complexity = complexity;
@@ -44,19 +45,21 @@ public class Recipe implements Serializable {
 	@XmlElement(required = true)
 	@OneToMany
 	@JoinTable(name = "Recipe_RecipeCategory", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "recipeCategory_id"))
-	private List<RecipeCategory> recipeCategorys; //вид блида.
+	private Set<RecipeCategory> recipeCategorys; //вид блида.
 
 	@Enumerated(EnumType.STRING)
+	@Column(name = "complexity", nullable = false)
 	@XmlElement(required = true)
-	private Complexity complexity; //enum
+	private Complexity complexity;
 
 	@XmlElement(required = true)
 	@Column(name = "time", nullable = false)
 	private int time;
 
 	@XmlElement(required = true)
-	@OneToMany @JoinTable(name="Recipe_ingredient")
-	@MapKeyColumn(name="ingredients")
+//	@OneToMany @JoinTable(name="Recipe_ingredient")
+//	@MapKeyColumn(name="ingredients")
+	@Transient
 	private HashMap<Ingredient, Double> ingredients;// название / количество. map
 
 	@Column(name = "instructions", nullable = false, length = 255)
@@ -84,11 +87,11 @@ public class Recipe implements Serializable {
 		this.name = name;
 	}
 
-	public List<RecipeCategory> getRecipeCategorys() {
+	public Set<RecipeCategory> getRecipeCategorys() {
 		return recipeCategorys;
 	}
 
-	public void setRecipeCategorys(List<RecipeCategory> recipeCategorys) {
+	public void setRecipeCategorys(Set<RecipeCategory> recipeCategorys) {
 		this.recipeCategorys = recipeCategorys;
 	}
 
@@ -142,6 +145,33 @@ public class Recipe implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Recipe{" + "id=" + id + ", name='" + name + '\'' + ", recipeCategorys=" + recipeCategorys + ", complexity=" + complexity + ", time=" + time + ", ingredients=" + ingredients + ", instructions='" + instructions + '\'' + ", photo='" + photo + '\'' + ", cookingMethod=" + cookingMethod + '}';
+		return "Recipe{" + "name='" + name + '\'' + ", recipeCategorys=" + recipeCategorys + ", complexity=" + complexity + ", time=" + time + ", ingredients=" + ingredients + ", instructions='" + instructions + '\'' + ", photo='" + photo + '\'' + ", cookingMethod=" + cookingMethod + '}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+
+		Recipe recipe = (Recipe) o;
+
+		if (name != null ? !name.equals(recipe.name) : recipe.name != null)
+			return false;
+		if (complexity != recipe.complexity)
+			return false;
+		if (instructions != null ? !instructions.equals(recipe.instructions) : recipe.instructions != null)
+			return false;
+		return photo != null ? photo.equals(recipe.photo) : recipe.photo == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = name != null ? name.hashCode() : 0;
+		result = 31 * result + (complexity != null ? complexity.hashCode() : 0);
+		result = 31 * result + (instructions != null ? instructions.hashCode() : 0);
+		result = 31 * result + (photo != null ? photo.hashCode() : 0);
+		return result;
 	}
 }

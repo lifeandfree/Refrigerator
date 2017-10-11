@@ -118,6 +118,30 @@ public class Session implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Session{" + "id=" + id + ", sessionId='" + sessionId + '\'' + ", user=" + user + ", session_user_agent='" + session_user_agent + '\'' + ", session_finish_time=" + session_finish_time + ", session_start_time=" + session_start_time + ", remember=" + remember + '}';
+		return "Session{" + "sessionId='" + sessionId + '\'' + ", user=" + user + ", session_user_agent='" + session_user_agent + '\'' + ", session_finish_time=" + session_finish_time + ", session_start_time=" + session_start_time + ", remember=" + remember + '}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+
+		Session session = (Session) o;
+
+		if (sessionId != null ? !sessionId.equals(session.sessionId) : session.sessionId != null)
+			return false;
+		if (session_user_agent != null ? !session_user_agent.equals(session.session_user_agent) : session.session_user_agent != null)
+			return false;
+		return session_start_time != null ? session_start_time.equals(session.session_start_time) : session.session_start_time == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = sessionId != null ? sessionId.hashCode() : 0;
+		result = 31 * result + (session_user_agent != null ? session_user_agent.hashCode() : 0);
+		result = 31 * result + (session_start_time != null ? session_start_time.hashCode() : 0);
+		return result;
 	}
 }

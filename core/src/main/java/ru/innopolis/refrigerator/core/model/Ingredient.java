@@ -5,7 +5,8 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Ingredient", propOrder = {})
@@ -17,7 +18,7 @@ public class Ingredient implements Serializable {
 	public Ingredient() {
 	}
 
-	public Ingredient(String name, String dimension, List<IngredientCategory> ingredientCategory) {
+	public Ingredient(String name, String dimension, Set<IngredientCategory> ingredientCategory) {
 		this.name = name;
 		this.dimension = dimension;
 		this.ingredientCategory = ingredientCategory;
@@ -26,7 +27,7 @@ public class Ingredient implements Serializable {
 	public Ingredient(String name, String dimension) {
 		this.name = name;
 		this.dimension = dimension;
-		this.ingredientCategory = null;
+		this.ingredientCategory = new HashSet<>();
 	}
 
 
@@ -48,10 +49,10 @@ public class Ingredient implements Serializable {
 	@OneToMany
 	@JoinTable(
 			name="Ingredient_ingredientCategory",
-			joinColumns = @JoinColumn( name="ingredient_id"),
-			inverseJoinColumns = @JoinColumn( name="ingredientCategory_id")
+			joinColumns = @JoinColumn( name="ingredient_id", unique = false),
+			inverseJoinColumns = @JoinColumn( name="ingredientCategory_id", unique = false)
 	)
-	private List<IngredientCategory> ingredientCategory;
+	private Set<IngredientCategory> ingredientCategory;
 
 	public long getId() {
 		return id;
@@ -73,16 +74,37 @@ public class Ingredient implements Serializable {
 		this.dimension = dimension;
 	}
 
-	public List<IngredientCategory> getIngredientCategory() {
+	public Set<IngredientCategory> getIngredientCategory() {
 		return ingredientCategory;
 	}
 
-	public void setIngredientCategory(List<IngredientCategory> ingredientCategory) {
+	public void setIngredientCategory(Set<IngredientCategory> ingredientCategory) {
 		this.ingredientCategory = ingredientCategory;
 	}
 
 	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+
+		Ingredient that = (Ingredient) o;
+
+		if (name != null ? !name.equals(that.name) : that.name != null)
+			return false;
+		return dimension != null ? dimension.equals(that.dimension) : that.dimension == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = name != null ? name.hashCode() : 0;
+		result = 31 * result + (dimension != null ? dimension.hashCode() : 0);
+		return result;
+	}
+
+	@Override
 	public String toString() {
-		return "Ingredient{" + "id=" + id + ", name='" + name + '\'' + ", dimension='" + dimension + '\'' + ", ingredientCategory=" + ingredientCategory + '}';
+		return "Ingredient{" + "name='" + name + '\'' + ", dimension='" + dimension + '\'' + ", ingredientCategory=" + ingredientCategory + '}';
 	}
 }

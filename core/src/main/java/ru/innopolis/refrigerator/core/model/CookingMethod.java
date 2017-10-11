@@ -13,7 +13,11 @@ import java.io.Serializable;
 @XmlType(name = "CookingMethod", propOrder = {})
 @Entity
 @Table(name = "\"CookingMethod\"")
-public class CookingMethod implements Serializable {
+public class CookingMethod implements Serializable, ICookingMethod {
+
+	public CookingMethod(ICookingMethod iCookingMethod) {
+		this.iCookingMethod = iCookingMethod;
+	}
 
 	public CookingMethod() {
 	}
@@ -22,12 +26,16 @@ public class CookingMethod implements Serializable {
 		this.name = name;
 	}
 
+	@Transient
+	ICookingMethod iCookingMethod;
+
 	@XmlElement(required = true)
 	@Id
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy = "increment")
 	@Column(name = "id", unique = true, nullable = false)
 	private long id;
+
 	@XmlElement(required = true)
 	@Column(name = "name", nullable = false, length = 255)
 	private String name;
@@ -36,6 +44,7 @@ public class CookingMethod implements Serializable {
 		return id;
 	}
 
+	@Override
 	public String getName() {
 		return name + " " + iCookingMethod.getName();
 	}
@@ -48,8 +57,6 @@ public class CookingMethod implements Serializable {
 	public String toString() {
 		return "CookingMethod{" + "id=" + id + ", name='" + name + '\'' + '}';
 	}
-	CookingMethod iCookingMethod;
-	public CookingMethod(CookingMethod iCookingMethod) {
-		this.iCookingMethod = iCookingMethod;
-	}
+
+
 }
