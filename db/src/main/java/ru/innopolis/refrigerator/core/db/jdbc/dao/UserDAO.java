@@ -5,9 +5,9 @@ import org.apache.logging.log4j.Logger;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.ConnectionFactoryPostgreSQL;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.IConnectionFactory;
 import ru.innopolis.refrigerator.core.db.jdbc.exception.UserDAOException;
+import ru.innopolis.refrigerator.core.model.Role;
 import ru.innopolis.refrigerator.core.model.User;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -31,7 +31,7 @@ public class UserDAO {
 			ResultSet resultSet = statement.executeQuery("SELECT * FROM User");
 
 			while(resultSet.next()) {
-				User user = new User(resultSet.getString("username"), resultSet.getString("password"), resultSet.getByte("role"), resultSet.getString("email"));
+				User user = new User(resultSet.getString("username"), resultSet.getString("password"), Role.valueOf(resultSet.getString("role")), resultSet.getString("email"));
 				users.add(user);
 			}
 		}
@@ -46,12 +46,12 @@ public class UserDAO {
 		User user = new User();
 
 		try {
-			PreparedStatement statement = connection.getConnection().prepareStatement("SELECT * FROM student where id=?");
-			statement.setLong(1, id);
-			ResultSet resultSet = statement.executeQuery();
+			Statement statement = connection.getConnection().createStatement();
+
+			ResultSet resultSet = statement.executeQuery("SELECT * FROM \"User\" where id=" + id);
 
 			if (resultSet.next()) {
-				user = new User(resultSet.getString("username"), resultSet.getString("password"), resultSet.getByte("role"), resultSet.getString("email"));
+				user = new User(resultSet.getString("username"), resultSet.getString("password"), Role.valueOf(resultSet.getString("role")), resultSet.getString("email"));
 
 			}
 		} catch (SQLException e) {

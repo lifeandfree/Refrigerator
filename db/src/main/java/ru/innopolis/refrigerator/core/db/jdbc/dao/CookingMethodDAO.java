@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.ConnectionFactoryPostgreSQL;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.IConnectionFactory;
+import ru.innopolis.refrigerator.core.db.jdbc.exception.CookingMethodDAOException;
 import ru.innopolis.refrigerator.core.db.jdbc.exception.IngredientCategoryDAOException;
 import ru.innopolis.refrigerator.core.model.CookingMethod;
 
@@ -23,7 +24,7 @@ public class CookingMethodDAO {
 		connection = ConnectionFactoryPostgreSQL.getInstance();
 	}
 
-	public static List<CookingMethod> getAll() throws IngredientCategoryDAOException {
+	public static List<CookingMethod> getAll() throws CookingMethodDAOException {
 		List<CookingMethod> cookingMethodList = new ArrayList<>();
 
 		try {
@@ -36,7 +37,7 @@ public class CookingMethodDAO {
 			}
 		} catch (SQLException e) {
 			logger.error("I can not get of all items to the database" + e.toString());
-			throw new IngredientCategoryDAOException();
+			throw new CookingMethodDAOException();
 		}
 		return cookingMethodList;
 	}

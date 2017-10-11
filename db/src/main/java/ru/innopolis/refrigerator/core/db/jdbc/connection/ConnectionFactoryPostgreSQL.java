@@ -31,7 +31,7 @@ public class ConnectionFactoryPostgreSQL implements IConnectionFactory
 
 	@Override
 	public Connection getConnection() {
-		return instance.createConnection("jdbc:postgresql://localhost:5432/refrigerator", "refrigerator", "123");
+		return instance.createConnection("jdbc:postgresql://localhost:5432/refrigerator2", "refrigerator", "123");
 	}
 
 	public static synchronized ConnectionFactoryPostgreSQL getInstance()

@@ -12,7 +12,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class IngredientCategoryDAO {
 
@@ -41,18 +43,15 @@ public class IngredientCategoryDAO {
 		return ingredientCategoryList;
 	}
 
-	public static List<IngredientCategory> getAllById(List<Long> ids) throws IngredientCategoryDAOException {
-		List<IngredientCategory> ingredientCategoryList = new ArrayList<>();
-
-
-		IngredientCategory ingredientCategory = new IngredientCategory();
+	public static Set<IngredientCategory> getAllById(Set<Long> ids) throws IngredientCategoryDAOException {
+		Set<IngredientCategory> ingredientCategoryList = new HashSet<>();
+		IngredientCategory ingredientCategory;
 
 		for (Long id: ids
 			 ) {
 			try {
-				PreparedStatement statement = connection.getConnection().prepareStatement("SELECT * FROM student where id=?");
-				statement.setLong(1, id);
-				ResultSet resultSet = statement.executeQuery();
+				Statement statement = connection.getConnection().createStatement();
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM IngredientCategory where id=" +id);
 
 				if (resultSet.next()) {
 					ingredientCategory = new IngredientCategory(resultSet.getString("name"));
