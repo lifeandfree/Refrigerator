@@ -1,6 +1,6 @@
 package ru.innopolis.refrigerator;
 
-import ru.innopolis.refrigerator.core.db.jdbc.connection.ConnectionFactoryPostgreSQL;
+import ru.innopolis.refrigerator.core.db.jdbc.connection.postgresql.ConnectionFactoryPostgreSQL;
 
 public class Main {
 	public static void main(String[] args) {

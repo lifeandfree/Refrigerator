@@ -1,7 +1,9 @@
-package ru.innopolis.refrigerator.core.db.jdbc.connection;
+package ru.innopolis.refrigerator.core.db.jdbc.connection.postgresql;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ru.innopolis.refrigerator.core.db.jdbc.connection.DbUtil;
+import ru.innopolis.refrigerator.core.db.jdbc.connection.IConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -31,7 +33,7 @@ public class ConnectionFactoryPostgreSQL implements IConnectionFactory
 
 	@Override
 	public Connection getConnection() {
-		return instance.createConnection("jdbc:postgresql://localhost:5432/refrigerator2", "refrigerator", "123");
+		return instance.createConnection("jdbc:postgresql://localhost:5432/refrigerator4", "refrigerator", "123");
 	}
 
 	public static synchronized ConnectionFactoryPostgreSQL getInstance()

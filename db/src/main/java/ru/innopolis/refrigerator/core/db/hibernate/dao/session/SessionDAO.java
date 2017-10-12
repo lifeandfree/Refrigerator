@@ -3,7 +3,7 @@ package ru.innopolis.refrigerator.core.db.hibernate.dao.session;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.innopolis.refrigerator.core.db.hibernate.element.ElementDAOImpl;
-import ru.innopolis.refrigerator.core.model.Session;
+import ru.innopolis.refrigerator.core.model.session.Session;
 
 public class SessionDAO extends ElementDAOImpl<Session> {
 

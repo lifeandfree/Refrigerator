@@ -1,24 +1,16 @@
-package ru.innopolis.refrigerator.core.db.jdbc.dao;
+package ru.innopolis.refrigerator.core.db.jdbc.dao.ingredient;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.innopolis.refrigerator.core.db.jdbc.connection.ConnectionFactoryPostgreSQL;
+import ru.innopolis.refrigerator.core.db.jdbc.connection.postgresql.ConnectionFactoryPostgreSQL;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.IConnectionFactory;
+import ru.innopolis.refrigerator.core.db.jdbc.dao.ingredientcategory.IngredientCategoryDAO;
 import ru.innopolis.refrigerator.core.db.jdbc.exception.IngredientCategoryDAOException;
 import ru.innopolis.refrigerator.core.db.jdbc.exception.IngredientDAOException;
 import ru.innopolis.refrigerator.core.db.jdbc.exception.IngredientIngredientCategoryDAOException;
-import ru.innopolis.refrigerator.core.db.jdbc.exception.UserDAOException;
-import ru.innopolis.refrigerator.core.model.ICookingMethod;
-import ru.innopolis.refrigerator.core.model.Ingredient;
-import ru.innopolis.refrigerator.core.model.IngredientCategory;
-import ru.innopolis.refrigerator.core.model.User;
+import ru.innopolis.refrigerator.core.model.ingredient.Ingredient;
+import ru.innopolis.refrigerator.core.model.ingredientcategory.IngredientCategory;
 
-import java.io.Externalizable;
-import java.io.Serializable;
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -28,14 +20,6 @@ import java.util.Set;
 
 public class IngredientDAO {
 
-	public static void main(String[] args) {
-		try {
-			System.out.println(getAll());
-		}
-		catch (IngredientDAOException e) {
-			e.printStackTrace();
-		}
-	}
 	private static final Logger logger = LogManager.getLogger(IngredientDAO.class.getName());
 	private static IConnectionFactory connection;
 
@@ -62,6 +46,7 @@ public class IngredientDAO {
 				{
 					ingredientCategories.add(ingredientCategory);
 				}
+
 				Ingredient ingredient = new Ingredient(
 						resultSet.getString("name"),
 						resultSet.getString("dimension")

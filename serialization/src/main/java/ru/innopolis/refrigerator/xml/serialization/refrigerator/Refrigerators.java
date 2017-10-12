@@ -1,6 +1,6 @@
 package ru.innopolis.refrigerator.xml.serialization.refrigerator;
 
-import ru.innopolis.refrigerator.core.model.Refrigerator;
+import ru.innopolis.refrigerator.core.model.refrigerator.Refrigerator;
 
 import javax.xml.bind.annotation.*;
 import java.util.List;

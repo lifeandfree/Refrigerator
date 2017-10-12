@@ -1,12 +1,12 @@
-package ru.innopolis.refrigerator.core.db.jdbc.dao;
+package ru.innopolis.refrigerator.core.db.jdbc.dao.user;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.innopolis.refrigerator.core.db.jdbc.connection.ConnectionFactoryPostgreSQL;
+import ru.innopolis.refrigerator.core.db.jdbc.connection.postgresql.ConnectionFactoryPostgreSQL;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.IConnectionFactory;
 import ru.innopolis.refrigerator.core.db.jdbc.exception.UserDAOException;
-import ru.innopolis.refrigerator.core.model.Role;
-import ru.innopolis.refrigerator.core.model.User;
+import ru.innopolis.refrigerator.core.model.enumcls.Role;
+import ru.innopolis.refrigerator.core.model.user.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

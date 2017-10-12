@@ -3,7 +3,7 @@ package ru.innopolis.refrigerator.core.db.hibernate.dao.cookingmethod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.innopolis.refrigerator.core.db.hibernate.element.ElementDAOImpl;
-import ru.innopolis.refrigerator.core.model.CookingMethod;
+import ru.innopolis.refrigerator.core.model.cookingmethod.CookingMethod;
 
 public class CookingMethodDAO extends ElementDAOImpl<CookingMethod> {
 

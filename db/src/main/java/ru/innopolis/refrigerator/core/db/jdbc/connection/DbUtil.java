@@ -2,6 +2,7 @@ package ru.innopolis.refrigerator.core.db.jdbc.connection;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ru.innopolis.refrigerator.core.db.jdbc.connection.postgresql.ConnectionFactoryPostgreSQL;
 
 import java.sql.*;
 

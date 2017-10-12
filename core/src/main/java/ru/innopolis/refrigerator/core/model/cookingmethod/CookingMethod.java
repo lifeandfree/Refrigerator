@@ -1,4 +1,4 @@
-package ru.innopolis.refrigerator.core.model;
+package ru.innopolis.refrigerator.core.model.cookingmethod;
 
 import org.hibernate.annotations.GenericGenerator;
 

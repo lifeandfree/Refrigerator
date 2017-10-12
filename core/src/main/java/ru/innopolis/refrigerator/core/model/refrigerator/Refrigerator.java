@@ -1,6 +1,8 @@
-package ru.innopolis.refrigerator.core.model;
+package ru.innopolis.refrigerator.core.model.refrigerator;
 
 import org.hibernate.annotations.GenericGenerator;
+import ru.innopolis.refrigerator.core.model.user.User;
+import ru.innopolis.refrigerator.core.model.ingredient.Ingredient;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
@@ -18,7 +20,13 @@ import java.util.Map;
 public class Refrigerator implements Serializable {
 
 	public Refrigerator() {
-		ingredients = new HashMap<>();
+		this.ingredients = new HashMap<>();
+	}
+
+	public Refrigerator(String name, User user) {
+		this.name = name;
+		this.user = user;
+		this.ingredients = new HashMap<>();
 	}
 
 	public Refrigerator(String name, User user, Map<Ingredient, Double> ingredients) {

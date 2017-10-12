@@ -1,6 +1,7 @@
-package ru.innopolis.refrigerator.core.model;
+package ru.innopolis.refrigerator.core.model.ingredient;
 
 import org.hibernate.annotations.GenericGenerator;
+import ru.innopolis.refrigerator.core.model.ingredientcategory.IngredientCategory;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
@@ -45,13 +46,12 @@ public class Ingredient implements Serializable {
 	@XmlElement(required = true)
 	@Column(name = "dimension", nullable = false, length = 100)
 	private String dimension; // млитры граммы шт
+
 	@XmlElement(required = true)
-	@OneToMany
-	@JoinTable(
-			name="Ingredient_ingredientCategory",
-			joinColumns = @JoinColumn( name="ingredient_id", unique = false),
-			inverseJoinColumns = @JoinColumn( name="ingredientCategory_id", unique = false)
-	)
+	@ManyToMany(targetEntity = IngredientCategory.class, cascade = { CascadeType.ALL })
+	@JoinTable(name = "Ingredient_ingredientCategory",
+			joinColumns = { @JoinColumn(name = "ingredient_id") },
+			inverseJoinColumns = { @JoinColumn(name = "ingredientCategory_id") })
 	private Set<IngredientCategory> ingredientCategory;
 
 	public long getId() {

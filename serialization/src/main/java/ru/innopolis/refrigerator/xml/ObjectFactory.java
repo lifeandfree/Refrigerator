@@ -1,6 +1,13 @@
 package ru.innopolis.refrigerator.xml;
 
-import ru.innopolis.refrigerator.core.model.*;
+import ru.innopolis.refrigerator.core.model.cookingmethod.CookingMethod;
+import ru.innopolis.refrigerator.core.model.ingredient.Ingredient;
+import ru.innopolis.refrigerator.core.model.ingredientcategory.IngredientCategory;
+import ru.innopolis.refrigerator.core.model.recipe.Recipe;
+import ru.innopolis.refrigerator.core.model.recipecategory.RecipeCategory;
+import ru.innopolis.refrigerator.core.model.refrigerator.Refrigerator;
+import ru.innopolis.refrigerator.core.model.session.Session;
+import ru.innopolis.refrigerator.core.model.user.User;
 
 import javax.xml.bind.annotation.XmlRegistry;
 

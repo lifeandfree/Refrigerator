@@ -1,12 +1,14 @@
-package ru.innopolis.refrigerator.core.db.jdbc.dao;
+package ru.innopolis.refrigerator.core.db.jdbc.dao.refrigerator;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.innopolis.refrigerator.core.db.jdbc.connection.ConnectionFactoryPostgreSQL;
+import ru.innopolis.refrigerator.core.db.jdbc.connection.postgresql.ConnectionFactoryPostgreSQL;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.IConnectionFactory;
+import ru.innopolis.refrigerator.core.db.jdbc.dao.ingredient.IngredientDAO;
+import ru.innopolis.refrigerator.core.db.jdbc.dao.ingredient.IngredientIngredientCategoryDAO;
 import ru.innopolis.refrigerator.core.db.jdbc.exception.IngredientDAOException;
 import ru.innopolis.refrigerator.core.db.jdbc.exception.RefrigeratorIngredientDAOException;
-import ru.innopolis.refrigerator.core.model.Ingredient;
+import ru.innopolis.refrigerator.core.model.ingredient.Ingredient;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

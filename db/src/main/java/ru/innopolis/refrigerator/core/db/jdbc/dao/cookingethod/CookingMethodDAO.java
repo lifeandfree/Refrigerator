@@ -1,12 +1,11 @@
-package ru.innopolis.refrigerator.core.db.jdbc.dao;
+package ru.innopolis.refrigerator.core.db.jdbc.dao.cookingethod;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.innopolis.refrigerator.core.db.jdbc.connection.ConnectionFactoryPostgreSQL;
+import ru.innopolis.refrigerator.core.db.jdbc.connection.postgresql.ConnectionFactoryPostgreSQL;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.IConnectionFactory;
 import ru.innopolis.refrigerator.core.db.jdbc.exception.CookingMethodDAOException;
-import ru.innopolis.refrigerator.core.db.jdbc.exception.IngredientCategoryDAOException;
-import ru.innopolis.refrigerator.core.model.CookingMethod;
+import ru.innopolis.refrigerator.core.model.cookingmethod.CookingMethod;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

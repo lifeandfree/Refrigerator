@@ -6,8 +6,8 @@
 <hibernate-configuration>
     <session-factory>
     	<!-- Database connection settings -->
-    	<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/refrigerator2</property>
+    	<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/refrigerator4</property>
         <property name="hibernate.connection.username">refrigerator</property>
         <property name="hibernate.connection.password">123</property>
         <!-- SQL dialect -->
@@ -21,14 +21,16 @@
         <property name="hibernate.hbm2ddl.auto">create</property><!-- create|auto|none|update|validate -->
         
         <!-- Core module -->
-        <mapping class="ru.innopolis.refrigerator.core.model.User"/>
-        <mapping class="ru.innopolis.refrigerator.core.model.CookingMethod"/>
-        <mapping class="ru.innopolis.refrigerator.core.model.IngredientCategory"/>
-        <mapping class="ru.innopolis.refrigerator.core.model.Ingredient"/>
-        <mapping class="ru.innopolis.refrigerator.core.model.Session"/>
-        <!--<mapping class="ru.innopolis.refrigerator.core.model.Refrigerator"/>-->
-        <mapping class="ru.innopolis.refrigerator.core.model.RecipeCategory"/>
-        <!--<mapping class="ru.innopolis.refrigerator.core.model.Recipe"/>-->
+        <mapping class="ru.innopolis.refrigerator.core.model.user.User"/>
+        <mapping class="ru.innopolis.refrigerator.core.model.cookingmethod.CookingMethod"/>
+        <mapping class="ru.innopolis.refrigerator.core.model.ingredientcategory.IngredientCategory"/>
+        <mapping class="ru.innopolis.refrigerator.core.model.ingredient.Ingredient"/>
+        <mapping class="ru.innopolis.refrigerator.core.model.session.Session"/>
+        <mapping class="ru.innopolis.refrigerator.core.model.refrigerator.Refrigerator"/>
+        <mapping class="ru.innopolis.refrigerator.core.model.recipecategory.RecipeCategory"/>
+        <mapping class="ru.innopolis.refrigerator.core.model.recipe.Recipe"/>
+        <mapping class="ru.innopolis.refrigerator.core.model.refrigerator.RefrigeratorIngredient"/>
+        <mapping class="ru.innopolis.refrigerator.core.model.recipe.RecipeIngredient"/>
 
 
     </session-factory>

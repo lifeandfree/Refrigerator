@@ -1,6 +1,10 @@
-package ru.innopolis.refrigerator.core.model;
+package ru.innopolis.refrigerator.core.model.recipe;
 
 import org.hibernate.annotations.GenericGenerator;
+import ru.innopolis.refrigerator.core.model.cookingmethod.CookingMethod;
+import ru.innopolis.refrigerator.core.model.enumcls.Complexity;
+import ru.innopolis.refrigerator.core.model.ingredient.Ingredient;
+import ru.innopolis.refrigerator.core.model.recipecategory.RecipeCategory;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
@@ -15,17 +19,28 @@ import java.util.*;
 public class Recipe implements Serializable {
 
 	public Recipe() {
-		recipeCategorys = new HashSet<>();
-		ingredients = new HashMap<>();
+		this.recipeCategorys = new HashSet<>();
+		this.ingredients = new HashMap<>();
 
 	}
 
-	public Recipe(String name, Set<RecipeCategory> recipeCategorys, Complexity complexity, int time, HashMap<Ingredient, Double> ingredients, String instructions, String photo, CookingMethod cookingMethod) {
+	public Recipe(String name, Set<RecipeCategory> recipeCategorys, Complexity complexity, int time, Map<Ingredient, Double> ingredients, String instructions, String photo, CookingMethod cookingMethod) {
 		this.name = name;
 		this.recipeCategorys = recipeCategorys;
 		this.complexity = complexity;
 		this.time = time;
 		this.ingredients = ingredients;
+		this.instructions = instructions;
+		this.photo = photo;
+		this.cookingMethod = cookingMethod;
+	}
+
+	public Recipe(String name, Complexity complexity, int time, String instructions, String photo, CookingMethod cookingMethod) {
+		this.recipeCategorys = new HashSet<>();
+		this.ingredients = new HashMap<>();
+		this.name = name;
+		this.complexity = complexity;
+		this.time = time;
 		this.instructions = instructions;
 		this.photo = photo;
 		this.cookingMethod = cookingMethod;
@@ -43,8 +58,10 @@ public class Recipe implements Serializable {
 	private String name;
 
 	@XmlElement(required = true)
-	@OneToMany
-	@JoinTable(name = "Recipe_RecipeCategory", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "recipeCategory_id"))
+	@ManyToMany(targetEntity = RecipeCategory.class, cascade = { CascadeType.ALL })
+	@JoinTable(name = "recipe_recipecategory",
+			joinColumns = { @JoinColumn(name = "recipe_id") },
+			inverseJoinColumns = { @JoinColumn(name = "recipeCategory_id") })
 	private Set<RecipeCategory> recipeCategorys; //вид блида.
 
 	@Enumerated(EnumType.STRING)
@@ -53,20 +70,20 @@ public class Recipe implements Serializable {
 	private Complexity complexity;
 
 	@XmlElement(required = true)
-	@Column(name = "time", nullable = false)
+	@Column(name = "time", nullable = true)
 	private int time;
 
 	@XmlElement(required = true)
 //	@OneToMany @JoinTable(name="Recipe_ingredient")
 //	@MapKeyColumn(name="ingredients")
 	@Transient
-	private HashMap<Ingredient, Double> ingredients;// название / количество. map
+	private Map<Ingredient, Double> ingredients;// название / количество. map
 
 	@Column(name = "instructions", nullable = false, length = 255)
 	@XmlElement(required = true)
 	private String instructions;
 
-	@Column(name = "photo", nullable = false, length = 255)
+	@Column(name = "photo", nullable = true, length = 255)
 	@XmlElement(required = true)
 	private String photo;
 
@@ -115,7 +132,7 @@ public class Recipe implements Serializable {
 		return ingredients;
 	}
 
-	public void setIngredients(HashMap<Ingredient, Double> ingredients) {
+	public void setIngredients(Map<Ingredient, Double> ingredients) {
 		this.ingredients = ingredients;
 	}
 

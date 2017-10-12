@@ -1,6 +1,7 @@
-package ru.innopolis.refrigerator.core.model;
+package ru.innopolis.refrigerator.core.model.user;
 
 import org.hibernate.annotations.GenericGenerator;
+import ru.innopolis.refrigerator.core.model.enumcls.Role;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;

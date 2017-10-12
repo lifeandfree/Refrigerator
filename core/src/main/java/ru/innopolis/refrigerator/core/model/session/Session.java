@@ -1,11 +1,13 @@
-package ru.innopolis.refrigerator.core.model;
+package ru.innopolis.refrigerator.core.model.session;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
+import ru.innopolis.refrigerator.core.model.user.User;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -20,7 +22,7 @@ public class Session implements Serializable {
 	public Session() {
 	}
 
-	public Session(String sessionId, User user, String session_user_agent, Date session_finish_time, Date session_start_time, boolean remember) {
+	public Session(String sessionId, User user, String session_user_agent, Timestamp session_finish_time, Timestamp session_start_time, boolean remember) {
 		this.sessionId = sessionId;
 		this.user = user;
 		this.session_user_agent = session_user_agent;
@@ -46,18 +48,18 @@ public class Session implements Serializable {
 	private User user;
 
 	@XmlElement(required = true)
-	@Column(name = "session_user_agent", nullable = false, length = 100)
+	@Column(name = "session_user_agent", nullable = true, length = 100)
 	private String session_user_agent;
 
 	@XmlElement(required = true)
-	@Column(name = "session_finish_time", unique = false, nullable = false)
+	@Column(name = "session_finish_time", unique = true, nullable = false)
 	@Type(type = "timestamp")
-	private Date session_finish_time;
+	private Timestamp session_finish_time;
 
 	@XmlElement(required = true)
 	@Column(name = "session_start_time", unique = false, nullable = false)
 	@Type(type = "timestamp")
-	private Date session_start_time;
+	private Timestamp session_start_time;
 
 	@XmlElement(required = true)
 	@Column(name = "remember", unique = false)
@@ -96,7 +98,7 @@ public class Session implements Serializable {
 		return session_finish_time;
 	}
 
-	public void setSession_finish_time(Date session_finish_time) {
+	public void setSession_finish_time(Timestamp session_finish_time) {
 		this.session_finish_time = session_finish_time;
 	}
 
@@ -104,7 +106,7 @@ public class Session implements Serializable {
 		return session_start_time;
 	}
 
-	public void setSession_start_time(Date session_start_time) {
+	public void setSession_start_time(Timestamp session_start_time) {
 		this.session_start_time = session_start_time;
 	}
 

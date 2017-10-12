@@ -1,4 +1,4 @@
-package ru.innopolis.refrigerator.core.model;
+package ru.innopolis.refrigerator.core.model.recipecategory;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -10,44 +10,46 @@ import javax.xml.bind.annotation.XmlType;
 import java.io.Serializable;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "IngredientCategory", propOrder = {})
+@XmlType(name = "RecipeCategory", propOrder = {
+
+})
 @Entity
-@Table(name = "\"IngredientCategory\"")
-public class IngredientCategory implements Serializable {
+@Table(name = "\"RecipeCategory\"")
+public class RecipeCategory implements Serializable {
 
-	public IngredientCategory() {
+	public RecipeCategory() {
 	}
 
-	public IngredientCategory(String name) {
-		this.ingredientCategorName = name;
+	public RecipeCategory(String name) {
+		this.name = name;
 	}
 
+	@XmlElement(required = true)
 	@Id
 	@GeneratedValue(generator = "increment")
 	@GenericGenerator(name = "increment", strategy = "increment")
 	@Column(name = "id", unique = true, nullable = false)
-	@XmlElement(required = true)
 	private long id;
 
 	@XmlElement(required = true)
-	@Column(name = "ingredientCategorName", nullable = false, length = 255)
-	private String ingredientCategorName;
+	@Column(name = "name", nullable = false, length = 255)
+	private String name;
 
 	public long getId() {
 		return id;
 	}
 
 	public String getName() {
-		return ingredientCategorName;
+		return name;
 	}
 
 	public void setName(String name) {
-		this.ingredientCategorName = name;
+		this.name = name;
 	}
 
 	@Override
 	public String toString() {
-		return "IngredientCategory{" + "ingredientCategorName='" + ingredientCategorName + '\'' + '}';
+		return "RecipeCategory{" + "name='" + name + '\'' + '}';
 	}
 
 	@Override
@@ -57,13 +59,13 @@ public class IngredientCategory implements Serializable {
 		if (o == null || getClass() != o.getClass())
 			return false;
 
-		IngredientCategory that = (IngredientCategory) o;
+		RecipeCategory that = (RecipeCategory) o;
 
-		return ingredientCategorName != null ? ingredientCategorName.equals(that.ingredientCategorName) : that.ingredientCategorName == null;
+		return name != null ? name.equals(that.name) : that.name == null;
 	}
 
 	@Override
 	public int hashCode() {
-		return ingredientCategorName != null ? ingredientCategorName.hashCode() : 0;
+		return name != null ? name.hashCode() : 0;
 	}
 }

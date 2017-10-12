@@ -1,7 +1,15 @@
 package ru.innopolis.refrigerator.xml.serialization;
 
 import ru.innopolis.refrigerator.core.Constants;
-import ru.innopolis.refrigerator.core.model.*;
+import ru.innopolis.refrigerator.core.model.cookingmethod.CookingMethod;
+import ru.innopolis.refrigerator.core.model.enumcls.Complexity;
+import ru.innopolis.refrigerator.core.model.enumcls.Role;
+import ru.innopolis.refrigerator.core.model.ingredient.Ingredient;
+import ru.innopolis.refrigerator.core.model.ingredientcategory.IngredientCategory;
+import ru.innopolis.refrigerator.core.model.recipe.Recipe;
+import ru.innopolis.refrigerator.core.model.recipecategory.RecipeCategory;
+import ru.innopolis.refrigerator.core.model.refrigerator.Refrigerator;
+import ru.innopolis.refrigerator.core.model.user.User;
 import ru.innopolis.refrigerator.xml.serialization.recipe.Recipes;
 import ru.innopolis.refrigerator.xml.serialization.refrigerator.Refrigerators;
 
