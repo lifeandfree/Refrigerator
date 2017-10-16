@@ -64,7 +64,7 @@ public class JaxbParserMain {
 
 		CookingMethod cookingMethod = new CookingMethod("Варить");
 
-		Recipe recipe = new Recipe("name1", recipeCategories, Complexity.junior, 1000, ingredients, "1. сварить", null, cookingMethod);
+		Recipe recipe = new Recipe("name1", recipeCategories, Complexity.junior, 1000, ingredients, "1. сварить", null, cookingMethod, user);
 
 		List<Recipe> recipersList = new ArrayList<>();
 		recipersList.add(recipe);

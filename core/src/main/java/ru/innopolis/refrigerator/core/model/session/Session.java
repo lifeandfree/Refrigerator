@@ -20,9 +20,11 @@ import java.util.Date;
 public class Session implements Serializable {
 
 	public Session() {
+		this.session_finish_time = 0L;
+		this.session_start_time = 0L;
 	}
 
-	public Session(String sessionId, User user, String session_user_agent, Timestamp session_finish_time, Timestamp session_start_time, boolean remember) {
+	public Session(String sessionId, User user, String session_user_agent, long session_finish_time, long session_start_time, boolean remember) {
 		this.sessionId = sessionId;
 		this.user = user;
 		this.session_user_agent = session_user_agent;
@@ -33,8 +35,9 @@ public class Session implements Serializable {
 
 	@XmlElement(required = true)
 	@Id
-	@GeneratedValue(generator = "increment")
-	@GenericGenerator(name = "increment", strategy = "increment")
+//	@GeneratedValue(generator = "increment")
+//	@GenericGenerator(name = "increment", strategy = "increment")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	private long id;
 
@@ -52,18 +55,16 @@ public class Session implements Serializable {
 	private String session_user_agent;
 
 	@XmlElement(required = true)
-	@Column(name = "session_finish_time", unique = true, nullable = false)
-	@Type(type = "timestamp")
-	private Timestamp session_finish_time;
+	@Column(name = "session_finish_time", unique = false, nullable = false)
+	private long session_finish_time;
 
 	@XmlElement(required = true)
 	@Column(name = "session_start_time", unique = false, nullable = false)
-	@Type(type = "timestamp")
-	private Timestamp session_start_time;
+	private long session_start_time;
 
 	@XmlElement(required = true)
 	@Column(name = "remember", unique = false)
-	@Type(type = "numeric_boolean")
+	@Type(type = "java.lang.Boolean")
 	private boolean remember = false;
 
 	public long getId() {
@@ -94,19 +95,19 @@ public class Session implements Serializable {
 		this.session_user_agent = session_user_agent;
 	}
 
-	public Date getSession_finish_time() {
+	public long getSession_finish_time() {
 		return session_finish_time;
 	}
 
-	public void setSession_finish_time(Timestamp session_finish_time) {
+	public void setSession_finish_time(long session_finish_time) {
 		this.session_finish_time = session_finish_time;
 	}
 
-	public Date getSession_start_time() {
+	public long getSession_start_time() {
 		return session_start_time;
 	}
 
-	public void setSession_start_time(Timestamp session_start_time) {
+	public void setSession_start_time(long session_start_time) {
 		this.session_start_time = session_start_time;
 	}
 
@@ -134,16 +135,16 @@ public class Session implements Serializable {
 
 		if (sessionId != null ? !sessionId.equals(session.sessionId) : session.sessionId != null)
 			return false;
-		if (session_user_agent != null ? !session_user_agent.equals(session.session_user_agent) : session.session_user_agent != null)
+		if (user != null ? !user.equals(session.user) : session.user != null)
 			return false;
-		return session_start_time != null ? session_start_time.equals(session.session_start_time) : session.session_start_time == null;
+		return session_user_agent != null ? session_user_agent.equals(session.session_user_agent) : session.session_user_agent == null;
 	}
 
 	@Override
 	public int hashCode() {
 		int result = sessionId != null ? sessionId.hashCode() : 0;
+		result = 31 * result + (user != null ? user.hashCode() : 0);
 		result = 31 * result + (session_user_agent != null ? session_user_agent.hashCode() : 0);
-		result = 31 * result + (session_start_time != null ? session_start_time.hashCode() : 0);
 		return result;
 	}
 }

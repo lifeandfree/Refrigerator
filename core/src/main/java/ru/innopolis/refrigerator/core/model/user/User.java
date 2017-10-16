@@ -27,8 +27,9 @@ public class User implements Serializable {
 	}
 
 	@Id
-	@GeneratedValue(generator = "increment")
-	@GenericGenerator(name = "increment", strategy = "increment")
+//	@GeneratedValue(generator = "increment")
+//	@GenericGenerator(name = "increment", strategy = "increment")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	@XmlElement(required = true)
 	private long id;

@@ -3,7 +3,7 @@ package ru.innopolis.refrigerator.core.db.jdbc.connection.postgresql;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.DbUtil;
-import ru.innopolis.refrigerator.core.db.jdbc.connection.IConnectionFactory;
+import ru.innopolis.refrigerator.core.db.jdbc.connection.ConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,7 +12,7 @@ import java.sql.SQLException;
 /**
  * Класс для создания подключения к БД PostgreSQL.
  */
-public class ConnectionFactoryPostgreSQL implements IConnectionFactory
+public class ConnectionFactoryPostgreSQL implements ConnectionFactory
 {
 	public static void main(String[] args) {
 		ConnectionFactoryPostgreSQL.getInstance().getConnection("","","");

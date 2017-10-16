@@ -3,14 +3,18 @@ package ru.innopolis.refrigerator.core.db.jdbc.dao.refrigerator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.postgresql.ConnectionFactoryPostgreSQL;
-import ru.innopolis.refrigerator.core.db.jdbc.connection.IConnectionFactory;
-import ru.innopolis.refrigerator.core.db.jdbc.exception.RefrigeratorDAOException;
+import ru.innopolis.refrigerator.core.db.jdbc.connection.ConnectionFactory;
+import ru.innopolis.refrigerator.core.db.jdbc.dao.DaoFactory;
+import ru.innopolis.refrigerator.core.db.jdbc.dao.ingredient.IngredientDAO;
+import ru.innopolis.refrigerator.core.db.jdbc.dao.user.UserDAO;
+import ru.innopolis.refrigerator.core.db.jdbc.exception.*;
 import ru.innopolis.refrigerator.core.model.enumcls.Role;
 import ru.innopolis.refrigerator.core.model.ingredient.Ingredient;
 import ru.innopolis.refrigerator.core.model.ingredientcategory.IngredientCategory;
 import ru.innopolis.refrigerator.core.model.refrigerator.Refrigerator;
 import ru.innopolis.refrigerator.core.model.user.User;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -22,13 +26,13 @@ import java.util.Set;
 public class RefrigeratorDAO {
 
 	private static final Logger logger = LogManager.getLogger(RefrigeratorDAO.class.getName());
-	private static IConnectionFactory connection;
+	private static ConnectionFactory connection;
 
 	static {
 		connection = ConnectionFactoryPostgreSQL.getInstance();
 	}
 
-	public static List<Refrigerator> getAll() throws RefrigeratorDAOException {
+	public List<Refrigerator> getAll() throws RefrigeratorDAOException {
 		List<Refrigerator> refrigerators = new ArrayList<>();
 		List<Ingredient> ingredientList = new ArrayList<>();
 		List<IngredientCategory> ingredientCategories = new ArrayList<>();
@@ -102,5 +106,97 @@ public class RefrigeratorDAO {
 			throw new RefrigeratorDAOException();
 		}
 		return refrigerators;
+	}
+
+	public void insertAll(List<Refrigerator> refrigerators) throws RefrigeratorDAOException {
+
+		PreparedStatement ps = null;
+		try {
+			for (Refrigerator refrigerator:
+					refrigerators) {
+				long userId = 0;
+				try {
+					userId = DaoFactory.getInstance().getUserDAO().getId(refrigerator.getUser());
+				}
+				catch (UserDAOException e) {
+					logger.error("I can not get an user to the database" + e.toString());
+					throw new RefrigeratorDAOException();
+				}
+				if (userId > 0){
+					insertOne(refrigerator.getName(), userId);
+				}
+				else {
+					logger.error("I can not add an refrigerator to the database. Not User"+ refrigerator.getUser().toString());
+					throw new RefrigeratorDAOException();
+				}
+				long refrigeratorId = getId(refrigerator.getName(), userId);
+				if (refrigeratorId <= 0 ){
+					logger.error("I can not get an refrigeratorID to the database" );
+					throw new RefrigeratorDAOException();
+				}
+
+				Map<Ingredient, Double> ingredients = refrigerator.getIngredients();
+
+				for(Map.Entry<Ingredient, Double> entry : ingredients.entrySet()) {
+					Ingredient ingredient = entry.getKey();
+					Double value = entry.getValue();
+
+					long ingredientId;
+					try {
+						ingredientId = DaoFactory.getInstance().getIngredientDAO().getId(ingredient);
+						String sql = "INSERT INTO \"RefrigeratorIngredient\" (quantity, ingredient_id, refrigerator_id) VALUES (?,?,?)";
+						ps = connection.getConnection().prepareStatement(sql);
+						ps.clearParameters();
+						ps.setDouble(1, value);
+						ps.setLong(2, ingredientId);
+						ps.setLong(3, refrigeratorId);
+						ps.addBatch();
+						ps.executeBatch();
+					}
+					catch (IngredientDAOException e) {
+						logger.error("I can not get an ingredientId to the database" );
+					}
+				}
+
+			}
+		}
+		catch (SQLException e) {
+			logger.error("I can not set an refrigerator to the database" );
+		}
+
+	}
+
+	private long getId(String name, long userId) throws RefrigeratorDAOException {
+		long refrigeratorId = 0;
+		try {
+			PreparedStatement statement = connection.getConnection().prepareStatement("SELECT * FROM \"Refrigerator\" WHERE name=? AND user_id=?");
+			statement.setString(1, name);
+			statement.setLong(2, userId);
+			ResultSet resultSet = statement.executeQuery();
+			if (resultSet.next()) {
+				refrigeratorId = resultSet.getLong("id");
+			}
+		}
+		catch (SQLException e) {
+			logger.error("I can not get an item to the database" + e.toString());
+			throw new RefrigeratorDAOException();
+		}
+		return refrigeratorId;
+	}
+
+	private void insertOne(String name, long userId) throws RefrigeratorDAOException {
+		String sql = "INSERT INTO \"Refrigerator\" (name, user_id) VALUES(?,?)";
+		try {
+			PreparedStatement ps = connection.getConnection().prepareStatement(sql);
+			ps.clearParameters();
+			ps.setString(1, name);
+			ps.setLong(2, userId);
+			ps.addBatch();
+			ps.executeBatch();
+		}
+		catch (SQLException e) {
+			logger.error("I can not add an item to the database" + e.toString());
+			throw new RefrigeratorDAOException();
+		}
 	}
 }

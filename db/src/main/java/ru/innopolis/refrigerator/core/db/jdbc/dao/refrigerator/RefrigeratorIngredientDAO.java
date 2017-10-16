@@ -3,7 +3,8 @@ package ru.innopolis.refrigerator.core.db.jdbc.dao.refrigerator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.postgresql.ConnectionFactoryPostgreSQL;
-import ru.innopolis.refrigerator.core.db.jdbc.connection.IConnectionFactory;
+import ru.innopolis.refrigerator.core.db.jdbc.connection.ConnectionFactory;
+import ru.innopolis.refrigerator.core.db.jdbc.dao.DaoFactory;
 import ru.innopolis.refrigerator.core.db.jdbc.dao.ingredient.IngredientDAO;
 import ru.innopolis.refrigerator.core.db.jdbc.dao.ingredient.IngredientIngredientCategoryDAO;
 import ru.innopolis.refrigerator.core.db.jdbc.exception.IngredientDAOException;
@@ -19,13 +20,13 @@ import java.util.Map;
 public class RefrigeratorIngredientDAO extends RefrigeratorIngredientDAOException{
 
 	private static final Logger logger = LogManager.getLogger(IngredientIngredientCategoryDAO.class.getName());
-	private static IConnectionFactory connection;
+	private static ConnectionFactory connection;
 
 	static {
 		connection = ConnectionFactoryPostgreSQL.getInstance();
 	}
 
-	public static Map<Ingredient, Double> getAllByRefrigeratorId(Long id) throws RefrigeratorIngredientDAOException {
+	public Map<Ingredient, Double> getAllByRefrigeratorId(Long id) throws RefrigeratorIngredientDAOException {
 		Map<Ingredient, Double> ingredWithQByRefrigerators = new HashMap<>();
 
 		try {
@@ -34,7 +35,7 @@ public class RefrigeratorIngredientDAO extends RefrigeratorIngredientDAOExceptio
 			ResultSet resultSet = statement.executeQuery();
 
 			while (resultSet.next()) {
-				Ingredient ingredient = IngredientDAO.getById(resultSet.getLong("ingredient_id"));
+				Ingredient ingredient = DaoFactory.getInstance().getIngredientDAO().getById(resultSet.getLong("ingredient_id"));
 				Double ingredientQuantity = resultSet.getDouble("ingredient_id");
 				ingredWithQByRefrigerators.put(ingredient, ingredientQuantity);
 			}

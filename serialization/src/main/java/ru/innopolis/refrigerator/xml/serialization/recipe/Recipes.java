@@ -2,6 +2,7 @@ package ru.innopolis.refrigerator.xml.serialization.recipe;
 
 import ru.innopolis.refrigerator.core.model.recipe.Recipe;
 import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -11,6 +12,7 @@ import java.util.List;
 public class Recipes {
 
 	public Recipes() {
+		this.recipes = new ArrayList<>();
 	}
 
 	public Recipes(List<Recipe> recipes) {

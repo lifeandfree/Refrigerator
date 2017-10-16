@@ -5,6 +5,7 @@ import ru.innopolis.refrigerator.core.model.cookingmethod.CookingMethod;
 import ru.innopolis.refrigerator.core.model.enumcls.Complexity;
 import ru.innopolis.refrigerator.core.model.ingredient.Ingredient;
 import ru.innopolis.refrigerator.core.model.recipecategory.RecipeCategory;
+import ru.innopolis.refrigerator.core.model.user.User;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
@@ -24,7 +25,7 @@ public class Recipe implements Serializable {
 
 	}
 
-	public Recipe(String name, Set<RecipeCategory> recipeCategorys, Complexity complexity, int time, Map<Ingredient, Double> ingredients, String instructions, String photo, CookingMethod cookingMethod) {
+	public Recipe(String name, Set<RecipeCategory> recipeCategorys, Complexity complexity, int time, Map<Ingredient, Double> ingredients, String instructions, String photo, CookingMethod cookingMethod, User user) {
 		this.name = name;
 		this.recipeCategorys = recipeCategorys;
 		this.complexity = complexity;
@@ -33,9 +34,10 @@ public class Recipe implements Serializable {
 		this.instructions = instructions;
 		this.photo = photo;
 		this.cookingMethod = cookingMethod;
+		this.user = user;
 	}
 
-	public Recipe(String name, Complexity complexity, int time, String instructions, String photo, CookingMethod cookingMethod) {
+	public Recipe(String name, Complexity complexity, int time, String instructions, String photo, CookingMethod cookingMethod, User user) {
 		this.recipeCategorys = new HashSet<>();
 		this.ingredients = new HashMap<>();
 		this.name = name;
@@ -44,12 +46,14 @@ public class Recipe implements Serializable {
 		this.instructions = instructions;
 		this.photo = photo;
 		this.cookingMethod = cookingMethod;
+		this.user = user;
 	}
 
 	@XmlElement(required = true)
 	@Id
-	@GeneratedValue(generator = "increment")
-	@GenericGenerator(name = "increment", strategy = "increment")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@GeneratedValue(generator = "increment")
+//	@GenericGenerator(name = "increment", strategy = "increment")
 	@Column(name = "id", unique = true, nullable = false)
 	private long id;
 
@@ -88,9 +92,22 @@ public class Recipe implements Serializable {
 	private String photo;
 
 	@ManyToOne
-	@JoinColumn(name = "cookingMethod_id")
+	@JoinColumn(name = "cookingMethod_id", nullable = true)
 	@XmlElement(required = true)
 	private CookingMethod cookingMethod; // способ приготовления
+
+	@XmlElement(required = true)
+	@ManyToOne
+	@JoinColumn(name = "user_id", nullable = true)
+	private User user;
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	public long getId() {
 		return id;

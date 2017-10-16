@@ -28,6 +28,19 @@
             <version>3.1.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>ru.innopolis.refrigerator</groupId>
+            <artifactId>core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ru.innopolis.refrigerator</groupId>
+            <artifactId>db</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+
     </dependencies>
 
 </project>

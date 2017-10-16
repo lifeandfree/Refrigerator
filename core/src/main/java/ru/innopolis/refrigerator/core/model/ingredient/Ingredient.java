@@ -31,10 +31,10 @@ public class Ingredient implements Serializable {
 		this.ingredientCategory = new HashSet<>();
 	}
 
-
 	@Id
-	@GeneratedValue(generator = "increment")
-	@GenericGenerator(name = "increment", strategy = "increment")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@GeneratedValue(generator = "increment")
+//	@GenericGenerator(name = "increment", strategy = "increment")
 	@Column(name = "id", unique = true, nullable = false)
 	@XmlElement(required = true)
 	private long id;
@@ -49,9 +49,9 @@ public class Ingredient implements Serializable {
 
 	@XmlElement(required = true)
 	@ManyToMany(targetEntity = IngredientCategory.class, cascade = { CascadeType.ALL })
-	@JoinTable(name = "Ingredient_ingredientCategory",
-			joinColumns = { @JoinColumn(name = "ingredient_id") },
-			inverseJoinColumns = { @JoinColumn(name = "ingredientCategory_id") })
+//	@JoinTable(name = "Ingredient_ingredientCategory",
+//			joinColumns = { @JoinColumn(name = "ingredient_id") },
+//			inverseJoinColumns = { @JoinColumn(name = "ingredientCategory_id") })
 	private Set<IngredientCategory> ingredientCategory;
 
 	public long getId() {

@@ -2,6 +2,7 @@ package ru.innopolis.refrigerator.core.model.refrigerator;
 
 import org.hibernate.annotations.GenericGenerator;
 import ru.innopolis.refrigerator.core.model.ingredient.Ingredient;
+import ru.innopolis.refrigerator.core.model.ingredientcategory.IngredientCategory;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
@@ -29,8 +30,9 @@ public class RefrigeratorIngredient implements Serializable {
 
 	@XmlElement(required = true)
 	@Id
-	@GeneratedValue(generator = "increment")
-	@GenericGenerator(name = "increment", strategy = "increment")
+//	@GeneratedValue(generator = "increment")
+//	@GenericGenerator(name = "increment", strategy = "increment")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	private long id;
 
@@ -39,13 +41,13 @@ public class RefrigeratorIngredient implements Serializable {
 	private Double quantity;
 
 	@XmlElement(required = true)
-	@ManyToOne
-	@JoinColumn(name = "ingredient_id", nullable = false)
+	@ManyToOne(targetEntity = Ingredient.class, cascade = { CascadeType.ALL })
+	@JoinColumn(name = "ingredient_id", nullable = false, unique = false)
 	private Ingredient ingredient;
 
 	@XmlElement(required = true)
-	@ManyToOne
-	@JoinColumn(name = "refrigerator_id", nullable = false)
+	@ManyToOne(targetEntity = Refrigerator.class, cascade = { CascadeType.ALL })
+	@JoinColumn(name = "refrigerator_id", nullable = false, unique = false)
 	private Refrigerator refrigerator;
 
 	@Override

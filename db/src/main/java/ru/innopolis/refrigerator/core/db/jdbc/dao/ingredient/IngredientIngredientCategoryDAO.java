@@ -3,7 +3,7 @@ package ru.innopolis.refrigerator.core.db.jdbc.dao.ingredient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.postgresql.ConnectionFactoryPostgreSQL;
-import ru.innopolis.refrigerator.core.db.jdbc.connection.IConnectionFactory;
+import ru.innopolis.refrigerator.core.db.jdbc.connection.ConnectionFactory;
 import ru.innopolis.refrigerator.core.db.jdbc.exception.IngredientIngredientCategoryDAOException;
 
 import java.sql.ResultSet;
@@ -15,13 +15,13 @@ import java.util.Set;
 public class IngredientIngredientCategoryDAO {
 
 	private static final Logger logger = LogManager.getLogger(IngredientIngredientCategoryDAO.class.getName());
-	private static IConnectionFactory connection;
+	private static ConnectionFactory connection;
 
 	static {
 		connection = ConnectionFactoryPostgreSQL.getInstance();
 	}
 
-	public static Set<Long> getAllByIngredientId(long id) throws IngredientIngredientCategoryDAOException {
+	public Set<Long> getAllByIngredientId(long id) throws IngredientIngredientCategoryDAOException {
 	Set<Long> ingToIngCategs = new HashSet<>();
 
 		try {

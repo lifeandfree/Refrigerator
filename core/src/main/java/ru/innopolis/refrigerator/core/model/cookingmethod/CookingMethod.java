@@ -26,13 +26,15 @@ public class CookingMethod implements Serializable, ICookingMethod {
 		this.name = name;
 	}
 
+	@XmlElement(type=CookingMethod.class)
 	@Transient
 	ICookingMethod iCookingMethod;
 
 	@XmlElement(required = true)
 	@Id
-	@GeneratedValue(generator = "increment")
-	@GenericGenerator(name = "increment", strategy = "increment")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@GeneratedValue(generator = "increment")
+//	@GenericGenerator(name = "increment", strategy = "increment")
 	@Column(name = "id", unique = true, nullable = false)
 	private long id;
 
@@ -46,7 +48,7 @@ public class CookingMethod implements Serializable, ICookingMethod {
 
 	@Override
 	public String getName() {
-		return name + " " + iCookingMethod.getName();
+		return name + " " + ((iCookingMethod != null) ? iCookingMethod.getName() : "");
 	}
 
 	public void setName(String name) {

@@ -4,15 +4,15 @@ import java.util.Collection;
 
 public interface ElementDAO<E> {
 
-    // public void addElement(E el);
+    public E add(E el);
 
-    public E addElement(E el);
+    public void delete(E el);
 
-    public void deleteElement(E el);
+    public Collection<E> getAll();
 
-    public Collection<E> getAllElements();
+    public E getById(Long elId);
 
-    public E getElementByID(Long elId);
+    public void update(E el);
 
-    public void updateElement(E el);
+    public Collection<E> addAll(Collection<E> el);
 }

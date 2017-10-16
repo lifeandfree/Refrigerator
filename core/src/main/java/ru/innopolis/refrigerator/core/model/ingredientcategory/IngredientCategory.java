@@ -1,6 +1,7 @@
 package ru.innopolis.refrigerator.core.model.ingredientcategory;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -23,14 +24,15 @@ public class IngredientCategory implements Serializable {
 	}
 
 	@Id
-	@GeneratedValue(generator = "increment")
-	@GenericGenerator(name = "increment", strategy = "increment")
+//	@GeneratedValue(generator = "increment")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@GenericGenerator(name = "increment", strategy = "increment")
 	@Column(name = "id", unique = true, nullable = false)
 	@XmlElement(required = true)
 	private long id;
 
 	@XmlElement(required = true)
-	@Column(name = "ingredientCategorName", nullable = false, length = 255)
+	@Column(name = "ingredientCategorName", unique = true, nullable = false, length = 255)
 	private String ingredientCategorName;
 
 	public long getId() {

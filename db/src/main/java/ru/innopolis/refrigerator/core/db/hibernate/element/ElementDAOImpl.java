@@ -27,7 +27,7 @@ public class ElementDAOImpl<E> implements ElementDAO<E> {
      *            - элемент для добавления.
      */
     @Override
-    public E addElement(E el) {
+    public E add(E el) {
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
@@ -53,7 +53,7 @@ public class ElementDAOImpl<E> implements ElementDAO<E> {
      *            - элемент для удаления.
      */
     @Override
-    public void deleteElement(E el) {
+    public void delete(E el) {
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
@@ -77,7 +77,7 @@ public class ElementDAOImpl<E> implements ElementDAO<E> {
      * @return {@link Collection} элементов {@link E} из БД.
      */
     @Override
-    public Collection<E> getAllElements() {
+    public Collection<E> getAll() {
         List<E> els = null;
         Session session = null;
         try {
@@ -108,7 +108,7 @@ public class ElementDAOImpl<E> implements ElementDAO<E> {
      * @return элемент {@link E} из БД.
      */
     public E getElementByID(long elId) {
-        return getElementByID(Long.valueOf(elId));
+        return getById(Long.valueOf(elId));
     }
 
     /**
@@ -119,7 +119,7 @@ public class ElementDAOImpl<E> implements ElementDAO<E> {
      * @return элемент {@link E} из БД.
      */
     @Override
-    public E getElementByID(Long elId) {
+    public E getById(Long elId) {
         E el = null;
         Session session = null;
         try {
@@ -146,7 +146,7 @@ public class ElementDAOImpl<E> implements ElementDAO<E> {
      *            - элемент для добавления.
      */
     @Override
-    public void updateElement(E el) {
+    public void update(E el) {
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
@@ -163,6 +163,11 @@ public class ElementDAOImpl<E> implements ElementDAO<E> {
             }
         }
 
+    }
+
+    @Override
+    public Collection<E> addAll(Collection<E> el) {
+        return el;
     }
 
 }
