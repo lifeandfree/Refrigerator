@@ -3,31 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
-    <!--<servlet>-->
-        <!--<servlet-name>-->
-            <!--MyServlet-->
-        <!--</servlet-name>-->
-        <!--<servlet-class>-->
-            <!--servlets.HelloServlet-->
-        <!--</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet>-->
-        <!--<servlet-name>StudentsServlet</servlet-name>-->
-        <!--<servlet-class>servlets.StudentsServlet</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet>-->
-        <!--<servlet-name>LoginServlet</servlet-name>-->
-        <!--<servlet-class>servlets.LoginServlet</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>MyServlet</servlet-name>-->
-        <!--<url-pattern>/hello</url-pattern>-->
-    <!--</servlet-mapping>-->
 
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>StudentsServlet</servlet-name>-->
-        <!--<url-pattern>/Students</url-pattern>-->
-    <!--</servlet-mapping>-->
     <servlet>
         <servlet-name>Authorization</servlet-name>
         <servlet-class>ru.innopolis.refrigerator.servlet.LoginServlet</servlet-class>
@@ -46,35 +22,39 @@
         <url-pattern>/reg</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>Refrigerator</servlet-name>
+        <servlet-class>ru.innopolis.refrigerator.servlet.Refrigerator</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Refrigerator</servlet-name>
+        <url-pattern>/refrigerator</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Recipes</servlet-name>
+        <servlet-class>ru.innopolis.refrigerator.servlet.Recipes</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Recipes</servlet-name>
+        <url-pattern>/recipes</url-pattern>
+    </servlet-mapping>
+
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>ru.innopolis.refrigerator.servlet.filter.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
     <!--<servlet>-->
         <!--<servlet-name>MainPage</servlet-name>-->
-        <!--<servlet-class>ru.innopolis.refrigerator.servlet.LoginServlet</servlet-class>-->
+        <!--<servlet-class>ru.innopolis.refrigerator.servlet.MainPage</servlet-class>-->
     <!--</servlet>-->
     <!--<servlet-mapping>-->
         <!--<servlet-name>MainPage</servlet-name>-->
         <!--<url-pattern>/</url-pattern>-->
     <!--</servlet-mapping>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>LoginServlet</servlet-name>-->
-        <!--<url-pattern>/auth</url-pattern>-->
-    <!--</servlet-mapping>-->
-
-    <!--<servlet>-->
-        <!--<servlet-name>ShowStudents</servlet-name>-->
-        <!--<servlet-class>servlets.ShowStudents</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>ShowStudents</servlet-name>-->
-        <!--<url-pattern>/ShowStudents</url-pattern>-->
-    <!--</servlet-mapping>-->
-
-    <!--<servlet>-->
-        <!--<servlet-name>DeleteStudentServlet</servlet-name>-->
-        <!--<servlet-class>servlets.DeleteStudentServlet</servlet-class>-->
-    <!--</servlet>-->
-    <!--<servlet-mapping>-->
-        <!--<servlet-name>DeleteStudentServlet</servlet-name>-->
-        <!--<url-pattern>/delete</url-pattern>-->
-    <!--</servlet-mapping>-->
-
 </web-app>

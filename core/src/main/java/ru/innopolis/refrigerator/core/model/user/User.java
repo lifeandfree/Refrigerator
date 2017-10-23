@@ -26,6 +26,16 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
+
+	public User(String username, String password, Role role, String email, long id) {
+		this.username = username;
+		this.password = password;
+		this.role = role;
+		this.email = email;
+		this.id = id;
+	}
+
+
 	@Id
 //	@GeneratedValue(generator = "increment")
 //	@GenericGenerator(name = "increment", strategy = "increment")
@@ -37,7 +47,7 @@ public class User implements Serializable {
 	/**
 	 * Логин пользователя
 	 */
-	@Column(name = "username", nullable = false, length = 255)
+	@Column(name = "username", nullable = false, length = 255, unique = true)
 	@XmlElement(required = true)
 	private String username;
 
@@ -59,7 +69,7 @@ public class User implements Serializable {
 	/**
 	 * Email пользователя
 	 */
-	@Column(name = "email", nullable = false, length = 255)
+	@Column(name = "email", nullable = false, length = 255, unique = true)
 	@XmlElement(required = true)
 	private String email;
 

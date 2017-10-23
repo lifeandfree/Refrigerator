@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.DbUtil;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.ConnectionFactory;
+import ru.innopolis.refrigerator.core.logger.LogHandler;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,7 +24,7 @@ public class ConnectionFactoryPostgreSQL implements ConnectionFactory
 	private static ConnectionFactoryPostgreSQL instance;
 	//private static ConnectionFactoryPostgreSQL instance = new ConnectionFactoryPostgreSQL(); //TODO
 
-	private static final Logger log = LogManager.getLogger(ConnectionFactoryPostgreSQL.class.getName());
+	private LogHandler log = new LogHandler();
 
 	@Override
 	public Connection getConnection(String url, String user, String password)
@@ -54,11 +55,11 @@ public class ConnectionFactoryPostgreSQL implements ConnectionFactory
 		}
 		catch (ClassNotFoundException e)
 		{
-			log.error("Unable to load " + DRIVER_CLASS_POSTGRESQL, e);
+			log.error("Unable to load " + DRIVER_CLASS_POSTGRESQL, e.toString());
 		}
 		catch (Exception e)
 		{
-			log.error("Unable to load " + DRIVER_CLASS_POSTGRESQL + " Message: " + e.getMessage(), e);
+			log.error("Unable to load " + DRIVER_CLASS_POSTGRESQL + " Message: " + e.getMessage(), e.toString());
 		}
 	}
 
@@ -75,11 +76,11 @@ public class ConnectionFactoryPostgreSQL implements ConnectionFactory
 		{
 			log.error(
 					"Unable to Connect to Database." + " SQLState: " + e.getSQLState() + " Message: " + e.getMessage()
-							+ " Vendor code: " + e.getErrorCode(), e);
+							+ " Vendor code: " + e.getErrorCode(), e.toString());
 		}
 		catch (Exception e)
 		{
-			log.error("Unable to Connect to Database." + " Message: " + e.getMessage(), e);
+			log.error("Unable to Connect to Database." + " Message: " + e.getMessage(), e.toString());
 		}
 		return connection;
 	}

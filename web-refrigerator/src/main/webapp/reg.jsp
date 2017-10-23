@@ -13,7 +13,7 @@
 <body>
 <div class="container">
 
-    <form class="well form-horizontal" action="" method="post"  id="contact_form">
+    <form class="well form-horizontal" action="/web-refrigerator/reg" method="post" id="contact_form">
         <fieldset>
             <legend><h2><b>Registration Form</b></h2></legend><br>
             <div class="form-group">
@@ -21,7 +21,7 @@
                 <div class="col-md-4 inputGroupContainer">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                        <input  name="user_name" placeholder="Username" class="form-control"  type="text">
+                        <input  name="username" placeholder="Username" class="form-control"  type="text">
                     </div>
                 </div>
             </div>
@@ -49,6 +49,13 @@
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
                         <input name="email" placeholder="E-Mail Address" class="form-control"  type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                        <p class="text-danger">${msgerror}</p>
                     </div>
                 </div>
             </div>

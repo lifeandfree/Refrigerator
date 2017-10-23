@@ -1,10 +1,10 @@
 package ru.innopolis.refrigerator.core.db.jdbc.dao.user;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.postgresql.ConnectionFactoryPostgreSQL;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.ConnectionFactory;
+import ru.innopolis.refrigerator.core.db.jdbc.dao.DaoFactory;
 import ru.innopolis.refrigerator.core.db.jdbc.exception.UserDAOException;
+import ru.innopolis.refrigerator.core.logger.LogHandler;
 import ru.innopolis.refrigerator.core.model.enumcls.Role;
 import ru.innopolis.refrigerator.core.model.user.User;
 
@@ -18,7 +18,7 @@ import java.util.List;
 public class UserDAO {
 
 	private static ConnectionFactory connection;
-	private static final Logger logger = LogManager.getLogger(UserDAO.class.getName());
+	private LogHandler logger = new LogHandler();
 
 	static {
 		connection = ConnectionFactoryPostgreSQL.getInstance();
@@ -48,12 +48,12 @@ public class UserDAO {
 
 		try {
 			Statement statement = connection.getConnection().createStatement();
-
 			ResultSet resultSet = statement.executeQuery("SELECT * FROM \"User\" where id=" + id);
-
 			if (resultSet.next()) {
-				user = new User(resultSet.getString("username"), resultSet.getString("password"), Role.valueOf(resultSet.getString("role")), resultSet.getString("email"));
-
+				user = new User(resultSet.getString("username"),
+						resultSet.getString("password"),
+						Role.valueOf(resultSet.getString("role")),
+						resultSet.getString("email"), id);
 			}
 		}
 		catch (SQLException e) {
@@ -72,6 +72,7 @@ public class UserDAO {
 			ps.setString(2, user.getPassword());
 			ps.setString(3, user.getRole().toString());
 			ps.setString(4, user.getEmail());
+			ps.addBatch();
 			ps.executeBatch();
 		}
 		catch (SQLException e) {
@@ -127,5 +128,62 @@ public class UserDAO {
 			logger.error("I can not get an item to the database" + e.toString());
 			return false;
 		}
+	}
+
+	public boolean checkDublicateUser(String login, String email) throws UserDAOException {
+		logger.info("I check duplicate user to the database");
+		User user = new User();
+		user.setEmail(email);
+		user.setUsername(login);
+		long userid = DaoFactory.getInstance().getUserDAO().getId(user);
+		if (userid > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	public User getUserByLoginAndPassword(String login, String psw) throws UserDAOException {
+		User user = new User();
+
+		try {
+			PreparedStatement statement = connection.getConnection().prepareStatement("SELECT * FROM \"User\" WHERE username=? AND password=?");
+			statement.setString(1, login);
+			statement.setString(2, psw);
+			ResultSet resultSet = statement.executeQuery();
+
+			if (resultSet.next()) {
+				user = new User(resultSet.getString("username"), resultSet.getString(""), Role.valueOf(resultSet.getString("role")), resultSet.getString("email"));
+
+			}
+		}
+		catch (SQLException e) {
+			String msg = "I can not get an item to the database" + e.toString();
+			logger.error(msg);
+			throw new UserDAOException(msg);
+		}
+		return user;
+	}
+
+	public long getUserIdByLoginAndPassword(String login, String psw) throws UserDAOException {
+		long userId = 0;
+
+		try {
+			PreparedStatement statement = connection.getConnection().prepareStatement("SELECT * FROM \"User\" WHERE username=? AND password=?");
+			statement.setString(1, login);
+			statement.setString(2, psw);
+			ResultSet resultSet = statement.executeQuery();
+
+			if (resultSet.next()) {
+				if (resultSet.next()) {
+					userId = resultSet.getLong("id");
+				}
+			}
+		}
+		catch (SQLException e) {
+			String msg = "I can not get an item to the database" + e.toString();
+			logger.error(msg);
+			throw new UserDAOException(msg);
+		}
+		return userId;
 	}
 }
