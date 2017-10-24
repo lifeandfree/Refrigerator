@@ -31,7 +31,7 @@ public class LoginFilter implements Filter {
 
 		if (req.getServletPath().contains("/auth") || req.getServletPath().contains("/reg") ||
 				req.getServletPath().contains("/auth.") || req.getServletPath().contains("/reg.") ||
-				req.getServletPath().contains("/css") || req.getServletPath().contains("/js") ||
+				req.getServletPath().contains("/WEB-INF/view/css") || req.getServletPath().contains("/js") ||
 				req.getServletPath().contains("/image"))
 		{
 			chain.doFilter(request, response);

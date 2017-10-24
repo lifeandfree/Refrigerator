@@ -30,11 +30,9 @@ public class LoginServlet extends HttpServlet  {
 		String logout = req.getParameter("logout");
 
 		User user = new User();
-		if (password == null)
-		{
+		if (password == null) {
 			user.setPassword(null);
-		}
-		else
+		} else
 		{
 			user.setPassword(PasswordEncoder.passwordEncode(password));
 		}

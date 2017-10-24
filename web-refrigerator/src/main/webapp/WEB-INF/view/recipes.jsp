@@ -24,7 +24,7 @@
       <ul class="nav navbar-nav">
         <li><a href="#">Главная</a></li>
         <li><a href="#">Поиск</a></li>
-        <li class="active"><a href="#">Свои рецепты <span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="${pageContext.servletContext.contextPath}/recipes">Свои рецепты <span class="sr-only">(current)</span></a></li>
       </ul>
       <form class="navbar-form navbar-left">
         <div class="form-group">
@@ -32,6 +32,9 @@
         </div>
         <button type="submit" class="btn btn-default">Найти</button>
       </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="${pageContext.servletContext.contextPath}/auth/logout" name="logout">Logout</a></li>
+      </ul>
     </div>
   </div>
 </nav>
@@ -52,23 +55,6 @@
         </thead>
         <tbody>
         ${recipes}
-        <%--<tr>--%>
-          <%--<th scope="row">1</th>--%>
-          <%--<td>Mark</td>--%>
-          <%--<td>Otto</td>--%>
-          <%--<td>@mdo</td>--%>
-        <%--</tr>--%>
-        <%--<tr>--%>
-          <%--<th scope="row">2</th>--%>
-          <%--<td>Jacob</td>--%>
-          <%--<td>Thornton</td>--%>
-          <%--<td>@fat</td>--%>
-        <%--</tr>--%>
-        <%--<tr>--%>
-          <%--<th scope="row">3</th>--%>
-          <%--<td colspan="2">Larry the Bird</td>--%>
-          <%--<td>@twitter</td>--%>
-        <%--</tr>--%>
         </tbody>
       </table>
       <div class="table-responsive">

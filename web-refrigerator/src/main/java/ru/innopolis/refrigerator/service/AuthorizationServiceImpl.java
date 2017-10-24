@@ -21,7 +21,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 	/**
 	 * Значение userId по умолчанию.
 	 */
-	private static final String ANONYMOUS = "0";
+	public static final String ANONYMOUS = "0";
 
 	private static final Logger logger = LogManager.getLogger(AuthorizationServiceImpl.class.getName());
 	@Override

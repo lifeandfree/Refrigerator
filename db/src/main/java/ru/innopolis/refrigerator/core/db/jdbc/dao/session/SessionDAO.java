@@ -150,7 +150,8 @@ public class SessionDAO {
 	public boolean deleteById(long sessionId) throws SessionDAOException {
 		try {
 			Statement statement = connection.getConnection().createStatement();
-			statement.executeUpdate("DELETE \"Session\" WHERE id = "+sessionId);
+			String sql = "DELETE FROM \"Session\" WHERE id=" + sessionId;
+			statement.executeUpdate(sql);
 		}
 		catch (SQLException e) {
 			String msg = "I can not delete an item to the database" + e.toString();
