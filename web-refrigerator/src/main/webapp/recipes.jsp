@@ -25,18 +25,6 @@
         <li><a href="#">Главная</a></li>
         <li><a href="#">Поиск</a></li>
         <li class="active"><a href="#">Свои рецепты <span class="sr-only">(current)</span></a></li>
-        <%--<li class="dropdown">--%>
-          <%--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>--%>
-          <%--<ul class="dropdown-menu">--%>
-            <%--<li><a href="#">Action</a></li>--%>
-            <%--<li><a href="#">Another action</a></li>--%>
-            <%--<li><a href="#">Something else here</a></li>--%>
-            <%--<li role="separator" class="divider"></li>--%>
-            <%--<li><a href="#">Separated link</a></li>--%>
-            <%--<li role="separator" class="divider"></li>--%>
-            <%--<li><a href="#">One more separated link</a></li>--%>
-          <%--</ul>--%>
-        <%--</li>--%>
       </ul>
       <form class="navbar-form navbar-left">
         <div class="form-group">
@@ -47,7 +35,46 @@
     </div>
   </div>
 </nav>
-
-
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h4>Список созданых рецептов</h4>
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th>#</th>
+          <th>Название</th>
+          <th>Сложность</th>
+          <th>Время</th>
+          <th>Редактировать</th>
+          <th>Удалить</th>
+        </tr>
+        </thead>
+        <tbody>
+        ${recipes}
+        <%--<tr>--%>
+          <%--<th scope="row">1</th>--%>
+          <%--<td>Mark</td>--%>
+          <%--<td>Otto</td>--%>
+          <%--<td>@mdo</td>--%>
+        <%--</tr>--%>
+        <%--<tr>--%>
+          <%--<th scope="row">2</th>--%>
+          <%--<td>Jacob</td>--%>
+          <%--<td>Thornton</td>--%>
+          <%--<td>@fat</td>--%>
+        <%--</tr>--%>
+        <%--<tr>--%>
+          <%--<th scope="row">3</th>--%>
+          <%--<td colspan="2">Larry the Bird</td>--%>
+          <%--<td>@twitter</td>--%>
+        <%--</tr>--%>
+        </tbody>
+      </table>
+      <div class="table-responsive">
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>

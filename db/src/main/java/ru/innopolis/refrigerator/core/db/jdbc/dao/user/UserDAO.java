@@ -174,9 +174,7 @@ public class UserDAO {
 			ResultSet resultSet = statement.executeQuery();
 
 			if (resultSet.next()) {
-				if (resultSet.next()) {
 					userId = resultSet.getLong("id");
-				}
 			}
 		}
 		catch (SQLException e) {

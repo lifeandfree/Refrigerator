@@ -21,6 +21,7 @@
     <junit.platform.version>1.0.0</junit.platform.version>
     <log4j.version>2.9.1</log4j.version>
     <hibernate.version>5.2.1.Final</hibernate.version>
+    <spring.version>4.3.12.RELEASE</spring.version>
   </properties>
 
   <dependencies>
@@ -62,6 +63,12 @@
       <artifactId>mockito-all</artifactId>
       <version>1.10.19</version>
       <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>${spring.version}</version>
     </dependency>
 
   </dependencies>
