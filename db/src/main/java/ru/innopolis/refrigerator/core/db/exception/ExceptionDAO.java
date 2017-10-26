@@ -1,4 +1,4 @@
-package ru.innopolis.refrigerator.core.db.jdbc.exception;
+package ru.innopolis.refrigerator.core.db.exception;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
