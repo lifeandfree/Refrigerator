@@ -36,7 +36,13 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/auth", method = RequestMethod.POST)
-	public ModelAndView login(@RequestParam(name = "login", required = false) String login, @RequestParam(name = "psw", required = false) String password, @RequestParam(name = "logout", required = false) String logout, @RequestParam(name = "rm", required = false) String rememberMe, @CookieValue(value = AuthorizationServiceImpl.COOKIE_SID, required = false) Cookie sid, @CookieValue(value = AuthorizationServiceImpl.COOKIE_UID, required = false) Cookie usid, HttpServletResponse response) {
+	public ModelAndView login(@RequestParam(name = "login", required = false) String login,
+							  @RequestParam(name = "psw", required = false) String password,
+							  @RequestParam(name = "logout", required = false) String logout,
+							  @RequestParam(name = "rm", required = false) String rememberMe,
+							  @CookieValue(value = AuthorizationServiceImpl.COOKIE_SID, required = false) Cookie sid,
+							  @CookieValue(value = AuthorizationServiceImpl.COOKIE_UID, required = false) Cookie usid,
+							  HttpServletResponse response) {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("redirect:auth");
 
