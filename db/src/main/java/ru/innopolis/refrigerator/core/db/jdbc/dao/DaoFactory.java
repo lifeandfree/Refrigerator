@@ -2,7 +2,7 @@ package ru.innopolis.refrigerator.core.db.jdbc.dao;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.innopolis.refrigerator.core.db.jdbc.dao.cookingethod.CookingMethodDAO;
+import ru.innopolis.refrigerator.core.db.jdbc.dao.cookingethod.CookingMethodDAOJDBCImpl;
 import ru.innopolis.refrigerator.core.db.jdbc.dao.ingredient.IngredientDAO;
 import ru.innopolis.refrigerator.core.db.jdbc.dao.ingredient.IngredientIngredientCategoryDAO;
 import ru.innopolis.refrigerator.core.db.jdbc.dao.ingredientcategory.IngredientCategoryDAO;
@@ -18,7 +18,7 @@ public class DaoFactory {
 	private static final Logger logger = LogManager.getLogger(DaoFactory.class.getName());
 
 	private UserDAO userDAO = new UserDAO();
-	private CookingMethodDAO cookingMethodDAO = new CookingMethodDAO();
+	private CookingMethodDAOJDBCImpl cookingMethodDAO = new CookingMethodDAOJDBCImpl();
 	private IngredientDAO ingredientDAO = new IngredientDAO();
 	private IngredientCategoryDAO ingredientCategoryDAO = new IngredientCategoryDAO();
 	private SessionDAO sessionDAO = new SessionDAO();
@@ -44,7 +44,7 @@ public class DaoFactory {
 		return userDAO;
 	}
 
-	public CookingMethodDAO getCookingMethodDAO() {
+	public CookingMethodDAOJDBCImpl getCookingMethodDAO() {
 		return cookingMethodDAO;
 	}
 

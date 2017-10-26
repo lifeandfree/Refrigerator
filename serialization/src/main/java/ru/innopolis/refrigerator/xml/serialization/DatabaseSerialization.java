@@ -4,15 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.innopolis.refrigerator.core.Constants;
 import ru.innopolis.refrigerator.core.db.jdbc.dao.DaoFactory;
-import ru.innopolis.refrigerator.core.db.jdbc.dao.cookingethod.CookingMethodDAO;
-import ru.innopolis.refrigerator.core.db.jdbc.dao.ingredient.IngredientDAO;
-import ru.innopolis.refrigerator.core.db.jdbc.dao.ingredientcategory.IngredientCategoryDAO;
-import ru.innopolis.refrigerator.core.db.jdbc.dao.recipe.RecipeDAO;
-import ru.innopolis.refrigerator.core.db.jdbc.dao.recipecategory.RecipeCategoryDAO;
-import ru.innopolis.refrigerator.core.db.jdbc.dao.refrigerator.RefrigeratorDAO;
-import ru.innopolis.refrigerator.core.db.jdbc.dao.session.SessionDAO;
-import ru.innopolis.refrigerator.core.db.jdbc.dao.user.UserDAO;
-import ru.innopolis.refrigerator.core.db.jdbc.exception.*;
+import ru.innopolis.refrigerator.core.db.exception.*;
 import ru.innopolis.refrigerator.xml.serialization.cookingmethod.CookingMethods;
 import ru.innopolis.refrigerator.xml.serialization.ingredient.Ingredients;
 import ru.innopolis.refrigerator.xml.serialization.ingredientcategory.IngredientCategories;
@@ -59,7 +51,7 @@ public class DatabaseSerialization {
 			logger.error("I can not get of all CookingMethods from the xml" + e.toString());
 		}
 		try {
-			DaoFactory.getInstance().getCookingMethodDAO().insertAll(cookingMethods.getCookingMethods());
+			DaoFactory.getInstance().getCookingMethodDAO().addAll(cookingMethods.getCookingMethods());
 		}
 		catch (CookingMethodDAOException e) {
 			logger.error("I can not set of all CookingMethods to the database" + e.toString());

@@ -4,15 +4,16 @@ import java.util.Collection;
 
 public interface ElementDAO<E> {
 
-    public E add(E el);
+    public E add(E el) throws Exception;
 
-    public void delete(E el);
+    public E delete(E el) throws Exception;
 
-    public Collection<E> getAll();
+    public Collection<E> getAll() throws Exception;
 
-    public E getById(Long elId);
+    public E getById(Long elId) throws Exception;
 
-    public void update(E el);
+    public E update(E el) throws Exception;
 
-    public Collection<E> addAll(Collection<E> el);
+    public Collection<E> addAll(Collection<E> els) throws Exception;
+
 }

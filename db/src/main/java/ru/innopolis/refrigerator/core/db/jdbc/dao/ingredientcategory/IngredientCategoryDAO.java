@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.postgresql.ConnectionFactoryPostgreSQL;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.ConnectionFactory;
-import ru.innopolis.refrigerator.core.db.jdbc.exception.IngredientCategoryDAOException;
+import ru.innopolis.refrigerator.core.db.exception.IngredientCategoryDAOException;
 import ru.innopolis.refrigerator.core.model.ingredientcategory.IngredientCategory;
 
 import java.sql.PreparedStatement;

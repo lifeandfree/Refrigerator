@@ -2,7 +2,7 @@ package ru.innopolis.refrigerator.servlet;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.innopolis.refrigerator.core.db.jdbc.exception.RecipeDAOException;
+import ru.innopolis.refrigerator.core.db.exception.RecipeDAOException;
 import ru.innopolis.refrigerator.service.AuthorizationService;
 import ru.innopolis.refrigerator.service.AuthorizationServiceImpl;
 import ru.innopolis.refrigerator.servlet.view.RecipesView;
@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Recipes extends HttpServlet {
 	private static AuthorizationService as = new AuthorizationServiceImpl();

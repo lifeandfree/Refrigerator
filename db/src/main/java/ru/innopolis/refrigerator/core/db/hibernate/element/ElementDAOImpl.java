@@ -53,7 +53,7 @@ public class ElementDAOImpl<E> implements ElementDAO<E> {
      *            - элемент для удаления.
      */
     @Override
-    public void delete(E el) {
+    public E delete(E el) {
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
@@ -69,6 +69,7 @@ public class ElementDAOImpl<E> implements ElementDAO<E> {
                 session.close();
             }
         }
+        return el;
     }
 
     /**
@@ -146,7 +147,7 @@ public class ElementDAOImpl<E> implements ElementDAO<E> {
      *            - элемент для добавления.
      */
     @Override
-    public void update(E el) {
+    public E update(E el) {
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
@@ -162,12 +163,12 @@ public class ElementDAOImpl<E> implements ElementDAO<E> {
                 session.close();
             }
         }
-
+        return el;
     }
 
     @Override
-    public Collection<E> addAll(Collection<E> el) {
-        return el;
+    public Collection<E> addAll(Collection<E> els) {
+        return els;
     }
 
 }

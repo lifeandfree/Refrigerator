@@ -2,8 +2,8 @@ package ru.innopolis.refrigerator.servlet;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.innopolis.refrigerator.core.db.jdbc.exception.SessionDAOException;
-import ru.innopolis.refrigerator.core.db.jdbc.exception.UserDAOException;
+import ru.innopolis.refrigerator.core.db.exception.SessionDAOException;
+import ru.innopolis.refrigerator.core.db.exception.UserDAOException;
 import ru.innopolis.refrigerator.core.model.session.Session;
 import ru.innopolis.refrigerator.core.model.user.User;
 import ru.innopolis.refrigerator.service.AuthorizationService;

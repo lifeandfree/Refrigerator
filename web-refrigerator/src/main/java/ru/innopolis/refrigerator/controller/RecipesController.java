@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import ru.innopolis.refrigerator.core.db.jdbc.exception.RecipeDAOException;
+import ru.innopolis.refrigerator.core.db.exception.RecipeDAOException;
 import ru.innopolis.refrigerator.service.AuthorizationServiceImpl;
 import ru.innopolis.refrigerator.servlet.view.RecipesView;
 

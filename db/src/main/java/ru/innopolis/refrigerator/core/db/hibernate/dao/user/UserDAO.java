@@ -11,7 +11,6 @@ public class UserDAO extends ElementDAOImpl<User> {
 	public UserDAO() {
 		super(User.class);
 	}
-
 	public UserDAO(Class<User> content) {
 		super(content);
 	}

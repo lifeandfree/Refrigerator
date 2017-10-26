@@ -1,7 +1,7 @@
 package ru.innopolis.refrigerator.service;
 
-import ru.innopolis.refrigerator.core.db.jdbc.exception.SessionDAOException;
-import ru.innopolis.refrigerator.core.db.jdbc.exception.UserDAOException;
+import ru.innopolis.refrigerator.core.db.exception.SessionDAOException;
+import ru.innopolis.refrigerator.core.db.exception.UserDAOException;
 import ru.innopolis.refrigerator.core.model.session.Session;
 import ru.innopolis.refrigerator.service.exception.AuthorizationServiceImplException;
 

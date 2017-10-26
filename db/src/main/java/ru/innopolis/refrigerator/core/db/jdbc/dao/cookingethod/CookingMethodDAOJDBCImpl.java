@@ -2,10 +2,11 @@ package ru.innopolis.refrigerator.core.db.jdbc.dao.cookingethod;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.innopolis.refrigerator.core.db.hibernate.element.ElementDAOImpl;
+import ru.innopolis.refrigerator.core.db.dao.CookingMethodDAO;
+import ru.innopolis.refrigerator.core.db.hibernate.element.ElementDAO;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.postgresql.ConnectionFactoryPostgreSQL;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.ConnectionFactory;
-import ru.innopolis.refrigerator.core.db.jdbc.exception.CookingMethodDAOException;
+import ru.innopolis.refrigerator.core.db.exception.CookingMethodDAOException;
 import ru.innopolis.refrigerator.core.model.cookingmethod.CookingMethod;
 
 import java.sql.PreparedStatement;
@@ -13,18 +14,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 
-public class CookingMethodDAO  {
+public class CookingMethodDAOJDBCImpl implements CookingMethodDAO, ElementDAO<CookingMethod> {
 
-	private static final Logger logger = LogManager.getLogger(CookingMethodDAO.class.getName());
+	private static final Logger logger = LogManager.getLogger(CookingMethodDAOJDBCImpl.class.getName());
 	private static ConnectionFactory connection;
 
 	static {
 		connection = ConnectionFactoryPostgreSQL.getInstance();
 	}
 
+	@Override
 	public List<CookingMethod> getAll() throws CookingMethodDAOException {
 		List<CookingMethod> cookingMethodList = new ArrayList<>();
 
@@ -43,7 +46,20 @@ public class CookingMethodDAO  {
 		return cookingMethodList;
 	}
 
-	public void insertOne(CookingMethod cookingMethod) throws CookingMethodDAOException {
+	@Override
+	public CookingMethod getById(Long elId)  throws CookingMethodDAOException {
+
+		return null;
+	}
+
+	@Override
+	public CookingMethod update(CookingMethod el) throws CookingMethodDAOException {
+		return null;
+	}
+
+
+	@Override
+	public CookingMethod add(CookingMethod cookingMethod) throws CookingMethodDAOException {
 		String sql = "INSERT INTO \"CookingMethod\" (name) VALUES(?)";
 		try {
 			PreparedStatement ps = connection.getConnection().prepareStatement(sql);
@@ -55,9 +71,16 @@ public class CookingMethodDAO  {
 			logger.error("I can not add an item to the database" + e.toString());
 			throw new CookingMethodDAOException();
 		}
+		return cookingMethod;
 	}
 
-	public void insertAll(List<CookingMethod> cookingMethods) throws CookingMethodDAOException {
+	@Override
+	public CookingMethod delete(CookingMethod el) throws CookingMethodDAOException {
+		return null;
+	}
+
+	@Override
+	public Collection<CookingMethod> addAll(Collection<CookingMethod> cookingMethods) throws CookingMethodDAOException  {
 		String sql = "INSERT INTO \"CookingMethod\" (name) VALUES(?)";
 		try {
 			PreparedStatement ps = connection.getConnection().prepareStatement(sql);
@@ -72,8 +95,10 @@ public class CookingMethodDAO  {
 			logger.error("I can not add an item to the database" + e.toString());
 			throw new CookingMethodDAOException();
 		}
+		return cookingMethods;
 	}
 
+	@Override
 	public long getId(CookingMethod cookingMethod) throws CookingMethodDAOException {
 		long cookId = 0;
 		try {

@@ -2,7 +2,7 @@ package ru.innopolis.refrigerator.servlet.filter;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.innopolis.refrigerator.core.db.jdbc.exception.SessionDAOException;
+import ru.innopolis.refrigerator.core.db.exception.SessionDAOException;
 import ru.innopolis.refrigerator.service.AuthorizationService;
 import ru.innopolis.refrigerator.service.AuthorizationServiceImpl;
 import ru.innopolis.refrigerator.service.exception.AuthorizationServiceImplException;

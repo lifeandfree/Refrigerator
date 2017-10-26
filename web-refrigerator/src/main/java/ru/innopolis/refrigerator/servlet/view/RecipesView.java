@@ -3,7 +3,7 @@ package ru.innopolis.refrigerator.servlet.view;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.innopolis.refrigerator.core.db.jdbc.dao.DaoFactory;
-import ru.innopolis.refrigerator.core.db.jdbc.exception.RecipeDAOException;
+import ru.innopolis.refrigerator.core.db.exception.RecipeDAOException;
 import ru.innopolis.refrigerator.core.model.recipe.Recipe;
 
 import java.util.List;

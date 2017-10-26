@@ -4,7 +4,7 @@ import org.apache.commons.validator.routines.EmailValidator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.innopolis.refrigerator.core.db.jdbc.dao.DaoFactory;
-import ru.innopolis.refrigerator.core.db.jdbc.exception.UserDAOException;
+import ru.innopolis.refrigerator.core.db.exception.UserDAOException;
 import ru.innopolis.refrigerator.core.model.enumcls.Role;
 import ru.innopolis.refrigerator.core.model.user.User;
 import ru.innopolis.refrigerator.service.exception.RegistrationServiceImplException;
