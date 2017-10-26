@@ -3,7 +3,7 @@ package ru.innopolis.refrigerator.xml.serialization;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.innopolis.refrigerator.core.Constants;
-import ru.innopolis.refrigerator.core.db.jdbc.dao.DaoFactory;
+import ru.innopolis.refrigerator.core.db.DaoFactory;
 import ru.innopolis.refrigerator.core.db.exception.*;
 import ru.innopolis.refrigerator.core.model.cookingmethod.CookingMethod;
 import ru.innopolis.refrigerator.core.model.ingredient.Ingredient;

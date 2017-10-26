@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 import ru.innopolis.refrigerator.core.db.dao.session.SessionDAO;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.postgresql.ConnectionFactoryPostgreSQL;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.ConnectionFactory;
-import ru.innopolis.refrigerator.core.db.jdbc.dao.DaoFactory;
+import ru.innopolis.refrigerator.core.db.DaoFactory;
 import ru.innopolis.refrigerator.core.db.exception.SessionDAOException;
 import ru.innopolis.refrigerator.core.db.exception.UserDAOException;
 import ru.innopolis.refrigerator.core.model.enumcls.Role;
