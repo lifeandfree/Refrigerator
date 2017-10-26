@@ -16,7 +16,7 @@ public class RegistrationServiceImpl implements RegistrationService {
 
 	private static final Logger logger = LogManager.getLogger(RegistrationServiceImpl.class.getName());
 	@Override
-	public Boolean regUser(String login, String password, Role role, String email) {
+	public Boolean regUser(String login, String password, Role role, String email) throws UserDAOException {
 		if (login == null || password == null || email == null) {
 			return false;
 		}

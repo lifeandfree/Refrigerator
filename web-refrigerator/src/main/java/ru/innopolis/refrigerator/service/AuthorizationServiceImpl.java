@@ -6,6 +6,7 @@ import ru.innopolis.refrigerator.core.db.jdbc.dao.DaoFactory;
 import ru.innopolis.refrigerator.core.db.exception.SessionDAOException;
 import ru.innopolis.refrigerator.core.db.exception.UserDAOException;
 import ru.innopolis.refrigerator.core.model.session.Session;
+import ru.innopolis.refrigerator.core.model.user.User;
 import ru.innopolis.refrigerator.service.exception.AuthorizationServiceImplException;
 import ru.innopolis.refrigerator.service.utils.Md5;
 import ru.innopolis.refrigerator.service.utils.PasswordEncoder;
@@ -34,12 +35,24 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 		long userId = DaoFactory.getInstance().getUserDAO().getUserIdByLoginAndPassword(login, PasswordEncoder.passwordEncode(password));
 		if (userId > 0) {
 			long currentTimeMillis = System.currentTimeMillis();
-			Session session = new Session(
-					Md5.getMD5(userId + String.valueOf(currentTimeMillis)),
-					DaoFactory.getInstance().getUserDAO().getById(userId), "", 0,
-					currentTimeMillis,
-					remember);
-			DaoFactory.getInstance().getSessionDAO().insertOne(session);
+			Session session = null;
+			try {
+				session = new Session(
+						Md5.getMD5(userId + String.valueOf(currentTimeMillis)), (User) DaoFactory.getInstance().getUserDAO().getById(userId), "", 0,
+						currentTimeMillis,
+						remember);
+			}
+			catch (Exception e) {
+				logger.error(e);
+				throw new AuthorizationServiceImplException(e);
+			}
+			try {
+				DaoFactory.getInstance().getSessionDAO().add(session);
+			}
+			catch (Exception e) {
+				logger.error(e);
+				throw new AuthorizationServiceImplException(e);
+			}
 			return session;
 		}
 		else{

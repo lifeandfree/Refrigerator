@@ -5,6 +5,14 @@ import org.apache.logging.log4j.Logger;
 import ru.innopolis.refrigerator.core.Constants;
 import ru.innopolis.refrigerator.core.db.jdbc.dao.DaoFactory;
 import ru.innopolis.refrigerator.core.db.exception.*;
+import ru.innopolis.refrigerator.core.model.cookingmethod.CookingMethod;
+import ru.innopolis.refrigerator.core.model.ingredient.Ingredient;
+import ru.innopolis.refrigerator.core.model.ingredientcategory.IngredientCategory;
+import ru.innopolis.refrigerator.core.model.recipe.Recipe;
+import ru.innopolis.refrigerator.core.model.recipecategory.RecipeCategory;
+import ru.innopolis.refrigerator.core.model.refrigerator.Refrigerator;
+import ru.innopolis.refrigerator.core.model.session.Session;
+import ru.innopolis.refrigerator.core.model.user.User;
 import ru.innopolis.refrigerator.xml.serialization.cookingmethod.CookingMethods;
 import ru.innopolis.refrigerator.xml.serialization.ingredient.Ingredients;
 import ru.innopolis.refrigerator.xml.serialization.ingredientcategory.IngredientCategories;
@@ -16,16 +24,17 @@ import ru.innopolis.refrigerator.xml.serialization.user.Users;
 
 import javax.xml.bind.JAXBException;
 import java.io.File;
+import java.util.List;
 
 public class DatabaseSerialization {
 
-	public static void main(String[] args) {
-		restoreFromXmlToDB();
+	public static void main(String[] args) throws Exception {
+		createXmlSerealization();
 	}
 
 	private static final Logger logger = LogManager.getLogger(DatabaseSerialization.class.getName());
 
-	public static void restoreFromXmlToDB() {
+	public static void restoreFromXmlToDB() throws Exception {
 
 		ObjectJaxbParser parser = new ObjectJaxbParser();
 
@@ -37,7 +46,7 @@ public class DatabaseSerialization {
 			logger.error("I can not get of all Users from the xml" + e.toString());
 		}
 		try {
-			DaoFactory.getInstance().getUserDAO().insertAll(users.getUsers());
+			DaoFactory.getInstance().getUserDAO().addAll(users.getUsers());
 		}
 		catch (UserDAOException e) {
 			logger.error("I can not set of all Users to the database" + e.toString());
@@ -56,6 +65,9 @@ public class DatabaseSerialization {
 		catch (CookingMethodDAOException e) {
 			logger.error("I can not set of all CookingMethods to the database" + e.toString());
 		}
+		catch (Exception e) {
+			logger.error(e.toString());
+		}
 
 		IngredientCategories ingredientCategories = new IngredientCategories();
 		try {
@@ -65,10 +77,13 @@ public class DatabaseSerialization {
 			logger.error("I can not get of all IngredientCategories from the xml" + e.toString());
 		}
 		try {
-			DaoFactory.getInstance().getIngredientCategoryDAO().insertAll(ingredientCategories.getIngredientCategories());
+			DaoFactory.getInstance().getIngredientCategoryDAO().addAll(ingredientCategories.getIngredientCategories());
 		}
 		catch (IngredientCategoryDAOException e) {
 			logger.error("I can not set of all IngredientCategories to the database" + e.toString());
+		}
+		catch (Exception e) {
+			logger.error(e.toString());
 		}
 
 		RecipeCategories recipeCategories = new RecipeCategories();
@@ -79,7 +94,7 @@ public class DatabaseSerialization {
 			logger.error("I can not get of all RecipeCategories from the xml" + e.toString());
 		}
 		try {
-			DaoFactory.getInstance().getRecipeCategoryDAO().insertAll(recipeCategories.getRecipeCategories());
+			DaoFactory.getInstance().getRecipeCategoryDAOJDBCImpl().addAll(recipeCategories.getRecipeCategories());
 		}
 		catch (RecipeCategoryDAOException e) {
 			logger.error("I can not set of all RecipeCategories to the database" + e.toString());
@@ -93,7 +108,7 @@ public class DatabaseSerialization {
 			logger.error("I can not get of all Sessions from the xml" + e.toString());
 		}
 		try {
-			DaoFactory.getInstance().getSessionDAO().insertAll(sessions.getSessions());
+			DaoFactory.getInstance().getSessionDAO().addAll(sessions.getSessions());
 		}
 		catch (SessionDAOException e) {
 			logger.error("I can not set of all Sessions to the database" + e.toString());
@@ -107,7 +122,7 @@ public class DatabaseSerialization {
 			logger.error("I can not get of all Sessions from the xml" + e.toString());
 		}
 		try {
-			DaoFactory.getInstance().getIngredientDAO().insertAll(ingredients.getIngredients());
+			DaoFactory.getInstance().getIngredientDAO().addAll(ingredients.getIngredients());
 		}
 		catch (IngredientDAOException e) {
 			logger.error("I can not set of all ingredients to the database" + e.toString());
@@ -121,7 +136,7 @@ public class DatabaseSerialization {
 			logger.error("I can not get of all Sessions from the xml" + e.toString());
 		}
 		try {
-			DaoFactory.getInstance().getRefrigeratorDAO().insertAll(refrigerators.getRefrigerators());
+			DaoFactory.getInstance().getRefrigeratorDAOJDBCImpl().addAll(refrigerators.getRefrigerators());
 		}
 		catch (RefrigeratorDAOException e) {
 			logger.error("I can not set of all refrigerators to the database" + e.toString());
@@ -135,20 +150,20 @@ public class DatabaseSerialization {
 			logger.error("I can not get of all Sessions from the xml" + e.toString());
 		}
 		try {
-			DaoFactory.getInstance().getRecipeDAO().insertAll(recipes.getRecipes());
+			DaoFactory.getInstance().getRecipeDAOJDBCImpl().addAll(recipes.getRecipes());
 		}
 		catch (RecipeDAOException e) {
 			logger.error("I can not set of all Recipes to the database" + e.toString());
 		}
 	}
 
-	public static void createXmlSerealization() {
+	public static void createXmlSerealization() throws Exception {
 
 		ObjectJaxbParser parser = new ObjectJaxbParser();
 
 		Refrigerators refrigerators = new Refrigerators();
 		try {
-			refrigerators.setRefrigerators(DaoFactory.getInstance().getRefrigeratorDAO().getAll());
+			refrigerators.setRefrigerators((List<Refrigerator>) DaoFactory.getInstance().getRefrigeratorDAOJDBCImpl().getAll());
 		}
 		catch (RefrigeratorDAOException e) {
 			logger.error("I can not get of all Refrigerators to the database" + e.toString());
@@ -163,7 +178,7 @@ public class DatabaseSerialization {
 
 		Recipes recipes = new Recipes();
 		try {
-			recipes.setRecipes(DaoFactory.getInstance().getRecipeDAO().getAll());
+			recipes.setRecipes((List<Recipe>) DaoFactory.getInstance().getRecipeDAOJDBCImpl().getAll());
 		}
 		catch (RecipeDAOException e) {
 			logger.error("I can not get of all Recipe to the database" + e.toString());
@@ -177,10 +192,10 @@ public class DatabaseSerialization {
 
 		CookingMethods cookingMethods = new CookingMethods();
 		try {
-			cookingMethods.setCookingMethods(DaoFactory.getInstance().getCookingMethodDAO().getAll());
+			cookingMethods.setCookingMethods((List<CookingMethod>) DaoFactory.getInstance().getCookingMethodDAO().getAll());
 		}
-		catch (CookingMethodDAOException e) {
-			logger.error("I can not get of all CookingMethod to the database" + e.toString());
+		catch (Exception e) {
+			logger.error(e.toString());
 		}
 		try {
 			parser.saveObject(new File(Constants.COOKINGMETHODS_XML_FILENAME), cookingMethods);
@@ -191,7 +206,7 @@ public class DatabaseSerialization {
 
 		Ingredients ingredients = new Ingredients();
 		try {
-			ingredients.setIngredients(DaoFactory.getInstance().getIngredientDAO().getAll());
+			ingredients.setIngredients((List<Ingredient>) DaoFactory.getInstance().getIngredientDAO().getAll());
 		}
 		catch (IngredientDAOException e) {
 			logger.error("I can not get of all Ingredient to the database" + e.toString());
@@ -205,10 +220,13 @@ public class DatabaseSerialization {
 
 		IngredientCategories ingredientCategories = new IngredientCategories();
 		try {
-			ingredientCategories.setIngredientCategories(DaoFactory.getInstance().getIngredientCategoryDAO().getAll());
+			ingredientCategories.setIngredientCategories((List<IngredientCategory>) DaoFactory.getInstance().getIngredientCategoryDAO().getAll());
 		}
 		catch (IngredientCategoryDAOException e) {
 			logger.error("I can not get of all IngredientCategoryD to the database" + e.toString());
+		}
+		catch (Exception e) {
+			logger.error(e.toString());
 		}
 		try {
 			parser.saveObject(new File(Constants.INGRREDIENTCATEGORIES_XML_FILENAME), ingredientCategories);
@@ -219,7 +237,7 @@ public class DatabaseSerialization {
 
 		RecipeCategories recipeCategories = new RecipeCategories();
 		try {
-			recipeCategories.setRecipeCategories(DaoFactory.getInstance().getRecipeCategoryDAO().getAll());
+			recipeCategories.setRecipeCategories((List<RecipeCategory>) DaoFactory.getInstance().getRecipeCategoryDAOJDBCImpl().getAll());
 		}
 		catch (RecipeCategoryDAOException e) {
 			logger.error("I can not get of all RecipeCategory to the database" + e.toString());
@@ -233,7 +251,7 @@ public class DatabaseSerialization {
 
 		Sessions sessions = new Sessions();
 		try {
-			sessions.setSessions(DaoFactory.getInstance().getSessionDAO().getAll());
+			sessions.setSessions((List<Session>) DaoFactory.getInstance().getSessionDAO().getAll());
 		}
 		catch (SessionDAOException e) {
 			logger.error("I can not get of all Session to the database" + e.toString());
@@ -248,7 +266,7 @@ public class DatabaseSerialization {
 
 		Users users = new Users();
 		try {
-			users.setUsers(DaoFactory.getInstance().getUserDAO().getAll());
+			users.setUsers((List<User>) DaoFactory.getInstance().getUserDAO().getAll());
 		}
 		catch (UserDAOException e) {
 			logger.error("I can not get of all User to the database" + e.toString());

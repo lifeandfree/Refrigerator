@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import ru.innopolis.refrigerator.core.db.exception.UserDAOException;
 import ru.innopolis.refrigerator.core.model.enumcls.Role;
 import ru.innopolis.refrigerator.service.RegistrationService;
 import ru.innopolis.refrigerator.service.RegistrationServiceImpl;
@@ -30,7 +31,7 @@ public class RegistrationController {
 	public ModelAndView registration(@RequestParam(name = "username", required = true) String login,
 							  @RequestParam(name = "user_password", required = true) String password,
 							  @RequestParam(name = "email", required = false) String email
-	) {
+	) throws UserDAOException {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("redirect:reg");
 

@@ -2,8 +2,7 @@ package ru.innopolis.refrigerator.core.db.jdbc.dao.cookingethod;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import ru.innopolis.refrigerator.core.db.dao.CookingMethodDAO;
-import ru.innopolis.refrigerator.core.db.hibernate.element.ElementDAO;
+import ru.innopolis.refrigerator.core.db.dao.cookingmethod.CookingMethodDAO;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.postgresql.ConnectionFactoryPostgreSQL;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.ConnectionFactory;
 import ru.innopolis.refrigerator.core.db.exception.CookingMethodDAOException;
@@ -18,7 +17,7 @@ import java.util.Collection;
 import java.util.List;
 
 
-public class CookingMethodDAOJDBCImpl implements CookingMethodDAO, ElementDAO<CookingMethod> {
+public class CookingMethodDAOJDBCImpl implements CookingMethodDAO<CookingMethod> {
 
 	private static final Logger logger = LogManager.getLogger(CookingMethodDAOJDBCImpl.class.getName());
 	private static ConnectionFactory connection;
@@ -48,13 +47,16 @@ public class CookingMethodDAOJDBCImpl implements CookingMethodDAO, ElementDAO<Co
 
 	@Override
 	public CookingMethod getById(Long elId)  throws CookingMethodDAOException {
-
-		return null;
+		String msg = "This method is not implemented";
+		logger.error(msg);
+		throw new CookingMethodDAOException(msg);
 	}
 
 	@Override
 	public CookingMethod update(CookingMethod el) throws CookingMethodDAOException {
-		return null;
+		String msg = "This method is not implemented";
+		logger.error(msg);
+		throw new CookingMethodDAOException(msg);
 	}
 
 
@@ -76,7 +78,9 @@ public class CookingMethodDAOJDBCImpl implements CookingMethodDAO, ElementDAO<Co
 
 	@Override
 	public CookingMethod delete(CookingMethod el) throws CookingMethodDAOException {
-		return null;
+		String msg = "This method is not implemented";
+		logger.error(msg);
+		throw new CookingMethodDAOException(msg);
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package ru.innopolis.refrigerator.service.utils;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import ru.innopolis.refrigerator.core.db.hibernate.dao.DaoFactory;
 import ru.innopolis.refrigerator.core.model.cookingmethod.CookingMethod;
 import ru.innopolis.refrigerator.core.model.enumcls.Complexity;
@@ -20,15 +22,16 @@ import java.util.Map;
 import java.util.Set;
 
 public class MainHi {
-	public static void main(String[] args) {
+	private static final Logger logger = LogManager.getLogger(MainHi.class.getName());
+	public static void main(String[] args) throws Exception {
 		writeBD();
 	}
 
-	public static void createBD() {
+	public static void createBD() throws Exception {
 		DaoFactory.getInstance().getUserDAO().getAll();
 	}
 
-	public static void writeBD() {
+	public static void writeBD() throws Exception {
 		User user2 = new User("tmp2", PasswordEncoder.passwordEncode("pass2"), Role.user, "ddggg@ggg.ru");
 		DaoFactory.getInstance().getUserDAO().add(user2);
 
@@ -107,14 +110,29 @@ public class MainHi {
 		recipeCategories2.add(recipeCategory2);
 
 		CookingMethod cookingMethod = new CookingMethod("Варить");
-		DaoFactory.getInstance().getCookingMethodDAO().add(cookingMethod);
+		try {
+			DaoFactory.getInstance().getCookingMethodDAO().add(cookingMethod);
+		}
+		catch (Exception e) {
+			logger.error(e.toString());
+		}
 
 		CookingMethod cookingMethod2 = new CookingMethod("Жарить");
-		DaoFactory.getInstance().getCookingMethodDAO().add(cookingMethod2);
+		try {
+			DaoFactory.getInstance().getCookingMethodDAO().add(cookingMethod2);
+		}
+		catch (Exception e) {
+			logger.error(e.toString());
+		}
 
 		CookingMethod cookingMethod3 = new CookingMethod(cookingMethod2);
 		cookingMethod3.setName("парить");
-		DaoFactory.getInstance().getCookingMethodDAO().add(cookingMethod3);
+		try {
+			DaoFactory.getInstance().getCookingMethodDAO().add(cookingMethod3);
+		}
+		catch (Exception e) {
+			logger.error(e.toString());
+		}
 
 		HashMap<Ingredient, Double> ingredients = new HashMap<>();
 		double ingredientsrecipevalue1 = 50d;

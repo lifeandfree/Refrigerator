@@ -2,6 +2,7 @@ package ru.innopolis.refrigerator.servlet;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import ru.innopolis.refrigerator.core.db.exception.UserDAOException;
 import ru.innopolis.refrigerator.core.logger.LogHandler;
 import ru.innopolis.refrigerator.core.model.enumcls.Role;
 import ru.innopolis.refrigerator.service.RegistrationService;
@@ -52,16 +53,22 @@ public class RegisterServlet extends HttpServlet {
 			request.setAttribute("msgerror", msg);
 			getServletContext().getRequestDispatcher("/reg.jsp").forward(request, response);
 		}
-		if (rs.regUser(login, password, Role.user, email))
-		{
-			response.sendRedirect("auth");
-			//getServletContext().getRequestDispatcher("/auth").(request, response);
+		try {
+			if (rs.regUser(login, password, Role.user, email))
+			{
+				response.sendRedirect("auth");
+				//getServletContext().getRequestDispatcher("/auth").(request, response);
+			}
+			else {
+				msg = "";
+				logger.error(msg);
+				request.setAttribute("msgerror", msg);
+				getServletContext().getRequestDispatcher("/reg.jsp").forward(request, response);
+			}
 		}
-		else {
-			msg = "";
-			logger.error(msg);
-			request.setAttribute("msgerror", msg);
-			getServletContext().getRequestDispatcher("/reg.jsp").forward(request, response);
+		catch (UserDAOException e) {
+			logger.error(e.getMessage(), e.toString());
+			request.setAttribute("msgerror", e.getMessage());
 		}
 
 	}
