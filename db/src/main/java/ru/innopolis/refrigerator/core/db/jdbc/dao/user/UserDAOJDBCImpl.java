@@ -1,5 +1,6 @@
 package ru.innopolis.refrigerator.core.db.jdbc.dao.user;
 
+import org.springframework.stereotype.Component;
 import ru.innopolis.refrigerator.core.db.dao.user.UserDAO;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.postgresql.ConnectionFactoryPostgreSQL;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.ConnectionFactory;

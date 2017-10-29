@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-
 public class CookingMethodDAOJDBCImpl implements CookingMethodDAO<CookingMethod> {
 
 	private static final Logger logger = LogManager.getLogger(CookingMethodDAOJDBCImpl.class.getName());

@@ -1,7 +1,11 @@
-package ru.innopolis.refrigerator.core.db.jdbc.dao;
+package ru.innopolis.refrigerator.core.db;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.innopolis.refrigerator.core.db.dao.cookingmethod.CookingMethodDAO;
 import ru.innopolis.refrigerator.core.db.dao.ingredient.IngredientDAO;
 import ru.innopolis.refrigerator.core.db.dao.ingredientcategory.IngredientCategoryDAO;
@@ -11,35 +15,75 @@ import ru.innopolis.refrigerator.core.db.dao.refrigerator.RefrigeratorDAO;
 import ru.innopolis.refrigerator.core.db.dao.refrigeratoringredient.RefrigeratorIngredientDAO;
 import ru.innopolis.refrigerator.core.db.dao.session.SessionDAO;
 import ru.innopolis.refrigerator.core.db.dao.user.UserDAO;
-import ru.innopolis.refrigerator.core.db.jdbc.dao.cookingethod.CookingMethodDAOJDBCImpl;
-import ru.innopolis.refrigerator.core.db.jdbc.dao.ingredient.IngredientDAOJDBCImpl;
 import ru.innopolis.refrigerator.core.db.jdbc.dao.ingredient.IngredientIngredientCategoryDAO;
-import ru.innopolis.refrigerator.core.db.jdbc.dao.ingredientcategory.IngredientCategoryDAOJDBCImpl;
-import ru.innopolis.refrigerator.core.db.jdbc.dao.recipe.RecipeDAOJDBCImpl;
-import ru.innopolis.refrigerator.core.db.jdbc.dao.recipecategory.RecipeCategoryDAOJDBCImpl;
-import ru.innopolis.refrigerator.core.db.jdbc.dao.refrigerator.RefrigeratorDAOJDBCImpl;
-import ru.innopolis.refrigerator.core.db.jdbc.dao.refrigerator.RefrigeratorIngredientDAOJDBCImpl;
-import ru.innopolis.refrigerator.core.db.jdbc.dao.session.SessionDAOJDBCImpl;
-import ru.innopolis.refrigerator.core.db.jdbc.dao.user.UserDAOJDBCImpl;
 
+//@Component(value = "DaoFactory")
 public class DaoFactory {
 	private static DaoFactory instance = null;
 	private static final Logger logger = LogManager.getLogger(DaoFactory.class.getName());
 
-	private UserDAO userDAO = new UserDAOJDBCImpl();
-	private CookingMethodDAO cookingMethodDAO = new CookingMethodDAOJDBCImpl();
-	private IngredientDAO ingredientDAO = new IngredientDAOJDBCImpl();
-	private SessionDAO sessionDAO = new SessionDAOJDBCImpl();
-	private RecipeCategoryDAO recipeCategoryDAOJDBCImpl = new RecipeCategoryDAOJDBCImpl();
-	private RecipeDAO recipeDAOJDBCImpl = new RecipeDAOJDBCImpl();
-	private RefrigeratorDAO refrigeratorDAOJDBCImpl = new RefrigeratorDAOJDBCImpl();
-	private RefrigeratorIngredientDAO refrigeratorIngredientDAOJDBCImpl = new RefrigeratorIngredientDAOJDBCImpl();
-	private IngredientCategoryDAO ingredientCategoryDAO = new IngredientCategoryDAOJDBCImpl();
-	private IngredientIngredientCategoryDAO ingredientIngredientCategoryDAO = new IngredientIngredientCategoryDAO();
+	private DaoFactory() {
+	}
+
+	public DaoFactory(UserDAO userDAO, CookingMethodDAO cookingMethodDAO, IngredientDAO ingredientDAO, SessionDAO sessionDAO, RecipeCategoryDAO recipeCategoryDAO, RecipeDAO recipeDAO, RefrigeratorDAO refrigeratorDAO, RefrigeratorIngredientDAO refrigeratorIngredientDAO, IngredientCategoryDAO ingredientCategoryDAO, IngredientIngredientCategoryDAO ingredientIngredientCategoryDAO) {
+		this.userDAO = userDAO;
+		this.cookingMethodDAO = cookingMethodDAO;
+		this.ingredientDAO = ingredientDAO;
+		this.sessionDAO = sessionDAO;
+		this.recipeCategoryDAO = recipeCategoryDAO;
+		this.recipeDAO = recipeDAO;
+		this.refrigeratorDAO = refrigeratorDAO;
+		this.refrigeratorIngredientDAO = refrigeratorIngredientDAO;
+		this.ingredientCategoryDAO = ingredientCategoryDAO;
+		this.ingredientIngredientCategoryDAO = ingredientIngredientCategoryDAO;
+	}
+
+//	@Autowired
+//	@Qualifier(value = "userdao")
+	private UserDAO userDAO;
+
+//	@Autowired
+//	@Qualifier(value = "cookingethoddao")
+	private CookingMethodDAO cookingMethodDAO;
+
+//	@Autowired
+//	@Qualifier(value = "ingredientdao")
+	private IngredientDAO ingredientDAO;
+
+//	@Autowired
+//	@Qualifier(value = "sessiondao")
+	private SessionDAO sessionDAO;
+
+//	@Autowired
+//	@Qualifier(value = "recipecategorydao")
+	private RecipeCategoryDAO recipeCategoryDAO;
+
+//	@Autowired
+//	@Qualifier(value = "recipedao")
+	private RecipeDAO recipeDAO;
+
+//	@Autowired
+//	@Qualifier(value = "refrigeratordao")
+	private RefrigeratorDAO refrigeratorDAO;
+
+//	@Autowired
+//	@Qualifier(value = "refrigeratoringredientdao")
+	private RefrigeratorIngredientDAO refrigeratorIngredientDAO;
+
+//	@Autowired
+//	@Qualifier(value = "ingredientcategorydao")
+	private IngredientCategoryDAO ingredientCategoryDAO;
+
+//	@Autowired
+//	@Qualifier(value = "ingredientingredientcategorydao")
+	private IngredientIngredientCategoryDAO ingredientIngredientCategoryDAO;
 
 	public static synchronized DaoFactory getInstance() {
 		if (instance == null) {
-			instance = new DaoFactory();
+			ApplicationContext applicationContext =
+					new ClassPathXmlApplicationContext("bean.xml");
+			instance =(DaoFactory) applicationContext.getBean("DaoFactory");
+//			instance = new DaoFactory();
 		}
 
 		return instance;
@@ -61,20 +105,20 @@ public class DaoFactory {
 		return sessionDAO;
 	}
 
-	public RecipeCategoryDAO getRecipeCategoryDAOJDBCImpl() {
-		return recipeCategoryDAOJDBCImpl;
+	public RecipeCategoryDAO getRecipeCategoryDAO() {
+		return recipeCategoryDAO;
 	}
 
-	public RecipeDAO getRecipeDAOJDBCImpl() {
-		return recipeDAOJDBCImpl;
+	public RecipeDAO getRecipeDAO() {
+		return recipeDAO;
 	}
 
-	public RefrigeratorDAO getRefrigeratorDAOJDBCImpl() {
-		return refrigeratorDAOJDBCImpl;
+	public RefrigeratorDAO getRefrigeratorDAO() {
+		return refrigeratorDAO;
 	}
 
-	public RefrigeratorIngredientDAO getRefrigeratorIngredientDAOJDBCImpl() {
-		return refrigeratorIngredientDAOJDBCImpl;
+	public RefrigeratorIngredientDAO getRefrigeratorIngredientDAO() {
+		return refrigeratorIngredientDAO;
 	}
 
 	public IngredientCategoryDAO getIngredientCategoryDAO() {
@@ -83,5 +127,45 @@ public class DaoFactory {
 
 	public IngredientIngredientCategoryDAO getIngredientIngredientCategoryDAO() {
 		return ingredientIngredientCategoryDAO;
+	}
+
+	public void setUserDAO(UserDAO userDAO) {
+		this.userDAO = userDAO;
+	}
+
+	public void setCookingMethodDAO(CookingMethodDAO cookingMethodDAO) {
+		this.cookingMethodDAO = cookingMethodDAO;
+	}
+
+	public void setIngredientDAO(IngredientDAO ingredientDAO) {
+		this.ingredientDAO = ingredientDAO;
+	}
+
+	public void setSessionDAO(SessionDAO sessionDAO) {
+		this.sessionDAO = sessionDAO;
+	}
+
+	public void setRecipeCategoryDAO(RecipeCategoryDAO recipeCategoryDAO) {
+		this.recipeCategoryDAO = recipeCategoryDAO;
+	}
+
+	public void setRecipeDAO(RecipeDAO recipeDAO) {
+		this.recipeDAO = recipeDAO;
+	}
+
+	public void setRefrigeratorDAO(RefrigeratorDAO refrigeratorDAO) {
+		this.refrigeratorDAO = refrigeratorDAO;
+	}
+
+	public void setRefrigeratorIngredientDAO(RefrigeratorIngredientDAO refrigeratorIngredientDAO) {
+		this.refrigeratorIngredientDAO = refrigeratorIngredientDAO;
+	}
+
+	public void setIngredientCategoryDAO(IngredientCategoryDAO ingredientCategoryDAO) {
+		this.ingredientCategoryDAO = ingredientCategoryDAO;
+	}
+
+	public void setIngredientIngredientCategoryDAO(IngredientIngredientCategoryDAO ingredientIngredientCategoryDAO) {
+		this.ingredientIngredientCategoryDAO = ingredientIngredientCategoryDAO;
 	}
 }

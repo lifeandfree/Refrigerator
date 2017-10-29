@@ -3,12 +3,12 @@
 <head>
     <title>refrigerator project</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/reg.css">
+    <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/css/reg.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js"></script>
-    <script src="${pageContext.servletContext.contextPath}/js/reg.js"></script>
+    <script src="${pageContext.servletContext.contextPath}/resources/js/reg.js"></script>
 </head>
 <body>
 <div class="container">

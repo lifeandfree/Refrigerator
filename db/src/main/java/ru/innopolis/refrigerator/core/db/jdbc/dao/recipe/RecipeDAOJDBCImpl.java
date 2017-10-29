@@ -203,7 +203,7 @@ public class RecipeDAOJDBCImpl implements RecipeDAO<Recipe> {
 
 				Set<Long> recipeCategoryIds = new HashSet<>();
 				try {
-					recipeCategoryIds = DaoFactory.getInstance().getRecipeCategoryDAOJDBCImpl().getIds(recipe.getRecipeCategorys());
+					recipeCategoryIds = DaoFactory.getInstance().getRecipeCategoryDAO().getIds(recipe.getRecipeCategorys());
 				}
 				catch (RecipeCategoryDAOException e) {
 					logger.error("I can not get an RecipeCategory to the database" + e.toString());

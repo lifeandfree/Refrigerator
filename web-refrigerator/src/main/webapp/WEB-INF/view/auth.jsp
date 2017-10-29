@@ -5,12 +5,12 @@
   <title>refrigerator project</title>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/css/auth.css">
+  <link rel="stylesheet" href="${pageContext.servletContext.contextPath}/resources/css/auth.css">
 </head>
 <body>
   <form action="${pageContext.servletContext.contextPath}/auth" method="post">
     <div class="imgcontainer">
-      <img src="${pageContext.servletContext.contextPath}/images/reflogo.jpeg" alt="logo" class="avatar">
+      <img src="${pageContext.servletContext.contextPath}/resources/images/reflogo.jpeg" alt="logo" class="avatar">
     </div>
     <div class="container">
       <label><b>Username</b></label>

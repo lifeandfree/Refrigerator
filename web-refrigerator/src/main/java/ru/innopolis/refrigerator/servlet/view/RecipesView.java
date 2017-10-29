@@ -22,7 +22,7 @@ public class RecipesView {
 
 	public String rendering() throws RecipeDAOException {
 
-		List<Recipe> recipes = DaoFactory.getInstance().getRecipeDAOJDBCImpl().getAllByUserId(uid);
+		List<Recipe> recipes = DaoFactory.getInstance().getRecipeDAO().getAllByUserId(uid);
 		StringBuilder stringBuilder = new StringBuilder();
 		int i = 0;
 		for (Recipe recipe : recipes) {
