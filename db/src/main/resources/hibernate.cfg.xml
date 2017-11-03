@@ -7,7 +7,7 @@
     <session-factory>
     	<!-- Database connection settings -->
     	<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/refrigerator4</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/refrigerator5</property>
         <property name="hibernate.connection.username">refrigerator</property>
         <property name="hibernate.connection.password">123</property>
         <!-- SQL dialect -->

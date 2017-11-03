@@ -27,7 +27,7 @@ public class User implements Serializable {
 	}
 
 
-	public User(String username, String password, Role role, String email, long id) {
+	public User(String username, String password, Role role, String email, Long id) {
 		this.username = username;
 		this.password = password;
 		this.role = role;
@@ -42,7 +42,7 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	@XmlElement(required = true)
-	private long id;
+	private Long id;
 
 	/**
 	 * Логин пользователя
@@ -73,6 +73,9 @@ public class User implements Serializable {
 	@XmlElement(required = true)
 	private String email;
 
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public long getId() {
 		return id;

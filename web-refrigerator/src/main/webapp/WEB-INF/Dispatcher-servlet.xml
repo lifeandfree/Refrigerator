@@ -10,7 +10,9 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
-    <context:component-scan base-package="ru.innopolis.refrigerator.controller"/>
+
+    <context:component-scan base-package="ru.innopolis.refrigerator"/>
+
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
         <property name="prefix" value="/WEB-INF/view/"/>
@@ -20,57 +22,5 @@
     <mvc:resources mapping="/resources/**" location="/resources/"/>
     <mvc:annotation-driven />
 
-    <!--<bean name="userdao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.user.UserDAOJDBCImpl"></bean>-->
-    <!--<bean id="refrigeratordao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.refrigerator.RefrigeratorDAOJDBCImpl"></bean>-->
-    <!--<bean id="recipedao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.recipe.RecipeDAOJDBCImpl"></bean>-->
-    <!--<bean id="sessiondao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.session.SessionDAOJDBCImpl"></bean>-->
-    <!--<bean id="cookingethoddao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.cookingethod.CookingMethodDAOJDBCImpl"></bean>-->
-    <!--<bean id="ingredientdao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.ingredient.IngredientDAOJDBCImpl"></bean>-->
-    <!--<bean id="recipecategorydao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.recipecategory.RecipeCategoryDAOJDBCImpl"></bean>-->
-    <!--<bean id="ingredientcategorydao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.ingredientcategory.IngredientCategoryDAOJDBCImpl"></bean>-->
-    <!--<bean id="refrigeratoringredientdao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.refrigerator.RefrigeratorIngredientDAOJDBCImpl"></bean>-->
-    <!--<bean id="ingredientingredientcategorydao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.ingredient.IngredientIngredientCategoryDAO"></bean>-->
-
-    <!--<bean id="DaoFactory" class="ru.innopolis.refrigerator.core.db.DaoFactory" autowire="byType">-->
-        <!--<constructor-arg ref="userdao"/>-->
-        <!--<constructor-arg ref="cookingethoddao"/>-->
-        <!--<constructor-arg ref="ingredientdao"/>-->
-        <!--<constructor-arg ref="sessiondao"/>-->
-        <!--<constructor-arg ref="recipecategorydao"/>-->
-        <!--<constructor-arg ref="recipedao"/>-->
-        <!--<constructor-arg ref="refrigeratordao"/>-->
-        <!--<constructor-arg ref="refrigeratoringredientdao"/>-->
-        <!--<constructor-arg ref="ingredientcategorydao"/>-->
-        <!--<constructor-arg ref="ingredientingredientcategorydao"/>-->
-        <!--<property ref="userdao" name="userDAO">-->
-        <!--</property>-->
-        <!--<property name="refrigeratorDAO">-->
-        <!--<ref bean="refrigeratordao"/>-->
-        <!--</property>-->
-        <!--<property name="recipeDAO">-->
-        <!--<ref bean="recipedao"/>-->
-        <!--</property>-->
-        <!--<property name="sessionDAO">-->
-        <!--<ref bean="sessiondao"/>-->
-        <!--</property>-->
-        <!--<property name="cookingMethodDAO">-->
-        <!--<ref bean="cookingethoddao"/>-->
-        <!--</property>-->
-        <!--<property name="ingredientDAO">-->
-        <!--<ref bean="ingredientdao"/>-->
-        <!--</property>-->
-        <!--<property name="recipeCategoryDAO">-->
-        <!--<ref bean="recipecategorydao"/>-->
-        <!--</property>-->
-        <!--<property name="ingredientCategoryDAO">-->
-        <!--<ref bean="ingredientcategorydao"/>-->
-        <!--</property>-->
-        <!--<property name="refrigeratorIngredientDAO">-->
-        <!--<ref bean="refrigeratoringredientdao"/>-->
-        <!--</property>-->
-        <!--<property name="ingredientIngredientCategoryDAO">-->
-        <!--<ref bean="ingredientingredientcategorydao"/>-->
-        <!--</property>-->
-    <!--</bean>-->
 
 </beans>

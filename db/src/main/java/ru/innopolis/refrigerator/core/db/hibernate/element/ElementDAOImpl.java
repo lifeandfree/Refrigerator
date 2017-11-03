@@ -6,18 +6,30 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.DetachedCriteria;
+import org.springframework.beans.factory.annotation.Autowired;
 import ru.innopolis.refrigerator.core.db.hibernate.util.HibernateUtil;
 
 
 public class ElementDAOImpl<E> implements ElementDAO<E> {
+
     private static final Logger logger = LogManager.getLogger(ElementDAOImpl.class.getName());
 
+    private SessionFactory sessionFactory;
     private Class<E> elementClass;
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     public ElementDAOImpl(Class<E> elementClass) {
         this.elementClass = elementClass;
+    }
+
+    public ElementDAOImpl() {
+        super();
     }
 
     /**
@@ -30,7 +42,8 @@ public class ElementDAOImpl<E> implements ElementDAO<E> {
     public E add(E el) {
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            //session = HibernateUtil.getSessionFactory().openSession();TODO
+            session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
             session.save(el);
             transaction.commit();
@@ -56,7 +69,7 @@ public class ElementDAOImpl<E> implements ElementDAO<E> {
     public E delete(E el) {
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
             session.delete(el);
             transaction.commit();
@@ -82,11 +95,12 @@ public class ElementDAOImpl<E> implements ElementDAO<E> {
         List<E> els = null;
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = sessionFactory.openSession();
             // Transaction transaction = session.beginTransaction();
             // TODO
             DetachedCriteria criteria = DetachedCriteria.forClass(elementClass);
             els = criteria.getExecutableCriteria(session).list();
+
             // els = session.createCriteria(elementClass).list();
             // transaction.commit();
         }
@@ -124,7 +138,7 @@ public class ElementDAOImpl<E> implements ElementDAO<E> {
         E el = null;
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = sessionFactory.openSession();
             // Transaction transaction = session.beginTransaction();
             el = session.get(elementClass, elId);
             // transaction.commit();
@@ -150,7 +164,7 @@ public class ElementDAOImpl<E> implements ElementDAO<E> {
     public E update(E el) {
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
             session.update(el);
             transaction.commit();
@@ -168,6 +182,21 @@ public class ElementDAOImpl<E> implements ElementDAO<E> {
 
     @Override
     public Collection<E> addAll(Collection<E> els) {
+        Session session = null;
+        try {
+            session = sessionFactory.openSession();
+            Transaction transaction = session.beginTransaction();
+            session.save(els);
+            transaction.commit();
+        }
+        catch (Exception e) {
+            logger.error("I can not update an item to the database" + e.toString());
+        }
+        finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
         return els;
     }
 

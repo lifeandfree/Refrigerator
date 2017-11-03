@@ -39,7 +39,7 @@ public class Session implements Serializable {
 //	@GenericGenerator(name = "increment", strategy = "increment")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
-	private long id;
+	private Long id;
 
 	@XmlElement(required = true)
 	@Column(name = "sessionId", nullable = false, length = 100)
@@ -47,7 +47,7 @@ public class Session implements Serializable {
 
 	@XmlElement(required = true)
 	@ManyToOne
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "column_name_of_user_id")
 	private User user;
 
 	@XmlElement(required = true)
@@ -66,6 +66,10 @@ public class Session implements Serializable {
 	@Column(name = "remember", unique = false)
 	@Type(type = "java.lang.Boolean")
 	private boolean remember = false;
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public long getId() {
 		return id;

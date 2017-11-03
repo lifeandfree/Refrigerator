@@ -2,6 +2,8 @@ package ru.innopolis.refrigerator.core.db.hibernate.dao;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ru.innopolis.refrigerator.core.db.dao.cookingmethod.CookingMethodDAO;
 import ru.innopolis.refrigerator.core.db.dao.ingredient.IngredientDAO;
 import ru.innopolis.refrigerator.core.db.dao.ingredientcategory.IngredientCategoryDAO;
@@ -40,7 +42,10 @@ public class DaoFactory {
 
 	public static synchronized DaoFactory getInstance() {
 		if (instance == null) {
-			instance = new DaoFactory();
+//			instance = new DaoFactory();
+			ApplicationContext applicationContext =
+					new ClassPathXmlApplicationContext("bean.xml");
+			instance =(DaoFactory) applicationContext.getBean("DaoFactory");
 		}
 
 		return instance;

@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class MainController {
+public class RecipeController {
 
-	private static final Logger logger = LogManager.getLogger(MainController.class.getName());
+	private static final Logger logger = LogManager.getLogger(RecipeController.class.getName());
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView renderMainForm() {
-		ModelAndView modelAndViewRec = new ModelAndView("redirect:recipes");
-		return  modelAndViewRec;
+	@RequestMapping(value = "/recipe/add", method = RequestMethod.GET)
+	public ModelAndView renderRecipeAddForm() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("recipe");
+		return modelAndView;
 	}
-
 }

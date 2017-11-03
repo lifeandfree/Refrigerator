@@ -7,18 +7,76 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
 
-  <!--<context:component-scan base-package="ru.innopolis.refrigerator.core.db"/>-->
+  <context:component-scan base-package="ru.innopolis.refrigerator.core.db.hibernate.element"/>
 
-  <bean name="userdao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.user.UserDAOJDBCImpl"></bean>
-  <bean id="refrigeratordao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.refrigerator.RefrigeratorDAOJDBCImpl"></bean>
-  <bean id="recipedao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.recipe.RecipeDAOJDBCImpl"></bean>
-  <bean id="sessiondao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.session.SessionDAOJDBCImpl"></bean>
-  <bean id="cookingethoddao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.cookingethod.CookingMethodDAOJDBCImpl"></bean>
-  <bean id="ingredientdao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.ingredient.IngredientDAOJDBCImpl"></bean>
-  <bean id="recipecategorydao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.recipecategory.RecipeCategoryDAOJDBCImpl"></bean>
-  <bean id="ingredientcategorydao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.ingredientcategory.IngredientCategoryDAOJDBCImpl"></bean>
-  <bean id="refrigeratoringredientdao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.refrigerator.RefrigeratorIngredientDAOJDBCImpl"></bean>
-  <bean id="ingredientingredientcategorydao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.ingredient.IngredientIngredientCategoryDAO"></bean>
+  <!--<bean name="userdao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.user.UserDAOJDBCImpl"></bean>-->
+  <!--<bean id="refrigeratordao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.refrigerator.RefrigeratorDAOJDBCImpl"></bean>-->
+  <!--<bean id="recipedao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.recipe.RecipeDAOJDBCImpl"></bean>-->
+  <!--<bean id="sessiondao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.session.SessionDAOJDBCImpl"></bean>-->
+  <!--<bean id="cookingethoddao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.cookingethod.CookingMethodDAOJDBCImpl"></bean>-->
+  <!--<bean id="ingredientdao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.ingredient.IngredientDAOJDBCImpl"></bean>-->
+  <!--<bean id="recipecategorydao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.recipecategory.RecipeCategoryDAOJDBCImpl"></bean>-->
+  <!--<bean id="ingredientcategorydao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.ingredientcategory.IngredientCategoryDAOJDBCImpl"></bean>-->
+  <!--<bean id="refrigeratoringredientdao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.refrigerator.RefrigeratorIngredientDAOJDBCImpl"></bean>-->
+  <!--<bean id="ingredientingredientcategorydao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.ingredient.IngredientIngredientCategoryDAO"></bean>-->
+
+  <bean name="userdao" class="ru.innopolis.refrigerator.core.db.hibernate.dao.user.UserDAOImpl" autowire="byType">
+    <property name="sessionFactory" ref="sessionFactory"/>
+  </bean>
+  <bean id="refrigeratordao" class="ru.innopolis.refrigerator.core.db.hibernate.dao.refrigerator.RefrigeratorDAOImpl" autowire="byType">
+    <property name="sessionFactory" ref="sessionFactory"/>
+  </bean>
+  <bean id="recipedao" class="ru.innopolis.refrigerator.core.db.hibernate.dao.recipe.RecipeDAOImpl" autowire="byType">
+    <property name="sessionFactory" ref="sessionFactory"/>
+  </bean>
+  <bean id="sessiondao" class="ru.innopolis.refrigerator.core.db.hibernate.dao.session.SessionDAOImpl" autowire="byType">
+    <property name="sessionFactory" ref="sessionFactory"/>
+  </bean>
+  <bean id="cookingethoddao" class="ru.innopolis.refrigerator.core.db.hibernate.dao.cookingmethod.CookingMethodDAOImpl" autowire="byType">
+    <property name="sessionFactory" ref="sessionFactory"/>
+  </bean>
+  <bean id="ingredientdao" class="ru.innopolis.refrigerator.core.db.hibernate.dao.ingredient.IngredientDAOImpl" autowire="byType">
+    <property name="sessionFactory" ref="sessionFactory"/>
+  </bean>
+  <bean id="recipecategorydao" class="ru.innopolis.refrigerator.core.db.hibernate.dao.recipeCategory.RecipeCategoryDAOImpl" autowire="byType">
+    <property name="sessionFactory" ref="sessionFactory"/>
+  </bean>
+  <bean id="ingredientcategorydao" class="ru.innopolis.refrigerator.core.db.hibernate.dao.ingredientcategory.IngredientCategoryDAOImpl" autowire="byType">
+    <property name="sessionFactory" ref="sessionFactory"/>
+  </bean>
+  <bean id="refrigeratoringredientdao" class="ru.innopolis.refrigerator.core.db.hibernate.dao.refrigerator.RefrigeratorIngredientDAOImpl" autowire="byType">
+    <property name="sessionFactory" ref="sessionFactory"/>
+  </bean>
+  <bean id="ingredientingredientcategorydao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.ingredient.IngredientIngredientCategoryDAO" autowire="byType">
+    <!--<property name="sessionFactory" ref="sessionFactory"/>-->
+  </bean>
+
+  <bean name="ElementDAO" class="ru.innopolis.refrigerator.core.db.hibernate.element.ElementDAOImpl" autowire="byType">
+    <property name="sessionFactory" ref="sessionFactory"/>
+  </bean>
+
+  <bean id = "datasource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName" value="org.postgresql.Driver"/>
+    <property name="url" value="jdbc:postgresql://localhost:5432/refrigerator5"/>
+    <property name="username" value="refrigerator"/>
+    <property name="password" value="123"/>
+  </bean>
+
+  <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+    <property name="dataSource" ref="datasource"></property>
+    <property name="packagesToScan" value="ru"/>
+    <property name="hibernateProperties">
+      <props>
+        <prop key="hibernate.hbm2ddl.auto">create</prop>
+        <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL95Dialect</prop>
+        <prop key="show_sql">true</prop>
+      </props>
+    </property>
+  </bean>
+
+  <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+    <property name="sessionFactory" ref="sessionFactory"/>
+  </bean>
 
   <bean id="DaoFactory" class="ru.innopolis.refrigerator.core.db.DaoFactory" autowire="byType">
     <constructor-arg ref="userdao"/>

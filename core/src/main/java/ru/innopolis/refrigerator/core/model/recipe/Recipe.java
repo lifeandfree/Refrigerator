@@ -63,9 +63,9 @@ public class Recipe implements Serializable {
 
 	@XmlElement(required = true)
 	@ManyToMany(targetEntity = RecipeCategory.class, cascade = { CascadeType.ALL })
-	@JoinTable(name = "recipe_recipecategory",
-			joinColumns = { @JoinColumn(name = "recipe_id") },
-			inverseJoinColumns = { @JoinColumn(name = "recipeCategory_id") })
+//	@JoinTable(name = "recipe_recipecategory",
+//			joinColumns = { @JoinColumn(name = "recipe_id") },
+//			inverseJoinColumns = { @JoinColumn(name = "recipeCategory_id") })
 	private Set<RecipeCategory> recipeCategorys; //вид блида.
 
 	@Enumerated(EnumType.STRING)

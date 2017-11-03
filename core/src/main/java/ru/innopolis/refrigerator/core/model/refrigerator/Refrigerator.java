@@ -59,6 +59,10 @@ public class Refrigerator implements Serializable {
 	@Transient
 	private Map<Ingredient, Double> ingredients;
 
+	public long getId() {
+		return id;
+	}
+
 	public String getName() {
 		return name;
 	}

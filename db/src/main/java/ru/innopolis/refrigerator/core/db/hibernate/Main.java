@@ -3,7 +3,6 @@ package ru.innopolis.refrigerator.core.db.hibernate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.innopolis.refrigerator.core.db.hibernate.dao.DaoFactory;
-import ru.innopolis.refrigerator.core.db.jdbc.dao.cookingethod.CookingMethodDAOJDBCImpl;
 import ru.innopolis.refrigerator.core.model.cookingmethod.CookingMethod;
 import ru.innopolis.refrigerator.core.model.enumcls.Complexity;
 import ru.innopolis.refrigerator.core.model.enumcls.Role;
@@ -23,7 +22,6 @@ public class Main {
 
 	private static final Logger logger = LogManager.getLogger(Main.class.getName());
 	public static void main(String[] args) throws Exception {
-		createBD();
 	}
 
 	public static void createBD() throws Exception {

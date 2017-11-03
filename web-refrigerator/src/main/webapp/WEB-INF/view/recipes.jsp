@@ -56,6 +56,16 @@
         <tbody>
         ${recipes}
         </tbody>
+        <tfoot>
+          <tr class="footable-editing">
+            <td colspan="7">
+              <button type="submit" class="btn btn-primary footable-add"
+                      onclick="window.location.href='${pageContext.servletContext.contextPath}/recipe/add'">
+                Добавить рецепт
+              </button>
+            </td>
+          </tr>
+        </tfoot>
       </table>
       <div class="table-responsive">
       </div>

@@ -23,6 +23,7 @@ public class DaoFactory {
 	private static final Logger logger = LogManager.getLogger(DaoFactory.class.getName());
 
 	private DaoFactory() {
+
 	}
 
 	public DaoFactory(UserDAO userDAO, CookingMethodDAO cookingMethodDAO, IngredientDAO ingredientDAO, SessionDAO sessionDAO, RecipeCategoryDAO recipeCategoryDAO, RecipeDAO recipeDAO, RefrigeratorDAO refrigeratorDAO, RefrigeratorIngredientDAO refrigeratorIngredientDAO, IngredientCategoryDAO ingredientCategoryDAO, IngredientIngredientCategoryDAO ingredientIngredientCategoryDAO) {
