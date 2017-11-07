@@ -37,7 +37,7 @@ public class Ingredient implements Serializable {
 //	@GenericGenerator(name = "increment", strategy = "increment")
 	@Column(name = "id", unique = true, nullable = false)
 	@XmlElement(required = true)
-	private long id;
+	private Long id;
 
 	@XmlElement(required = true)
 	@Column(name = "name", nullable = false, length = 255)

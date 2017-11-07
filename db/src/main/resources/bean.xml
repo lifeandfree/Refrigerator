@@ -47,6 +47,9 @@
   <bean id="refrigeratoringredientdao" class="ru.innopolis.refrigerator.core.db.hibernate.dao.refrigerator.RefrigeratorIngredientDAOImpl" autowire="byType">
     <property name="sessionFactory" ref="sessionFactory"/>
   </bean>
+  <bean id="RecipeIngredientDAO" class="ru.innopolis.refrigerator.core.db.hibernate.dao.recipe.RecipeIngredientDAOImpl" autowire="byType">
+    <property name="sessionFactory" ref="sessionFactory"/>
+  </bean>
   <bean id="ingredientingredientcategorydao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.ingredient.IngredientIngredientCategoryDAO" autowire="byType">
     <!--<property name="sessionFactory" ref="sessionFactory"/>-->
   </bean>
@@ -67,7 +70,7 @@
     <property name="packagesToScan" value="ru"/>
     <property name="hibernateProperties">
       <props>
-        <prop key="hibernate.hbm2ddl.auto">create</prop>
+        <prop key="hibernate.hbm2ddl.auto">update</prop>
         <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL95Dialect</prop>
         <prop key="show_sql">true</prop>
       </props>

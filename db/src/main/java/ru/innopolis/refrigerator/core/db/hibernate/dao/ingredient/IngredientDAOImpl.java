@@ -62,6 +62,35 @@ public class IngredientDAOImpl extends ElementDAOImpl<Ingredient>  implements In
 		return ingredient.getId();
 	}
 
+	@Override
+	public Ingredient getIngredientByNameDimension(String name, String dimension) throws IngredientDAOException {
+
+		Session session = null;
+		Ingredient ingredient = null;
+		try {
+			session = sessionFactory.openSession();
+			Transaction transaction = session.beginTransaction();
+			DetachedCriteria criteria = DetachedCriteria.forClass(Ingredient.class);
+
+			criteria.add(Restrictions.eq("name", name)).add(Restrictions.eq("dimension", dimension));
+			List<Ingredient> ingredients = criteria.getExecutableCriteria(session).setMaxResults(1).list();
+			transaction.commit();
+			if (ingredients != null && ingredients.size() > 0) {
+				ingredient = ingredients.get(0);
+			}
+		}
+		catch (Exception e) {
+			logger.error("I can not add an item to the database" + e.toString());
+			throw new IngredientDAOException(e);
+		}
+		finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
+		}
+		return ingredient;
+	}
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 		super.setSessionFactory(sessionFactory);

@@ -160,6 +160,13 @@ public class IngredientDAOJDBCImpl implements IngredientDAO<Ingredient> {
 	}
 
 	@Override
+	public Ingredient getIngredientByNameDimension(String name, String dimension) throws IngredientDAOException {
+		String msg = "This method is not implemented";
+		logger.error(msg);
+		throw new IngredientDAOException(msg);
+	}
+
+	@Override
 	public Ingredient add(Ingredient ingredient) throws IngredientDAOException {
 		insertOne(ingredient.getDimension(), ingredient.getName());
 		return ingredient;

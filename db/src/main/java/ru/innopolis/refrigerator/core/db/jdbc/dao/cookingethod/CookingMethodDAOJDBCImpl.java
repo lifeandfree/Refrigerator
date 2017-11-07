@@ -3,6 +3,7 @@ package ru.innopolis.refrigerator.core.db.jdbc.dao.cookingethod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.innopolis.refrigerator.core.db.dao.cookingmethod.CookingMethodDAO;
+import ru.innopolis.refrigerator.core.db.exception.IngredientCategoryDAOException;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.postgresql.ConnectionFactoryPostgreSQL;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.ConnectionFactory;
 import ru.innopolis.refrigerator.core.db.exception.CookingMethodDAOException;
@@ -28,7 +29,6 @@ public class CookingMethodDAOJDBCImpl implements CookingMethodDAO<CookingMethod>
 	@Override
 	public List<CookingMethod> getAll() throws CookingMethodDAOException {
 		List<CookingMethod> cookingMethodList = new ArrayList<>();
-
 		try {
 			Statement statement = connection.getConnection().createStatement();
 			ResultSet resultSet = statement.executeQuery("SELECT * FROM \"CookingMethod\"");
@@ -118,5 +118,13 @@ public class CookingMethodDAOJDBCImpl implements CookingMethodDAO<CookingMethod>
 		}
 		return cookId;
 	}
+
+	@Override
+	public CookingMethod getByName(String name) throws CookingMethodDAOException {
+		String msg = "This method is not implemented";
+		logger.error(msg);
+		throw new CookingMethodDAOException(msg);
+	}
+
 
 }

@@ -70,7 +70,7 @@ public class RecipeDAOImpl extends ElementDAOImpl<Recipe> implements RecipeDAO<R
 			Transaction transaction = session.beginTransaction();
 			DetachedCriteria criteria = DetachedCriteria.forClass(Recipe.class);
 			criteria.add(Restrictions.eq("user", DaoFactory.getInstance().getUserDAO().getById(uid)));
-			recipes = criteria.getExecutableCriteria(session).setMaxResults(1).list();
+			recipes = criteria.getExecutableCriteria(session).list();
 			transaction.commit();
 		}
 		catch (Exception e) {

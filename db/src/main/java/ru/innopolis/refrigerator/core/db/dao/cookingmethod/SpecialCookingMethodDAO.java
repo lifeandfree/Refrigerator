@@ -7,4 +7,5 @@ public interface SpecialCookingMethodDAO {
 
 	long getId(CookingMethod cookingMethod) throws CookingMethodDAOException;
 
+	CookingMethod getByName(String name) throws CookingMethodDAOException;
 }

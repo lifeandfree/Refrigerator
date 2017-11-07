@@ -25,6 +25,7 @@
         <li><a href="#">Главная</a></li>
         <li><a href="#">Поиск</a></li>
         <li class="active"><a href="${pageContext.servletContext.contextPath}/recipes">Свои рецепты <span class="sr-only">(current)</span></a></li>
+        <li><a href="${pageContext.servletContext.contextPath}/recipe/add">Добавить рецепт</a></li>
       </ul>
       <form class="navbar-form navbar-left">
         <div class="form-group">

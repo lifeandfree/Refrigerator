@@ -11,11 +11,13 @@ import ru.innopolis.refrigerator.core.db.dao.ingredient.IngredientDAO;
 import ru.innopolis.refrigerator.core.db.dao.ingredientcategory.IngredientCategoryDAO;
 import ru.innopolis.refrigerator.core.db.dao.recipe.RecipeDAO;
 import ru.innopolis.refrigerator.core.db.dao.recipecategory.RecipeCategoryDAO;
+import ru.innopolis.refrigerator.core.db.dao.recipeingredient.RecipeIngredientDAO;
 import ru.innopolis.refrigerator.core.db.dao.refrigerator.RefrigeratorDAO;
 import ru.innopolis.refrigerator.core.db.dao.refrigeratoringredient.RefrigeratorIngredientDAO;
 import ru.innopolis.refrigerator.core.db.dao.session.SessionDAO;
 import ru.innopolis.refrigerator.core.db.dao.user.UserDAO;
 import ru.innopolis.refrigerator.core.db.jdbc.dao.ingredient.IngredientIngredientCategoryDAO;
+import ru.innopolis.refrigerator.core.model.recipe.RecipeIngredient;
 
 //@Component(value = "DaoFactory")
 public class DaoFactory {
@@ -63,6 +65,8 @@ public class DaoFactory {
 //	@Qualifier(value = "recipedao")
 	private RecipeDAO recipeDAO;
 
+	private RecipeIngredientDAO recipeIngredientDAO;
+
 //	@Autowired
 //	@Qualifier(value = "refrigeratordao")
 	private RefrigeratorDAO refrigeratorDAO;
@@ -79,15 +83,33 @@ public class DaoFactory {
 //	@Qualifier(value = "ingredientingredientcategorydao")
 	private IngredientIngredientCategoryDAO ingredientIngredientCategoryDAO;
 
-	public static synchronized DaoFactory getInstance() {
-		if (instance == null) {
-			ApplicationContext applicationContext =
-					new ClassPathXmlApplicationContext("bean.xml");
-			instance =(DaoFactory) applicationContext.getBean("DaoFactory");
-//			instance = new DaoFactory();
-		}
+//	public static synchronized DaoFactory getInstance() {
+//		if (instance == null) {
+//			ApplicationContext applicationContext =
+//					new ClassPathXmlApplicationContext("bean.xml");
+//			instance =(DaoFactory) applicationContext.getBean("DaoFactory");
+////			instance = new DaoFactory();
+//		}
+//
+//		return instance;
+//	}
 
-		return instance;
+	public static class DaoFactoryHolder {
+		static ApplicationContext applicationContext =
+				new ClassPathXmlApplicationContext("bean.xml");
+		public static final DaoFactory HOLDER_INSTANCE = (DaoFactory) applicationContext.getBean("DaoFactory");
+	}
+
+	public RecipeIngredientDAO getRecipeIngredientDAO() {
+		return recipeIngredientDAO;
+	}
+
+	public void setRecipeIngredientDAO(RecipeIngredientDAO recipeIngredientDAO) {
+		this.recipeIngredientDAO = recipeIngredientDAO;
+	}
+
+	public static DaoFactory getInstance() {
+		return DaoFactoryHolder.HOLDER_INSTANCE;
 	}
 
 	public UserDAO getUserDAO() {

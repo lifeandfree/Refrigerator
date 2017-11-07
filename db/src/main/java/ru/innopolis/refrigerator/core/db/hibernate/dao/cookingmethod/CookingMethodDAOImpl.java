@@ -59,6 +59,33 @@ public class CookingMethodDAOImpl extends ElementDAOImpl<CookingMethod> implemen
 		return cookingMethod.getId();
 	}
 
+	@Override
+	public CookingMethod getByName(String name) throws CookingMethodDAOException {
+		Session session = null;
+		CookingMethod cookingMethod = null;
+		try {
+			session = sessionFactory.openSession();
+			Transaction transaction = session.beginTransaction();
+			DetachedCriteria criteria = DetachedCriteria.forClass(CookingMethod.class);
+			criteria.add(Restrictions.eq("name", name));
+			List<CookingMethod> cookingMethods = criteria.getExecutableCriteria(session).setMaxResults(1).list();
+			transaction.commit();
+			if (cookingMethods != null && cookingMethods.size() > 0) {
+				cookingMethod = cookingMethods.get(0);
+			}
+		}
+		catch (Exception e) {
+			logger.error("I can not add an item to the database" + e.toString());
+			throw new CookingMethodDAOException(e);
+		}
+		finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
+		}
+		return cookingMethod;
+	}
+
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 		super.setSessionFactory(sessionFactory);

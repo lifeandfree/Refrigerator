@@ -6,4 +6,6 @@ import ru.innopolis.refrigerator.core.model.ingredient.Ingredient;
 public interface SpecialIngredientDAO {
 
 	Long getId(Ingredient ingredient) throws IngredientDAOException;
+
+	Ingredient getIngredientByNameDimension(String name, String dimension) throws IngredientDAOException;
 }

@@ -1,6 +1,7 @@
 package ru.innopolis.refrigerator.core.model.recipe;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.engine.internal.Cascade;
 import ru.innopolis.refrigerator.core.model.ingredient.Ingredient;
 
 import javax.persistence.*;
@@ -40,7 +41,7 @@ public class RecipeIngredient implements Serializable {
 	private Double quantity;
 
 	@XmlElement(required = true)
-	@ManyToOne
+	@ManyToOne (cascade = {CascadeType.REMOVE, CascadeType.PERSIST })
 	@JoinColumn(name = "ingredient_id", nullable = false)
 	private Ingredient ingredient;
 
