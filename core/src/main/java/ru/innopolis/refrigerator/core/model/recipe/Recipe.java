@@ -1,6 +1,7 @@
 package ru.innopolis.refrigerator.core.model.recipe;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import ru.innopolis.refrigerator.core.model.cookingmethod.CookingMethod;
 import ru.innopolis.refrigerator.core.model.enumcls.Complexity;
 import ru.innopolis.refrigerator.core.model.ingredient.Ingredient;
@@ -62,7 +63,7 @@ public class Recipe implements Serializable {
 	private String name;
 
 	@XmlElement(required = true)
-	@ManyToMany(targetEntity = RecipeCategory.class, cascade = { CascadeType.ALL })
+	@ManyToMany(targetEntity = RecipeCategory.class, cascade = { CascadeType.ALL, CascadeType.REMOVE })
 //	@JoinTable(name = "recipe_recipecategory",
 //			joinColumns = { @JoinColumn(name = "recipe_id") },
 //			inverseJoinColumns = { @JoinColumn(name = "recipeCategory_id") })

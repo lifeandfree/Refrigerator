@@ -207,6 +207,12 @@ public class RefrigeratorDAOJDBCImpl implements RefrigeratorDAO<Refrigerator> {
 		return refrigeratorId;
 	}
 
+	@Override
+	public Refrigerator getRefByUser(User user) throws RefrigeratorDAOException {
+		String msg = "This method is not implemented";
+		logger.error(msg);
+		throw new RefrigeratorDAOException(msg);}
+
 	private void insertOne(String name, long userId) throws RefrigeratorDAOException {
 		String sql = "INSERT INTO \"Refrigerator\" (name, user_id) VALUES(?,?)";
 		try {

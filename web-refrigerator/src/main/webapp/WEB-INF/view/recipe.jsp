@@ -20,12 +20,13 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Холодильник</a>
+      <img src="${pageContext.servletContext.contextPath}/resources/images/refrigerator.png" alt="logo" class="navbar-brand">
+      <%--<a class="navbar-brand" href="#">Холодильник</a>--%>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="#">Главная</a></li>
-        <li><a href="#">Поиск</a></li>
+        <li><a href="${pageContext.servletContext.contextPath}/refrigerator">Холодильник</a></li>
+        <li><a href="${pageContext.servletContext.contextPath}/search">Поиск</a></li>
         <li><a  href="${pageContext.servletContext.contextPath}/recipes">Свои рецепты</a></li>
         <li class="active"><a href="${pageContext.servletContext.contextPath}/recipe/add">Добавить рецепт<span class="sr-only">(current)</span></a></li>
       </ul>

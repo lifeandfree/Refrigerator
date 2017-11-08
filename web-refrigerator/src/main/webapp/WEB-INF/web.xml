@@ -88,11 +88,6 @@
         <url-pattern>/images/*</url-pattern>
     </servlet-mapping>
 
-
-
-
-
-
     <!--<listener>-->
         <!--<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>-->
     <!--</listener>-->

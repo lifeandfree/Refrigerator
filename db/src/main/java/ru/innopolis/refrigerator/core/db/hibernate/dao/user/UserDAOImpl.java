@@ -7,9 +7,11 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
+import ru.innopolis.refrigerator.core.db.DaoFactory;
 import ru.innopolis.refrigerator.core.db.dao.user.UserDAO;
 import ru.innopolis.refrigerator.core.db.exception.UserDAOException;
 import ru.innopolis.refrigerator.core.db.hibernate.element.ElementDAOImpl;
+import ru.innopolis.refrigerator.core.model.refrigerator.Refrigerator;
 import ru.innopolis.refrigerator.core.model.user.User;
 
 import java.util.List;
@@ -70,6 +72,14 @@ public class UserDAOImpl extends ElementDAOImpl<User> implements UserDAO<User> {
 	public Boolean createUser(User user) throws UserDAOException {
 		user = add(user);
 		if (user != null){
+			Refrigerator refrigerator = new Refrigerator("default", user);
+			try {
+				DaoFactory.getInstance().getRefrigeratorDAO().add(refrigerator);
+			}
+			catch (Exception e) {
+				logger.error(e);
+				throw new UserDAOException(e);
+			}
 			return true;
 		}
 		else {

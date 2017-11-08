@@ -3,12 +3,14 @@ package ru.innopolis.refrigerator.core.db.jdbc.dao.refrigerator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.innopolis.refrigerator.core.db.dao.refrigeratoringredient.RefrigeratorIngredientDAO;
+import ru.innopolis.refrigerator.core.db.exception.RefrigeratorDAOException;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.postgresql.ConnectionFactoryPostgreSQL;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.ConnectionFactory;
 import ru.innopolis.refrigerator.core.db.DaoFactory;
 import ru.innopolis.refrigerator.core.db.exception.IngredientDAOException;
 import ru.innopolis.refrigerator.core.db.exception.RefrigeratorIngredientDAOException;
 import ru.innopolis.refrigerator.core.model.ingredient.Ingredient;
+import ru.innopolis.refrigerator.core.model.refrigerator.Refrigerator;
 import ru.innopolis.refrigerator.core.model.refrigerator.RefrigeratorIngredient;
 
 import java.sql.PreparedStatement;
@@ -16,6 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class RefrigeratorIngredientDAOJDBCImpl implements RefrigeratorIngredientDAO<RefrigeratorIngredient>{
@@ -92,6 +95,13 @@ public class RefrigeratorIngredientDAOJDBCImpl implements RefrigeratorIngredient
 
 	@Override
 	public Collection<RefrigeratorIngredient> addAll(Collection<RefrigeratorIngredient> els) throws RefrigeratorIngredientDAOException {
+		String msg = "This method is not implemented";
+		logger.error(msg);
+		throw new RefrigeratorIngredientDAOException(msg);
+	}
+
+	@Override
+	public List<RefrigeratorIngredient> getRefIngrByRef(Refrigerator refrigerator) throws RefrigeratorIngredientDAOException {
 		String msg = "This method is not implemented";
 		logger.error(msg);
 		throw new RefrigeratorIngredientDAOException(msg);

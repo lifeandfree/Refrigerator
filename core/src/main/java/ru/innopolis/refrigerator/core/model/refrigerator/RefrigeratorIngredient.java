@@ -41,13 +41,13 @@ public class RefrigeratorIngredient implements Serializable {
 	private Double quantity;
 
 	@XmlElement(required = true)
-	@ManyToOne(targetEntity = Ingredient.class, cascade = { CascadeType.ALL })
-	@JoinColumn(name = "ingredient_id", nullable = false, unique = false)
+	@ManyToOne(targetEntity = Ingredient.class)
+//	@JoinColumn(name = "ingredient_id", nullable = false, unique = false)
 	private Ingredient ingredient;
 
 	@XmlElement(required = true)
-	@ManyToOne(targetEntity = Refrigerator.class, cascade = { CascadeType.ALL })
-	@JoinColumn(name = "refrigerator_id", nullable = false, unique = false)
+	@ManyToOne(targetEntity = Refrigerator.class)
+//	@JoinColumn(name = "refrigerator_id", nullable = false, unique = false)
 	private Refrigerator refrigerator;
 
 	@Override

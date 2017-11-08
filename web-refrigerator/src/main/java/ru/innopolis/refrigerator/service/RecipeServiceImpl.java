@@ -20,7 +20,6 @@ public class RecipeServiceImpl implements RecipeService {
 
 	private static final Logger logger = LogManager.getLogger(RecipeServiceImpl.class.getName());
 
-
 	@Override
 	public boolean createRecipe(String name, String timerecipe, String complexity, String instructions, String cookingmethod, Map<Ingredient, Double> ingredients, long uid) throws Exception {
 		if(name == null || name.length() == 0)

@@ -45,6 +45,10 @@ public class IngredientDAOImpl extends ElementDAOImpl<Ingredient>  implements In
 			if (ingredients != null && ingredients.size() > 0) {
 				ingredient = ingredients.get(0);
 			}
+			else
+			{
+				return 0L;
+			}
 		}
 		catch (Exception e) {
 			logger.error("I can not add an item to the database" + e.toString());

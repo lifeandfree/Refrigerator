@@ -14,6 +14,7 @@ import ru.innopolis.refrigerator.core.db.hibernate.element.ElementDAOImpl;
 import ru.innopolis.refrigerator.core.model.cookingmethod.CookingMethod;
 import ru.innopolis.refrigerator.core.model.ingredient.Ingredient;
 import ru.innopolis.refrigerator.core.model.refrigerator.Refrigerator;
+import ru.innopolis.refrigerator.core.model.user.User;
 
 import java.util.List;
 
@@ -60,6 +61,33 @@ public class RefrigeratorDAOImpl extends ElementDAOImpl<Refrigerator> implements
 			return 0L;
 		}
 		return refrigerator.getId();
+	}
+
+	@Override
+	public Refrigerator getRefByUser(User user) throws RefrigeratorDAOException {
+		Refrigerator refrigerator = null;
+		Session session = null;
+		try {
+			session = sessionFactory.openSession();
+			Transaction transaction = session.beginTransaction();
+			DetachedCriteria criteria = DetachedCriteria.forClass(Refrigerator.class);
+			criteria.add(Restrictions.eq("user", user));
+			List<Refrigerator> refrigerators = criteria.getExecutableCriteria(session).setMaxResults(1).list();
+			transaction.commit();
+			if (refrigerators != null && refrigerators.size() > 0) {
+				refrigerator = refrigerators.get(0);
+			}
+		}
+		catch (Exception e) {
+			logger.error("I can not add an item to the database" + e.toString());
+			throw new RefrigeratorDAOException(e);
+		}
+		finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
+		}
+		return refrigerator;
 	}
 
 	public void setSessionFactory(SessionFactory sessionFactory) {
