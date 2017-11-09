@@ -84,7 +84,7 @@ public class Recipe implements Serializable {
 	@Transient
 	private Map<Ingredient, Double> ingredients;// название / количество. map
 
-	@Column(name = "instructions", nullable = false, length = 255)
+	@Column(name = "instructions", nullable = false, length = 4000)
 	@XmlElement(required = true)
 	private String instructions;
 

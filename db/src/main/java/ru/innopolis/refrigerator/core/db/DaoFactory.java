@@ -96,9 +96,9 @@ public class DaoFactory {
 
 	public static class DaoFactoryHolder {
 		static ApplicationContext applicationContext =
-				new ClassPathXmlApplicationContext("bean.xml");
-		public static final DaoFactory HOLDER_INSTANCE = (DaoFactory) applicationContext.getBean("DaoFactory");
-	}
+			new ClassPathXmlApplicationContext("bean.xml");
+	public static final DaoFactory HOLDER_INSTANCE = (DaoFactory) applicationContext.getBean("DaoFactory");
+}
 
 	public RecipeIngredientDAO getRecipeIngredientDAO() {
 		return recipeIngredientDAO;

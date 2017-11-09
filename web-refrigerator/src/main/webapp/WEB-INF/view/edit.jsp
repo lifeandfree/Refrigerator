@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
+<html lang="RU">
 <head>
   <title>refrigerator project</title>
   <meta charset="utf-8">
@@ -44,9 +45,9 @@
 </nav>
 
 <div class="container">
-  <form class="well form-horizontal" action="${pageContext.servletContext.contextPath}/recipe/add" method="post" id="recipe_add_form">
+  <form class="well form-horizontal" action="${pageContext.servletContext.contextPath}/recipe/edit" method="post" id="recipe_add_form">
     <fieldset>
-      <legend><h2><b>Добавление рецепта</b></h2></legend><br>
+      <legend><h2><b>Редактирование рецепта</b></h2></legend><br>
       <div class="form-group">
         <label class="col-md-4 control-label">Название рецепта</label>
         <div class="col-md-6 inputGroupContainer">

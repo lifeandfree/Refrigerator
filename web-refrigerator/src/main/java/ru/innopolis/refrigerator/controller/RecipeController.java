@@ -93,7 +93,42 @@ public class RecipeController {
 	public ModelAndView postAddRecipe(@RequestParam Map<String,String> allRequestParams,
 									  @CookieValue(value = AuthorizationServiceImpl.COOKIE_UID, required = false) Cookie usid,
 									  HttpServletResponse response) {
-		//Map<String, String[]> parameters = request.getParameterMap();
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("redirect:/recipes");
+
+		String recipename = allRequestParams.get("recipename");
+		String timerecipe = allRequestParams.get("timerecipe");
+		String complexity = allRequestParams.get("complexity");
+		String instructions = allRequestParams.get("instructions");
+		String cookingmethod = allRequestParams.get("cookingmethod");
+
+		Map<Ingredient, Double> ingredients = new HashMap<>();
+		for (int i = 0; i < ((allRequestParams.size()-5)/2); i++) {
+			String ingredientName = allRequestParams.get("ingredient" + i);
+			if (ingredientName != null) {
+				Double quantity = Double.parseDouble(allRequestParams.get("quantity" + i));
+				String dimension = allRequestParams.get("dimension" + i);
+				Ingredient ingredient = new Ingredient(ingredientName, dimension);
+				ingredients.put(ingredient, quantity);
+			}
+		}
+
+		try {
+			rc.createRecipe(recipename, timerecipe, complexity, instructions, cookingmethod, ingredients, Long.parseLong(usid.getValue()));
+		}
+		catch (Exception e) {
+			logger.error(e);
+			modelAndView.addObject("msgerror", e.getMessage());
+		}
+
+
+		return modelAndView;
+	}
+
+	@RequestMapping(value = "/recipe/edit", method = RequestMethod.POST)
+	public ModelAndView postEditRecipe(@RequestParam Map<String,String> allRequestParams,
+									   @CookieValue(value = AuthorizationServiceImpl.COOKIE_UID, required = false) Cookie usid,
+									   @RequestParam(name = "id", required = true) String id) {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("redirect:/recipes");
 

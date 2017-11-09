@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="${pageContext.servletContext.contextPath}/resources/js/recipe.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -20,13 +21,12 @@
         <span class="icon-bar"></span>
       </button>
       <img src="${pageContext.servletContext.contextPath}/resources/images/refrigerator.png" alt="logo" class="navbar-brand">
-      <%--<a class="navbar-brand" href="#">Холодильник</a>--%>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li><a href="${pageContext.servletContext.contextPath}/refrigerator">Холодильник</a></li>
-        <li><a href="${pageContext.servletContext.contextPath}/search">Поиск</a></li>
-        <li class="active"><a href="${pageContext.servletContext.contextPath}/recipes">Свои рецепты <span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="${pageContext.servletContext.contextPath}/search">Поиск <span class="sr-only">(current)</span></a></li>
+        <li><a href="${pageContext.servletContext.contextPath}/recipes">Свои рецепты</a></li>
         <li><a href="${pageContext.servletContext.contextPath}/recipe/add">Добавить рецепт</a></li>
       </ul>
       <form class="navbar-form navbar-left">
@@ -44,7 +44,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h4>Список созданых рецептов</h4>
+      <h4>Список найденных рецептов</h4>
       <table class="table table-hover">
         <thead>
         <tr>
@@ -52,23 +52,12 @@
           <th>Название</th>
           <th>Сложность</th>
           <th>Время</th>
-          <th>Редактировать</th>
-          <th>Удалить</th>
+          <th>Открыть</th>
         </tr>
         </thead>
         <tbody>
         ${recipes}
         </tbody>
-        <tfoot>
-        <tr class="footable-editing">
-          <td colspan="7">
-            <button type="submit" class="btn btn-primary footable-add"
-                    onclick="window.location.href='${pageContext.servletContext.contextPath}/recipe/add'">
-              Добавить рецепт
-            </button>
-          </td>
-        </tr>
-        </tfoot>
       </table>
       <div class="table-responsive">
       </div>

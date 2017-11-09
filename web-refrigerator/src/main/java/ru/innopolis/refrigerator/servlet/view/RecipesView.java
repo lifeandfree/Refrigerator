@@ -43,4 +43,22 @@ public class RecipesView {
 		}
 		return stringBuilder.toString();
 	}
+
+	public String renderingForSearch(List<Recipe> recipes) throws RecipeDAOException {
+
+
+		StringBuilder stringBuilder = new StringBuilder();
+		int i = 0;
+		for (Recipe recipe : recipes) {
+			i++;
+			stringBuilder.append("<tr><th scope=\"row\">").
+					append(i).append(" </th><td>").
+					append(recipe.getName()).append("</td><td>").
+					append(recipe.getComplexity()).append("</td><td>").
+					append(recipe.getTime()).append("</td>").
+					append("<td><p data-placement=\"top\" data-toggle=\"tooltip\" title=\"Open\"><button class=\"btn btn-danger btn-xs\" data-title=\"Open\" data-toggle=\"modal\" onclick=\"window.location.href='search/open?id="+ recipe.getId() +"'\" data-target=\"#open\" ><span class=\"glyphicon glyphicon-eye-open\"></span></button></p></td></tr>");
+
+		}
+		return stringBuilder.toString();
+	}
 }

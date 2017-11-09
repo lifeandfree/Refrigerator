@@ -13,6 +13,7 @@ import ru.innopolis.refrigerator.core.db.exception.IngredientDAOException;
 import ru.innopolis.refrigerator.core.db.hibernate.element.ElementDAOImpl;
 import ru.innopolis.refrigerator.core.model.cookingmethod.CookingMethod;
 import ru.innopolis.refrigerator.core.model.ingredient.Ingredient;
+import ru.innopolis.refrigerator.core.model.recipe.Recipe;
 
 import java.util.List;
 
