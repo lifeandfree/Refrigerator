@@ -53,8 +53,6 @@ public class Recipe implements Serializable {
 	@XmlElement(required = true)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	@GeneratedValue(generator = "increment")
-//	@GenericGenerator(name = "increment", strategy = "increment")
 	@Column(name = "id", unique = true, nullable = false)
 	private long id;
 

@@ -24,9 +24,7 @@ public class IngredientCategory implements Serializable {
 	}
 
 	@Id
-//	@GeneratedValue(generator = "increment")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	@GenericGenerator(name = "increment", strategy = "increment")
 	@Column(name = "id", unique = true, nullable = false)
 	@XmlElement(required = true)
 	private long id;

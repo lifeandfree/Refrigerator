@@ -35,8 +35,6 @@ public class Session implements Serializable {
 
 	@XmlElement(required = true)
 	@Id
-//	@GeneratedValue(generator = "increment")
-//	@GenericGenerator(name = "increment", strategy = "increment")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	private Long id;
