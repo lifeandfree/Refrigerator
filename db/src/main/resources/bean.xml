@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context.xsd">
+       http://www.springframework.org/schema/context/spring-context.xsd
+">
 
+
+  <!--<tx:annotation-driven transaction-manager="transactionManager" />-->
   <context:component-scan base-package="ru.innopolis.refrigerator.core.db.hibernate.element"/>
+  <!--<context:component-scan base-package="ru.innopolis.refrigerator.core.db.dao" />-->
+
 
   <!--<bean name="userdao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.user.UserDAOJDBCImpl"></bean>-->
   <!--<bean id="refrigeratordao" class="ru.innopolis.refrigerator.core.db.jdbc.dao.refrigerator.RefrigeratorDAOJDBCImpl"></bean>-->
@@ -74,6 +79,7 @@
         <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL95Dialect</prop>
         <prop key="show_sql">true</prop>
         <prop key="connection.pool_size">10</prop>
+        <prop key="format_sql">true</prop>
       </props>
     </property>
   </bean>
@@ -82,6 +88,7 @@
     <property name="sessionFactory" ref="sessionFactory"/>
   </bean>
 
+  <!--<tx:annotation-driven/>-->
   <bean id="DaoFactory" class="ru.innopolis.refrigerator.core.db.DaoFactory" autowire="byType">
     <constructor-arg ref="userdao"/>
     <constructor-arg ref="cookingethoddao"/>

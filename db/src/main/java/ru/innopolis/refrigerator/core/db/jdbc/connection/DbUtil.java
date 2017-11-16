@@ -4,6 +4,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.innopolis.refrigerator.core.db.jdbc.connection.postgresql.ConnectionFactoryPostgreSQL;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.sql.*;
 
 /**
@@ -11,6 +13,7 @@ import java.sql.*;
  */
 public class DbUtil
 {
+
 	private static final Logger log = LogManager.getLogger(ConnectionFactoryPostgreSQL.class.getName());
 	/**
 	 * Проверяет имеется исключение типа WARNING.

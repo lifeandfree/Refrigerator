@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.transaction.annotation.Transactional;
 import ru.innopolis.refrigerator.core.db.DaoFactory;
 import ru.innopolis.refrigerator.core.db.dao.recipe.RecipeDAO;
 import ru.innopolis.refrigerator.core.db.exception.RecipeDAOException;

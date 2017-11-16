@@ -37,11 +37,11 @@ public class Ingredient implements Serializable {
 	private Long id;
 
 	@XmlElement(required = true)
-	@Column(name = "name", nullable = false, length = 255)
+	@Column(name = "name", nullable = false, length = 100)
 	private String name;
 
 	@XmlElement(required = true)
-	@Column(name = "dimension", nullable = false, length = 100)
+	@Column(name = "dimension", nullable = false, length = 4000)
 	private String dimension; // млитры граммы шт
 
 	@XmlElement(required = true)

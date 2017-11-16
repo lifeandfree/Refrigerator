@@ -31,6 +31,8 @@ public class RecipeIngredient implements Serializable {
 	@XmlElement(required = true)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@GeneratedValue(generator = "increment")
+//	@GenericGenerator(name = "increment", strategy = "increment")
 	@Column(name = "id", unique = true, nullable = false)
 	private long id;
 
@@ -39,7 +41,7 @@ public class RecipeIngredient implements Serializable {
 	private Double quantity;
 
 	@XmlElement(required = true)
-	@ManyToOne (cascade = {CascadeType.REMOVE, CascadeType.PERSIST })
+	@ManyToOne (fetch = FetchType.EAGER, cascade =  {CascadeType.ALL })
 	@JoinColumn(name = "ingredient_id", nullable = false)
 	private Ingredient ingredient;
 

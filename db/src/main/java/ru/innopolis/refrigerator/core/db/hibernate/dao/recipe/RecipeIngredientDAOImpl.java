@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.transaction.annotation.Transactional;
 import ru.innopolis.refrigerator.core.db.DaoFactory;
 import ru.innopolis.refrigerator.core.db.dao.recipeingredient.RecipeIngredientDAO;
 import ru.innopolis.refrigerator.core.db.exception.RecipeIngredientDAOException;
@@ -65,8 +66,6 @@ public class RecipeIngredientDAOImpl extends ElementDAOImpl<RecipeIngredient> im
 
 	@Override
 	public List<RecipeIngredient> getIngredientByRecipe(Recipe recipe) throws RecipeIngredientDAOException {
-
-
 		Session session = null;
 		List<RecipeIngredient> recipeIngredients= new ArrayList<>();
 		try {

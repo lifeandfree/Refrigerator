@@ -19,6 +19,10 @@ import java.util.List;
 
 public class IngredientDAOImpl extends ElementDAOImpl<Ingredient>  implements IngredientDAO<Ingredient> {
 
+	public static void main(String[] args) {
+		Integer i = 5000;
+		System.out.println(i.hashCode());
+	}
 	private static final Logger logger = LogManager.getLogger(IngredientDAOImpl.class.getName());
 	private SessionFactory sessionFactory;
 

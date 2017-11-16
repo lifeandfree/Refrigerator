@@ -15,6 +15,11 @@ import ru.innopolis.refrigerator.core.db.hibernate.util.HibernateUtil;
 
 public class ElementDAOImpl<E> implements ElementDAO<E> {
 
+
+    public static void main(String[] args) {
+        int a =0;
+        System.out.println("a="+ new Integer(a=1));
+    }
     private static final Logger logger = LogManager.getLogger(ElementDAOImpl.class.getName());
 
     private SessionFactory sessionFactory;

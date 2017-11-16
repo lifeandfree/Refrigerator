@@ -39,7 +39,7 @@ public class CookingMethod implements Serializable, ICookingMethod {
 	private long id;
 
 	@XmlElement(required = true)
-	@Column(name = "name", nullable = false, length = 255)
+	@Column(name = "name", nullable = false, length = 100)
 	private String name;
 
 	public long getId() {

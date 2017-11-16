@@ -21,6 +21,7 @@ import ru.innopolis.refrigerator.core.model.recipe.RecipeIngredient;
 
 //@Component(value = "DaoFactory")
 public class DaoFactory {
+
 	private static DaoFactory instance = null;
 	private static final Logger logger = LogManager.getLogger(DaoFactory.class.getName());
 

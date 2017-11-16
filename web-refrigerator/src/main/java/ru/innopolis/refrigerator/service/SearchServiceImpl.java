@@ -1,5 +1,6 @@
 package ru.innopolis.refrigerator.service;
 
+import org.springframework.transaction.annotation.Transactional;
 import ru.innopolis.refrigerator.core.db.DaoFactory;
 import ru.innopolis.refrigerator.core.model.ingredient.Ingredient;
 import ru.innopolis.refrigerator.core.model.recipe.Recipe;
@@ -11,8 +12,12 @@ import java.util.List;
 
 public class SearchServiceImpl implements SearchService {
 
+	public static void main(String[] args) {
+
+	}
 
 	@Override
+	@Transactional
 	public List<Recipe> searchRecipes(List<RefrigeratorIngredient> refrigeratorIngredients) throws Exception {
 
 		List<Ingredient> refIngredients = new ArrayList<>();

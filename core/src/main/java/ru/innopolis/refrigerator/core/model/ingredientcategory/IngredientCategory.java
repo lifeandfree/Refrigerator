@@ -30,7 +30,7 @@ public class IngredientCategory implements Serializable {
 	private long id;
 
 	@XmlElement(required = true)
-	@Column(name = "ingredientCategorName", unique = true, nullable = false, length = 255)
+	@Column(name = "ingredientCategorName", unique = true, nullable = false, length = 100)
 	private String ingredientCategorName;
 
 	public long getId() {
